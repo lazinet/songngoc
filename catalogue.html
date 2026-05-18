@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+  <title>Hồ Sơ Năng Lực — Song Ngọc Cơ Khí Xây Dựng</title>
+  <meta name="description" content="Hồ sơ năng lực tương tác của Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Hơn 12 năm kinh nghiệm, 200+ dự án, năng lực thi công hạ tầng hàng đầu.">
+  <link rel="canonical" href="https://songngoc.com.vn/catalogue.html">
+  <link rel="icon" type="image/png" href="assets/logos/logo-sn.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    /* ── Catalogue cover page ── */
+    .cat-hero {
+      min-height: calc(100vh - var(--header-h));
+      background: linear-gradient(145deg, #0A100C 0%, #0D1A0F 40%, #122318 100%);
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .cat-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300854A' fill-opacity='0.04'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cat-hero-content { position: relative; z-index: 2; }
+    .cat-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(243,128,34,.4); border-radius: 30px;
+      padding: 6px 16px; font-size: .72rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--sn-orange);
+      margin-bottom: 24px;
+    }
+    .cat-hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.1; margin-bottom: 20px; }
+    .cat-hero p  { color: rgba(255,255,255,.68); font-size: 1rem; line-height: 1.7; max-width: 520px; margin-bottom: 36px; }
+    .cat-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Decorative vertical line */
+    .cat-hero::after {
+      content: '';
+      position: absolute; right: 10%; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(0,133,74,.3), transparent);
+    }
+
+    /* Profile sections */
+    .cat-section { padding: 80px 0; }
+    .cat-section:nth-child(even) { background: var(--surface); }
+
+    /* Company overview */
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    @media(max-width:768px) { .overview-grid { grid-template-columns: 1fr; } }
+
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--sn-green), var(--sn-orange)); }
+    .timeline-item { position: relative; margin-bottom: 28px; }
+    .timeline-dot {
+      position: absolute; left: -28px; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--sn-green); border: 2px solid #fff;
+      box-shadow: 0 0 0 3px rgba(0,133,74,.2);
+    }
+    .timeline-year { font-size: .72rem; font-weight: 800; color: var(--sn-green); text-transform: uppercase; letter-spacing: 1px; }
+    .timeline-desc { font-size: .88rem; color: var(--text-2); line-height: 1.6; margin-top: 3px; }
+
+    /* Capability cards */
+    .cap-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 28px;
+      border-left: 4px solid var(--sn-green);
+      box-shadow: var(--shadow-sm); transition: all var(--transition);
+    }
+    .cap-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+    .cap-num { font-size: 2.4rem; font-weight: 900; color: var(--sn-green); line-height: 1; }
+    .cap-num span { color: var(--sn-orange); }
+    .cap-label { font-size: .78rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .cap-desc { font-size: .82rem; color: var(--text-2); margin-top: 10px; line-height: 1.6; }
+
+    /* Project showcase grid */
+    .showcase-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+    @media(max-width:768px) { .showcase-grid { grid-template-columns: repeat(2,1fr); } }
+    .showcase-item { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
+    .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .showcase-item:hover img { transform: scale(1.08); }
+    .showcase-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 50%);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .showcase-item:hover .showcase-overlay { opacity: 1; }
+    .showcase-caption {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 16px;
+      color: #fff; font-size: .78rem; font-weight: 700;
+      transform: translateY(8px); opacity: 0; transition: all var(--transition);
+    }
+    .showcase-item:hover .showcase-caption { transform: translateY(0); opacity: 1; }
+
+    /* Equipment list */
+    .equip-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-2); font-size: .85rem; }
+    .equip-item:last-child { border-bottom: none; }
+    .equip-item i { color: var(--sn-green); width: 20px; }
+
+    /* Download / CTA */
+    .cat-cta-bar { background: linear-gradient(90deg, var(--sn-green-dk), var(--sn-green)); padding: 56px 0; text-align: center; }
+    .cat-cta-bar h2 { color: #fff; margin-bottom: 14px; }
+    .cat-cta-bar p  { color: rgba(255,255,255,.75); max-width: 480px; margin: 0 auto 28px; font-size: .92rem; }
+  </style>
+</head>
+<body>
+
+<div class="color-bar"></div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Song Ngọc — Trang chủ">
+      <img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="42">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <div class="nav-item"><a href="gioi-thieu.html" class="nav-link">Giới thiệu</a></div>
+      <div class="nav-item">
+        <a href="linh-vuc.html" class="nav-link">Lĩnh vực <i class="fas fa-chevron-down"></i></a>
+        <div class="nav-dropdown">
+          <a href="linh-vuc.html#thiet-ke"><i class="fas fa-drafting-compass"></i> Tư vấn &amp; Thiết kế</a>
+          <a href="linh-vuc.html#cong-nghiep"><i class="fas fa-industry"></i> Công trình Công nghiệp</a>
+          <a href="linh-vuc.html#cau-cang"><i class="fas fa-ship"></i> Cầu, Cảng, Giao thông</a>
+          <a href="linh-vuc.html#chong-an-mon"><i class="fas fa-shield-halved"></i> Chống ăn mòn biển</a>
+          <a href="linh-vuc.html#co-gioi"><i class="fas fa-tractor"></i> Cơ giới &amp; San lấp</a>
+          <a href="linh-vuc.html#duc-san"><i class="fas fa-cubes"></i> Cấu kiện đúc sẵn</a>
+          <a href="linh-vuc.html#cho-thue"><i class="fas fa-wrench"></i> Cho thuê thiết bị</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="du-an.html" class="nav-link">Dự án</a></div>
+      <div class="nav-item"><a href="tin-tuc.html" class="nav-link">Tin tức</a></div>
+      <div class="nav-item"><a href="hoat-dong.html" class="nav-link">Hoạt động</a></div>
+      <div class="nav-item"><a href="tuyen-dung.html" class="nav-link">Tuyển dụng</a></div>
+      <div class="nav-item"><a href="catalogue.html" class="nav-link active">Hồ sơ năng lực</a></div>
+      <a href="lien-he.html" class="btn btn-primary btn-sm nav-cta"><i class="fas fa-phone"></i> Liên hệ</a>
+    </nav>
+    <button class="hamburger" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu di động">
+  <div class="mobile-nav-sep">Menu</div>
+  <a href="gioi-thieu.html"><i class="fas fa-building"></i> Giới thiệu</a>
+  <a href="linh-vuc.html"><i class="fas fa-layer-group"></i> Lĩnh vực hoạt động</a>
+  <a href="du-an.html"><i class="fas fa-hard-hat"></i> Dự án</a>
+  <a href="tin-tuc.html"><i class="fas fa-newspaper"></i> Tin tức</a>
+  <a href="hoat-dong.html"><i class="fas fa-people-group"></i> Hoạt động công ty</a>
+  <a href="tuyen-dung.html"><i class="fas fa-user-tie"></i> Tuyển dụng</a>
+  <a href="catalogue.html" class="active"><i class="fas fa-book-open"></i> Hồ sơ năng lực</a>
+  <a href="lien-he.html"><i class="fas fa-map-marker-alt"></i> Liên hệ</a>
+</nav>
+
+<!-- HERO COVER -->
+<section class="cat-hero" aria-label="Bìa hồ sơ năng lực">
+  <div class="container cat-hero-content">
+    <div class="cat-badge"><i class="fas fa-book-open"></i> Hồ Sơ Năng Lực</div>
+    <h1>Công ty TNHH<br><em style="color:var(--sn-orange)">Cơ Khí Xây Dựng</em><br>Song Ngọc</h1>
+    <p>Hơn 12 năm kinh nghiệm trong lĩnh vực thi công hạ tầng cảng biển, công trình công nghiệp, chống ăn mòn và san lấp mặt bằng tại Việt Nam.</p>
+    <div class="cat-actions">
+      <a href="#gioi-thieu-cty" class="btn btn-primary btn-lg"><i class="fas fa-arrow-down"></i> Xem năng lực</a>
+      <a href="lien-he.html" class="btn btn-outline-white btn-lg"><i class="fas fa-paper-plane"></i> Liên hệ hợp tác</a>
+    </div>
+  </div>
+</section>
+
+<!-- THÔNG TIN CÔNG TY -->
+<section class="cat-section" id="gioi-thieu-cty">
+  <div class="container">
+    <div class="overview-grid">
+      <div data-aos="fade-right">
+        <div class="sec-eyebrow"><i class="fas fa-building"></i> Về Song Ngọc</div>
+        <h2 style="margin-bottom:20px">Đối tác tin cậy trong <em>cơ khí & xây dựng</em></h2>
+        <p style="color:var(--text-2);line-height:1.8;margin-bottom:24px">
+          Công ty TNHH Cơ Khí Xây Dựng Song Ngọc (SNCC) được thành lập năm 2012, chuyên thi công các công trình hạ tầng cảng biển, cầu đường, nhà máy công nghiệp và công trình dân dụng. Với hơn 300 nhân sự có chuyên môn, chúng tôi đã hoàn thành hơn 200 dự án cho các chủ đầu tư trong và ngoài nước.
+        </p>
+
+        <!-- Key facts -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px">
+          <div style="padding:14px;background:var(--sn-green-lt);border-radius:10px">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--sn-green)">12<span style="color:var(--sn-orange)">+</span></div>
+            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--text-3)">Năm kinh nghiệm</div>
+          </div>
+          <div style="padding:14px;background:var(--sn-orange-lt);border-radius:10px">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--sn-orange)">200<span style="color:var(--sn-green)">+</span></div>
+            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--text-3)">Dự án hoàn thành</div>
+          </div>
+          <div style="padding:14px;background:var(--sn-green-lt);border-radius:10px">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--sn-green)">300<span style="color:var(--sn-orange)">+</span></div>
+            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--text-3)">Nhân sự</div>
+          </div>
+          <div style="padding:14px;background:var(--sn-orange-lt);border-radius:10px">
+            <div style="font-size:1.4rem;font-weight:900;color:var(--sn-orange)">50<span style="color:var(--sn-green)">+</span></div>
+            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--text-3)">Đối tác</div>
+          </div>
+        </div>
+
+        <!-- Info table -->
+        <table style="width:100%;font-size:.82rem;border-collapse:collapse">
+          <tr><td style="padding:6px 0;color:var(--text-3);width:140px;font-weight:700">Mã số thuế</td><td style="padding:6px 0;font-weight:600">0312260211</td></tr>
+          <tr><td style="padding:6px 0;color:var(--text-3);font-weight:700">Thành lập</td><td style="padding:6px 0;font-weight:600">Năm 2012</td></tr>
+          <tr><td style="padding:6px 0;color:var(--text-3);font-weight:700">Địa chỉ</td><td style="padding:6px 0;font-weight:600">VP-2-09, Lầu 2, Tòa nhà St. Moritz, 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</td></tr>
+          <tr><td style="padding:6px 0;color:var(--text-3);font-weight:700">Hotline</td><td style="padding:6px 0"><a href="tel:0868937699" style="color:var(--sn-green);font-weight:700">086 893 7699</a></td></tr>
+          <tr><td style="padding:6px 0;color:var(--text-3);font-weight:700">Email</td><td style="padding:6px 0"><a href="mailto:songngoc.stmc@gmail.com" style="color:var(--sn-green);font-weight:700">songngoc.stmc@gmail.com</a></td></tr>
+          <tr><td style="padding:6px 0;color:var(--text-3);font-weight:700">Website</td><td style="padding:6px 0"><a href="https://songngoc.com.vn" style="color:var(--sn-green);font-weight:700">songngoc.com.vn</a></td></tr>
+        </table>
+      </div>
+
+      <div data-aos="fade-left">
+        <h3 style="margin-bottom:24px">Lịch sử hình thành &amp; phát triển</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2012</div>
+            <div class="timeline-desc">Thành lập Công ty TNHH Cơ Khí Xây Dựng Song Ngọc với đội ngũ ban đầu 50 nhân sự, tập trung vào thi công cầu cảng và san lấp mặt bằng.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2015</div>
+            <div class="timeline-desc">Mở rộng lĩnh vực sang thi công chống ăn mòn trên biển và nhà máy công nghiệp. Tham gia các dự án cảng biển lớn tại khu vực miền Nam.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2018</div>
+            <div class="timeline-desc">Đạt chứng nhận quản lý chất lượng ISO. Mở rộng đội ngũ lên 200 nhân sự. Bắt đầu hợp tác với các đối tác nước ngoài (Nhật, Hàn, Singapore).</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2021 – 2022</div>
+            <div class="timeline-desc">Tham gia các dự án điện gió lớn tại miền Nam Việt Nam. Đội ngũ chuyên gia thi công năng lượng tái tạo được hình thành và nâng cao.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--sn-orange)"></div>
+            <div class="timeline-year">2024 – nay</div>
+            <div class="timeline-desc">Đội ngũ vượt 300 nhân sự. Hoàn thành hơn 200 dự án. Đang triển khai các dự án hạ tầng cảng và nhà máy quy mô lớn tại nhiều tỉnh thành.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NĂNG LỰC CỐT LÕI -->
+<section class="cat-section bg-surface">
+  <div class="container">
+    <div class="sec-title" data-aos="fade-up">
+      <div class="sec-eyebrow"><i class="fas fa-medal"></i> Năng lực</div>
+      <h2>Năng Lực <em>Cốt Lõi</em></h2>
+      <p>Những con số minh chứng cho uy tín và chất lượng của Song Ngọc.</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-4" style="gap:20px">
+      <div class="cap-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="cap-num">200<span>+</span></div>
+        <div class="cap-label">Dự án hoàn thành</div>
+        <div class="cap-desc">Bao gồm cảng biển, nhà máy, điện gió, khu dân cư và hạ tầng công nghiệp.</div>
+      </div>
+      <div class="cap-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="cap-num">300<span>+</span></div>
+        <div class="cap-label">Nhân sự chuyên nghiệp</div>
+        <div class="cap-desc">Kỹ sư, chuyên gia và công nhân lành nghề với kinh nghiệm thực tế.</div>
+      </div>
+      <div class="cap-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="cap-num">50<span>+</span></div>
+        <div class="cap-label">Đối tác chiến lược</div>
+        <div class="cap-desc">Hợp tác với các tập đoàn trong và ngoài nước: Nhật, Hàn Quốc, Singapore, EU.</div>
+      </div>
+      <div class="cap-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="cap-num">12<span>+</span></div>
+        <div class="cap-label">Năm kinh nghiệm</div>
+        <div class="cap-desc">Dày dặn kinh nghiệm thực tế trong các môi trường thi công phức tạp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE DỰ ÁN -->
+<section class="cat-section">
+  <div class="container-fluid" style="max-width:1400px;margin:0 auto">
+    <div class="sec-title container" data-aos="fade-up">
+      <div class="sec-eyebrow"><i class="fas fa-hard-hat"></i> Portfolio</div>
+      <h2>Dự Án <em>Tiêu Biểu</em></h2>
+      <p>Những công trình nổi bật thể hiện năng lực và tay nghề Song Ngọc.</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="showcase-grid" id="showcaseGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- THIẾT BỊ & NGUỒN LỰC -->
+<section class="cat-section bg-surface">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px" data-aos="fade-up">
+      <div>
+        <h3 style="margin-bottom:20px">Đội ngũ nhân sự</h3>
+        <div class="equip-item"><i class="fas fa-hard-hat"></i><span><strong>Kỹ sư xây dựng</strong> — Kết cấu, công trình biển, điện</span></div>
+        <div class="equip-item"><i class="fas fa-drafting-compass"></i><span><strong>Kỹ sư tư vấn thiết kế</strong> — Nhà công nghiệp, thủy lợi</span></div>
+        <div class="equip-item"><i class="fas fa-shield-halved"></i><span><strong>Chuyên gia chống ăn mòn</strong> — Bọc cầu cảng biển</span></div>
+        <div class="equip-item"><i class="fas fa-tractor"></i><span><strong>Kỹ thuật cơ giới</strong> — San lấp, đầm nén</span></div>
+        <div class="equip-item"><i class="fas fa-fire-extinguisher"></i><span><strong>An toàn lao động (HSE)</strong> — Giám sát mọi công trình</span></div>
+        <div class="equip-item"><i class="fas fa-users"></i><span><strong>300+ nhân sự</strong> — Thường trực tại các công trình</span></div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:20px">Thiết bị & Máy móc</h3>
+        <div class="equip-item"><i class="fas fa-truck-monster"></i><span>Máy đào, máy ủi, máy cẩu hạng nặng</span></div>
+        <div class="equip-item"><i class="fas fa-water"></i><span>Thiết bị thi công dưới nước, tàu xà lan</span></div>
+        <div class="equip-item"><i class="fas fa-spray-can"></i><span>Máy phun chống ăn mòn, thiết bị bảo vệ bề mặt</span></div>
+        <div class="equip-item"><i class="fas fa-cube"></i><span>Khuôn đúc cấu kiện bê tông tiền chế</span></div>
+        <div class="equip-item"><i class="fas fa-bolt"></i><span>Máy hàn, cắt kim loại chuyên nghiệp</span></div>
+        <div class="equip-item"><i class="fas fa-cogs"></i><span>Thiết bị kiểm tra NDT, đo lường chất lượng</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cat-cta-bar">
+  <div class="container">
+    <h2 data-aos="fade-up">Hợp tác cùng Song Ngọc</h2>
+    <p data-aos="fade-up" data-aos-delay="80">Liên hệ ngay để nhận báo giá và tư vấn miễn phí cho dự án của bạn.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap" data-aos="fade-up" data-aos-delay="160">
+      <a href="lien-he.html" class="btn btn-orange btn-lg"><i class="fas fa-paper-plane"></i> Gửi yêu cầu hợp tác</a>
+      <a href="tel:0868937699" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> 086 893 7699</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer" aria-label="Footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-logo"><img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="44"></div>
+      <p class="footer-desc">Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Đối tác tin cậy trong lĩnh vực cơ khí và xây dựng hạ tầng tại Việt Nam.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/songngoc.com.vn" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@songngocconstruction3109" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="http://chat.zalo.me/0868937699" class="social-btn" target="_blank" rel="noopener" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-heading">Điều Hướng</span>
+      <ul class="footer-links">
+        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+        <li><a href="linh-vuc.html">Lĩnh vực hoạt động</a></li>
+        <li><a href="du-an.html">Dự án</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+        <li><a href="hoat-dong.html">Hoạt động</a></li>
+        <li><a href="tuyen-dung.html">Tuyển dụng</a></li>
+        <li><a href="catalogue.html">Hồ sơ năng lực</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Lĩnh Vực</span>
+      <ul class="footer-links">
+        <li><a href="linh-vuc.html#thiet-ke">Tư vấn &amp; Thiết kế</a></li>
+        <li><a href="linh-vuc.html#cau-cang">Cầu, Cảng, Giao thông</a></li>
+        <li><a href="linh-vuc.html#cong-nghiep">Công trình Công nghiệp</a></li>
+        <li><a href="linh-vuc.html#chong-an-mon">Chống ăn mòn biển</a></li>
+        <li><a href="linh-vuc.html#co-gioi">Cơ giới &amp; San lấp</a></li>
+        <li><a href="linh-vuc.html#duc-san">Cấu kiện đúc sẵn</a></li>
+        <li><a href="linh-vuc.html#cho-thue">Cho thuê thiết bị</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Liên Hệ</span>
+      <ul class="footer-contact">
+        <li><a href="https://goo.gl/maps/songngoc" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i>VP-2-09, Lầu 2, Tòa nhà St. Moritz, 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</a></li>
+        <li><a href="tel:0868937699"><i class="fas fa-phone"></i> 086 893 7699</a></li>
+        <li><a href="mailto:songngoc.stmc@gmail.com"><i class="fas fa-envelope"></i> songngoc.stmc@gmail.com</a></li>
+        <li><a href="mailto:songngoc@sncc.vn"><i class="fas fa-envelope"></i> songngoc@sncc.vn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider-gradient"></div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© <span id="footerYear">2025</span> Công ty TNHH Cơ Khí Xây Dựng Song Ngọc. MST: 0312260211. Thiết kế bởi <a href="https://hathyo.com" target="_blank" rel="noopener">HATHYO</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+/* Load showcase grid from projects */
+async function loadShowcase() {
+  try {
+    const res = await fetch('data/projects.json');
+    const projects = await res.json();
+    const featured = projects.filter(p => p.featured && p.image).slice(0, 9);
+    const grid = document.getElementById('showcaseGrid');
+    if (!grid) return;
+    grid.innerHTML = featured.map(p => `
+      <div class="showcase-item" data-lightbox="${p.image}" title="${p.title}">
+        <img src="${p.image}" alt="${p.title}" loading="lazy">
+        <div class="showcase-overlay"></div>
+        <div class="showcase-caption">${p.title}</div>
+      </div>`).join('');
+    /* Re-init lightbox */
+    if (window.initLightbox) initLightbox();
+  } catch(e) { console.warn('Showcase load failed', e); }
+}
+document.addEventListener('DOMContentLoaded', loadShowcase);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-XXXXXXXXXX',{anonymize_ip:true});
+</script>
+</body>
+</html>

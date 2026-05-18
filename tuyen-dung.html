@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+  <title>Tuyển Dụng — Công ty TNHH Cơ Khí Xây Dựng Song Ngọc</title>
+  <meta name="description" content="Tuyển dụng tại Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Kỹ sư xây dựng, Quản lý dự án, Kế toán và nhiều vị trí hấp dẫn khác. Gửi CV ngay hôm nay!">
+  <meta name="keywords" content="tuyển dụng song ngọc, việc làm xây dựng, tuyển kỹ sư xây dựng, tuyển quản lý dự án, việc làm hcm">
+  <meta name="author" content="Công ty TNHH Cơ Khí Xây Dựng Song Ngọc">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Tuyển Dụng — Song Ngọc Construction">
+  <meta property="og:description" content="Gia nhập đội ngũ 300+ nhân sự chuyên nghiệp của Song Ngọc. Xem vị trí và gửi CV ngay!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://songngoc.com.vn/tuyen-dung.html">
+  <meta property="og:image" content="https://songngoc.com.vn/assets/images/misc/og-cover.jpg">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Song Ngọc Construction">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tuyển Dụng — Song Ngọc Construction">
+  <meta name="twitter:image" content="https://songngoc.com.vn/assets/images/misc/og-cover.jpg">
+
+  <link rel="canonical" href="https://songngoc.com.vn/tuyen-dung.html">
+  <link rel="icon" type="image/png" href="assets/logos/logo-sn.png">
+  <link rel="apple-touch-icon" href="assets/logos/logo-sn.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, var(--sn-green-dk) 0%, var(--sn-green) 60%, var(--sn-green-mid) 100%);
+      padding: 80px 0 60px; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg') center/cover no-repeat;
+      opacity: .12;
+    }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero h1 { color: #fff; font-size: clamp(1.8rem,4vw,2.8rem); margin-bottom: 12px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .breadcrumb a, .breadcrumb span { font-size: .82rem; color: rgba(255,255,255,.75); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb .sep { color: rgba(255,255,255,.4); }
+    .breadcrumb .current { color: var(--sn-orange); font-weight: 700; }
+
+    /* Benefits */
+    .benefit-card {
+      background: var(--surface); border-radius: var(--radius-lg);
+      padding: 28px; text-align: center;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-2);
+      transition: all var(--transition);
+    }
+    .benefit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--sn-green); }
+    .benefit-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin: 0 auto 16px;
+    }
+    .benefit-icon.green { background: var(--sn-green-lt); color: var(--sn-green); }
+    .benefit-icon.orange { background: var(--sn-orange-lt); color: var(--sn-orange); }
+    .benefit-card h3 { font-size: .95rem; margin-bottom: 8px; }
+    .benefit-card p { font-size: .82rem; color: var(--text-3); line-height: 1.7; }
+
+    /* Job cards */
+    .job-card {
+      background: var(--surface); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-2);
+      overflow: hidden; transition: box-shadow var(--transition);
+    }
+    .job-card.open { box-shadow: var(--shadow-lg); border-color: var(--sn-green); }
+    .job-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 24px; cursor: pointer; gap: 16px;
+    }
+    .job-card-header:hover { background: var(--sn-green-lt); }
+    .job-header-left { flex: 1; }
+    .job-title { font-size: 1rem; font-weight: 800; margin-bottom: 6px; color: var(--text); }
+    .job-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .job-tag {
+      font-size: .68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .tag-dept { background: var(--sn-green-lt); color: var(--sn-green); }
+    .tag-type { background: var(--sn-orange-lt); color: var(--sn-orange); }
+    .tag-salary { background: #EEF4FF; color: #3B6EE5; }
+    .job-card-chevron {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--sn-green-lt); color: var(--sn-green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; flex-shrink: 0; transition: transform var(--transition);
+    }
+    .job-card.open .job-card-chevron { transform: rotate(180deg); }
+
+    .job-card-body {
+      display: none; padding: 0 24px 24px; border-top: 1px solid var(--border-2);
+    }
+    .job-card.open .job-card-body { display: block; }
+    .job-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0; }
+    .job-detail-item { display: flex; align-items: flex-start; gap: 8px; font-size: .82rem; color: var(--text-2); }
+    .job-detail-item i { color: var(--sn-green); margin-top: 2px; flex-shrink: 0; width: 16px; }
+    .job-section-title { font-size: .82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); margin: 20px 0 10px; }
+    .job-list { list-style: none; padding: 0; }
+    .job-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: .83rem; color: var(--text-2); padding: 5px 0;
+    }
+    .job-list li::before { content: '•'; color: var(--sn-green); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .apply-btn-inline {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: var(--sn-green); color: #fff; padding: 10px 20px;
+      border-radius: var(--radius-md); font-size: .85rem; font-weight: 700;
+      transition: all var(--transition); border: none; cursor: pointer;
+    }
+    .apply-btn-inline:hover { background: var(--sn-green-dk); transform: translateY(-2px); }
+
+    /* Apply form */
+    .apply-form-section {
+      background: var(--surface); border-radius: var(--radius-xl);
+      padding: 48px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-2);
+    }
+    @media (max-width: 600px) { .apply-form-section { padding: 28px 20px; } }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: .82rem; font-weight: 700; color: var(--text-2); }
+    .form-group label .req { color: var(--sn-orange); margin-left: 2px; }
+    .form-control {
+      padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: var(--radius-md); font-size: .88rem;
+      outline: none; background: var(--bg); transition: border-color var(--transition);
+      width: 100%;
+    }
+    .form-control:focus { border-color: var(--sn-green); background: #fff; }
+    .form-control.error { border-color: #E53E3E; }
+    .form-file { padding: 8px 14px; }
+    .form-error { font-size: .75rem; color: #E53E3E; margin-top: 2px; display: none; }
+    .form-error.visible { display: block; }
+    .submit-btn {
+      width: 100%; padding: 14px; background: var(--sn-green); color: #fff;
+      border: none; border-radius: var(--radius-md); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all var(--transition); display: flex;
+      align-items: center; justify-content: center; gap: 10px; margin-top: 8px;
+    }
+    .submit-btn:hover { background: var(--sn-green-dk); transform: translateY(-2px); }
+    .submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+    .hp-field { display: none; }
+    .form-note { font-size: .75rem; color: var(--text-3); margin-top: 12px; text-align: center; }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      padding: 14px 20px; border-radius: var(--radius-md);
+      font-size: .88rem; font-weight: 600; color: #fff;
+      box-shadow: var(--shadow-lg); transform: translateY(80px);
+      opacity: 0; transition: all .3s;
+    }
+    .toast-msg.show { transform: translateY(0); opacity: 1; }
+    .toast-msg.success { background: var(--sn-green); }
+    .toast-msg.error { background: #E53E3E; }
+
+    .jobs-count { font-size: .82rem; color: var(--text-3); margin-bottom: 20px; }
+    .no-jobs { text-align: center; padding: 48px; color: var(--text-3); }
+    .no-jobs i { font-size: 2.5rem; opacity: .3; display: block; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="color-bar"></div>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Song Ngọc — Trang chủ">
+      <img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="42">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <div class="nav-item"><a href="gioi-thieu.html" class="nav-link">Giới thiệu</a></div>
+      <div class="nav-item">
+        <a href="linh-vuc.html" class="nav-link">Lĩnh vực <i class="fas fa-chevron-down"></i></a>
+        <div class="nav-dropdown">
+          <a href="linh-vuc.html#thiet-ke"><i class="fas fa-drafting-compass"></i> Tư vấn &amp; Thiết kế</a>
+          <a href="linh-vuc.html#cong-nghiep"><i class="fas fa-industry"></i> Công trình Công nghiệp</a>
+          <a href="linh-vuc.html#cau-cang"><i class="fas fa-ship"></i> Cầu, Cảng, Giao thông</a>
+          <a href="linh-vuc.html#chong-an-mon"><i class="fas fa-shield-halved"></i> Chống ăn mòn biển</a>
+          <a href="linh-vuc.html#co-gioi"><i class="fas fa-tractor"></i> Cơ giới &amp; San lấp</a>
+          <a href="linh-vuc.html#duc-san"><i class="fas fa-cubes"></i> Cấu kiện đúc sẵn</a>
+          <a href="linh-vuc.html#cho-thue"><i class="fas fa-wrench"></i> Cho thuê thiết bị</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="du-an.html" class="nav-link">Dự án</a></div>
+      <div class="nav-item"><a href="tin-tuc.html" class="nav-link">Tin tức</a></div>
+      <div class="nav-item"><a href="hoat-dong.html" class="nav-link">Hoạt động</a></div>
+      <div class="nav-item"><a href="tuyen-dung.html" class="nav-link nav-active">Tuyển dụng</a></div>
+      <div class="nav-item"><a href="catalogue.html" class="nav-link">Hồ sơ năng lực</a></div>
+      <a href="lien-he.html" class="btn btn-primary btn-sm nav-cta"><i class="fas fa-phone"></i> Liên hệ</a>
+    </nav>
+    <button class="hamburger" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu di động">
+  <div class="mobile-nav-sep">Menu</div>
+  <a href="gioi-thieu.html"><i class="fas fa-building"></i> Giới thiệu</a>
+  <a href="linh-vuc.html"><i class="fas fa-layer-group"></i> Lĩnh vực hoạt động</a>
+  <a href="du-an.html"><i class="fas fa-hard-hat"></i> Dự án</a>
+  <a href="tin-tuc.html"><i class="fas fa-newspaper"></i> Tin tức</a>
+  <a href="hoat-dong.html"><i class="fas fa-people-group"></i> Hoạt động công ty</a>
+  <a href="tuyen-dung.html"><i class="fas fa-user-tie"></i> Tuyển dụng</a>
+  <a href="catalogue.html"><i class="fas fa-book-open"></i> Hồ sơ năng lực</a>
+  <a href="lien-he.html"><i class="fas fa-map-marker-alt"></i> Liên hệ</a>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero" aria-label="Tuyển dụng Song Ngọc">
+  <div class="container page-hero-content">
+    <h1 data-aos="fade-up">Tuyển Dụng</h1>
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-aos="fade-up" data-aos-delay="80">
+      <a href="index.html"><i class="fas fa-home"></i> Trang chủ</a>
+      <span class="sep"><i class="fas fa-chevron-right"></i></span>
+      <span class="current">Tuyển dụng</span>
+    </nav>
+  </div>
+</section>
+
+<!-- ══ GIA NHẬP SONG NGỌC ══ -->
+<section class="section bg-surface" aria-labelledby="sec-join">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center" class="join-grid">
+      <div data-aos="fade-right">
+        <div class="sec-eyebrow"><i class="fas fa-user-tie"></i> Cơ Hội Nghề Nghiệp</div>
+        <h2 id="sec-join" style="margin-bottom:16px">Gia Nhập <em>Song Ngọc</em></h2>
+        <p style="color:var(--text-2);line-height:1.8;margin-bottom:20px">
+          Song Ngọc là môi trường lý tưởng cho những ai đam mê ngành xây dựng và cơ khí. Chúng tôi tin rằng nhân sự tài năng là tài sản quý giá nhất — và luôn tạo điều kiện tốt nhất để mọi thành viên phát huy tối đa tiềm năng.
+        </p>
+        <p style="color:var(--text-2);line-height:1.8">
+          Với 300+ nhân sự chuyên nghiệp, văn hóa làm việc thực chất, chế độ đãi ngộ cạnh tranh và cơ hội thăng tiến rõ ràng — Song Ngọc xứng đáng là nơi bạn xây dựng sự nghiệp dài hạn.
+        </p>
+        <a href="#apply-form" class="btn btn-primary" style="margin-top:24px">
+          <i class="fas fa-paper-plane"></i> Ứng tuyển ngay
+        </a>
+      </div>
+      <div data-aos="fade-left">
+        <img src="assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg"
+             alt="Đội ngũ Song Ngọc tại công trường" loading="lazy"
+             style="width:100%;border-radius:var(--radius-lg);object-fit:cover;aspect-ratio:4/3;box-shadow:var(--shadow-xl)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BENEFITS ══ -->
+<section class="section" aria-labelledby="sec-benefits">
+  <div class="container">
+    <div class="sec-title" data-aos="fade-up">
+      <div class="sec-eyebrow"><i class="fas fa-gift"></i> Phúc Lợi</div>
+      <h2 id="sec-benefits">Tại Sao Chọn <em>Song Ngọc</em>?</h2>
+      <p>Chúng tôi đầu tư cho nhân sự như chúng tôi đầu tư cho các công trình — luôn ở mức tốt nhất.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+      <div class="benefit-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="benefit-icon green"><i class="fas fa-coins"></i></div>
+        <h3>Lương Cạnh Tranh</h3>
+        <p>Mức lương top ngành, đánh giá và điều chỉnh theo năng lực hàng năm. Thưởng dự án và thưởng hiệu quả kinh doanh.</p>
+      </div>
+      <div class="benefit-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="benefit-icon orange"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Đào Tạo &amp; Phát Triển</h3>
+        <p>Chương trình đào tạo nội bộ, hỗ trợ học phí và thi chứng chỉ chuyên ngành. Cơ hội học tập tại nước ngoài.</p>
+      </div>
+      <div class="benefit-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="benefit-icon green"><i class="fas fa-heart-pulse"></i></div>
+        <h3>Bảo Hiểm Toàn Diện</h3>
+        <p>BHXH, BHYT, BHTN đầy đủ. Bảo hiểm tai nạn 24/7 và gói bảo hiểm sức khỏe bổ sung cao cấp cho nhân sự chủ chốt.</p>
+      </div>
+      <div class="benefit-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="benefit-icon orange"><i class="fas fa-chart-line"></i></div>
+        <h3>Thăng Tiến Rõ Ràng</h3>
+        <p>Lộ trình thăng tiến minh bạch từ chuyên viên lên quản lý. Ưu tiên thăng tiến nội bộ trước khi tuyển bên ngoài.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ JOB LISTINGS ══ -->
+<section class="section bg-surface" aria-labelledby="sec-jobs">
+  <div class="container">
+    <div class="sec-title" data-aos="fade-up">
+      <div class="sec-eyebrow"><i class="fas fa-briefcase"></i> Vị Trí Tuyển Dụng</div>
+      <h2 id="sec-jobs">Cơ Hội <em>Việc Làm</em></h2>
+      <p>Xem chi tiết yêu cầu và phúc lợi từng vị trí — bấm vào thẻ để mở rộng.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <p class="jobs-count" id="jobsCount" aria-live="polite"></p>
+
+    <div id="jobsContainer" style="display:flex;flex-direction:column;gap:16px" aria-label="Danh sách vị trí tuyển dụng">
+      <!-- Populated by JS -->
+      <div style="height:80px;background:var(--border-2);border-radius:var(--radius-lg);animation:shimmer 1.5s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,var(--border-2) 25%,var(--border) 50%,var(--border-2) 75%)"></div>
+      <div style="height:80px;background:var(--border-2);border-radius:var(--radius-lg);animation:shimmer 1.5s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,var(--border-2) 25%,var(--border) 50%,var(--border-2) 75%)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPLY FORM ══ -->
+<section class="section" id="apply-form" aria-labelledby="sec-apply">
+  <div class="container" style="max-width:720px">
+    <div class="sec-title" data-aos="fade-up">
+      <div class="sec-eyebrow"><i class="fas fa-paper-plane"></i> Ứng Tuyển</div>
+      <h2 id="sec-apply">Gửi <em>Hồ Sơ</em> Ứng Tuyển</h2>
+      <p>Điền thông tin và đính kèm CV để chúng tôi liên hệ sớm nhất.</p>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="apply-form-section" data-aos="fade-up">
+      <form id="applyForm" novalidate aria-label="Form ứng tuyển Song Ngọc">
+        <!-- Honeypot anti-spam -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="hp_website">Website (đừng điền)</label>
+          <input type="text" id="hp_website" name="hp_website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-grid" style="margin-bottom:20px">
+          <div class="form-group">
+            <label for="fullName">Họ và tên <span class="req" aria-label="bắt buộc">*</span></label>
+            <input type="text" id="fullName" name="fullName" class="form-control"
+                   placeholder="Nguyễn Văn A" required aria-required="true"
+                   autocomplete="name">
+            <span class="form-error" id="err-fullName">Vui lòng nhập họ tên</span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span class="req" aria-label="bắt buộc">*</span></label>
+            <input type="email" id="email" name="email" class="form-control"
+                   placeholder="example@email.com" required aria-required="true"
+                   autocomplete="email">
+            <span class="form-error" id="err-email">Email không hợp lệ</span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Số điện thoại <span class="req" aria-label="bắt buộc">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-control"
+                   placeholder="0912 345 678" required aria-required="true"
+                   autocomplete="tel" pattern="[0-9\s\+\-]{9,15}">
+            <span class="form-error" id="err-phone">Số điện thoại không hợp lệ</span>
+          </div>
+          <div class="form-group">
+            <label for="position">Vị trí ứng tuyển <span class="req" aria-label="bắt buộc">*</span></label>
+            <select id="position" name="position" class="form-control" required aria-required="true">
+              <option value="">-- Chọn vị trí --</option>
+              <!-- Populated by JS -->
+              <option value="Kỹ sư Xây dựng / Giám sát công trình">Kỹ sư Xây dựng / Giám sát công trình</option>
+              <option value="Kỹ sư Kết cấu thép / Chuyên viên Chống ăn mòn biển">Kỹ sư Kết cấu thép / Chống ăn mòn biển</option>
+              <option value="Quản lý Dự án">Quản lý Dự án</option>
+              <option value="Kế toán Tài chính / Kế toán công trình">Kế toán Tài chính / Kế toán công trình</option>
+              <option value="Trưởng ca / Đội trưởng thi công">Trưởng ca / Đội trưởng thi công</option>
+              <option value="Khác">Vị trí khác</option>
+            </select>
+            <span class="form-error" id="err-position">Vui lòng chọn vị trí</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:20px">
+          <label for="cvFile">Đính kèm CV <span class="req" aria-label="bắt buộc">*</span></label>
+          <input type="file" id="cvFile" name="cvFile" class="form-control form-file"
+                 accept=".pdf,.doc,.docx" required aria-required="true"
+                 aria-describedby="cvFileHint">
+          <span id="cvFileHint" style="font-size:.72rem;color:var(--text-3)">Chấp nhận: PDF, DOC, DOCX (tối đa 5MB)</span>
+          <span class="form-error" id="err-cvFile">Vui lòng đính kèm CV</span>
+        </div>
+
+        <div class="form-group" style="margin-bottom:24px">
+          <label for="message">Thư giới thiệu <span style="color:var(--text-3);font-weight:400">(tùy chọn)</span></label>
+          <textarea id="message" name="message" class="form-control" rows="4"
+                    placeholder="Giới thiệu bản thân, lý do muốn gia nhập Song Ngọc..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn" aria-label="Gửi đơn ứng tuyển">
+          <i class="fas fa-paper-plane"></i>
+          <span id="submitText">Gửi đơn ứng tuyển</span>
+        </button>
+
+        <p class="form-note">
+          <i class="fas fa-lock" aria-hidden="true"></i>
+          Thông tin của bạn được bảo mật tuyệt đối và chỉ dùng cho mục đích tuyển dụng.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Toast -->
+<div class="toast-msg" id="toastMsg" role="alert" aria-live="assertive"></div>
+
+<!-- ══ CTA ══ -->
+<div style="background:linear-gradient(90deg,var(--sn-green-dk),var(--sn-green),var(--sn-green-mid));padding:56px 0">
+  <div class="container" style="text-align:center">
+    <h2 style="color:#fff;margin-bottom:14px" data-aos="fade-up">Hỏi thêm về cơ hội nghề nghiệp?</h2>
+    <p style="color:rgba(255,255,255,.75);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto" data-aos="fade-up" data-aos-delay="80">
+      Liên hệ trực tiếp Phòng Nhân sự Song Ngọc để được tư vấn về vị trí phù hợp.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap" data-aos="fade-up" data-aos-delay="160">
+      <a href="mailto:songngoc.stmc@gmail.com" class="btn btn-orange btn-lg"><i class="fas fa-envelope"></i> Email HR</a>
+      <a href="tel:0868937699" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> 086 893 7699</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer" aria-label="Footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-logo"><img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="44"></div>
+      <p class="footer-desc">Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Đối tác tin cậy trong lĩnh vực cơ khí và xây dựng hạ tầng tại Việt Nam.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/songngoc.com.vn" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook Song Ngọc"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@songngocconstruction3109" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube Song Ngọc"><i class="fab fa-youtube"></i></a>
+        <a href="http://chat.zalo.me/0868937699" class="social-btn" target="_blank" rel="noopener" aria-label="Zalo Song Ngọc"><i class="fas fa-comment-dots"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-heading">Điều Hướng</span>
+      <ul class="footer-links">
+        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+        <li><a href="linh-vuc.html">Lĩnh vực hoạt động</a></li>
+        <li><a href="du-an.html">Dự án</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+        <li><a href="hoat-dong.html">Hoạt động</a></li>
+        <li><a href="tuyen-dung.html">Tuyển dụng</a></li>
+        <li><a href="catalogue.html">Hồ sơ năng lực</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Lĩnh Vực</span>
+      <ul class="footer-links">
+        <li><a href="linh-vuc.html#thiet-ke">Tư vấn &amp; Thiết kế</a></li>
+        <li><a href="linh-vuc.html#cau-cang">Cầu, Cảng, Giao thông</a></li>
+        <li><a href="linh-vuc.html#cong-nghiep">Công trình Công nghiệp</a></li>
+        <li><a href="linh-vuc.html#chong-an-mon">Chống ăn mòn biển</a></li>
+        <li><a href="linh-vuc.html#co-gioi">Cơ giới &amp; San lấp</a></li>
+        <li><a href="linh-vuc.html#duc-san">Cấu kiện đúc sẵn</a></li>
+        <li><a href="linh-vuc.html#cho-thue">Cho thuê thiết bị</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Liên Hệ</span>
+      <ul class="footer-contact">
+        <li><a href="https://www.google.com/maps/place/CÔNG+TY+TNHH+CƠ+KHÍ+XÂY+DỰNG+SONG+NGỌC/@10.8380516,106.7348122,17z" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> VP-2-09, Lầu 2, Tòa nhà St. Moritz, Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</a></li>
+        <li><a href="tel:0868937699"><i class="fas fa-phone"></i> 086 893 7699</a></li>
+        <li><a href="mailto:songngoc.stmc@gmail.com"><i class="fas fa-envelope"></i> songngoc.stmc@gmail.com</a></li>
+        <li><a href="mailto:songngoc@sncc.vn"><i class="fas fa-envelope"></i> songngoc@sncc.vn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider-gradient"></div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© <span id="footerYear">2025</span> Công ty TNHH Cơ Khí Xây Dựng Song Ngọc. MST: 0312260211. Thiết kế bởi <a href="https://hathyo.com" target="_blank" rel="noopener">HATHYO</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
+<div style="position:fixed;bottom:28px;left:20px;z-index:500;display:flex;flex-direction:column;gap:10px">
+  <a href="tel:0868937699" style="width:46px;height:46px;border-radius:50%;background:#00854A;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,133,74,.4);font-size:1.1rem" aria-label="Gọi điện Song Ngọc"><i class="fas fa-phone"></i></a>
+  <a href="http://chat.zalo.me/0868937699" target="_blank" rel="noopener" style="width:46px;height:46px;border-radius:50%;background:#0068FF;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,104,255,.4);font-size:1rem" aria-label="Chat Zalo Song Ngọc"><i class="fas fa-comment-dots"></i></a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+/* ── Responsive join grid ── */
+const joinGrid = document.querySelector('.join-grid');
+if (joinGrid) {
+  function fixJoinGrid() {
+    joinGrid.style.gridTemplateColumns = window.innerWidth < 768 ? '1fr' : '1fr 1.2fr';
+  }
+  fixJoinGrid();
+  window.addEventListener('resize', fixJoinGrid, { passive: true });
+}
+
+/* ── Toast ── */
+function showToast(msg, type) {
+  const t = document.getElementById('toastMsg');
+  t.textContent = msg;
+  t.className = 'toast-msg ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+/* ── Job accordion ── */
+function renderJobs(jobs) {
+  const container = document.getElementById('jobsContainer');
+  const count = document.getElementById('jobsCount');
+  const active = jobs.filter(j => j.active !== false);
+  count.textContent = `${active.length} vị trí đang tuyển`;
+
+  if (!active.length) {
+    container.innerHTML = '<div class="no-jobs"><i class="fas fa-briefcase"></i><p>Hiện chưa có vị trí tuyển dụng mới. Vui lòng gửi CV để chúng tôi liên hệ khi có cơ hội phù hợp.</p></div>';
+    return;
+  }
+
+  container.innerHTML = active.map((j, i) => `
+    <div class="job-card" id="job-${j.id}" data-aos="fade-up" data-aos-delay="${Math.min(i*60,240)}">
+      <div class="job-card-header" onclick="toggleJob(${j.id})"
+           role="button" tabindex="0" aria-expanded="false"
+           aria-controls="job-body-${j.id}"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleJob(${j.id})}">
+        <div class="job-header-left">
+          <div class="job-title">${j.title}</div>
+          <div class="job-tags">
+            <span class="job-tag tag-dept">${j.department || ''}</span>
+            <span class="job-tag tag-type">${j.typeLabel || j.type || ''}</span>
+            ${j.salary ? `<span class="job-tag tag-salary">${j.salary}</span>` : ''}
+            ${j.quantity ? `<span class="job-tag" style="background:var(--border-2);color:var(--text-3)">${j.quantity} vị trí</span>` : ''}
+          </div>
+        </div>
+        <div class="job-card-chevron" aria-hidden="true"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="job-card-body" id="job-body-${j.id}" role="region" aria-labelledby="job-${j.id}">
+        <div class="job-detail-grid">
+          ${j.location ? `<div class="job-detail-item"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>${j.location}</span></div>` : ''}
+          ${j.level ? `<div class="job-detail-item"><i class="fas fa-layer-group" aria-hidden="true"></i><span>${j.level}</span></div>` : ''}
+          ${j.deadline ? `<div class="job-detail-item"><i class="fas fa-calendar-xmark" aria-hidden="true"></i><span>Hạn nộp: ${j.deadline}</span></div>` : ''}
+        </div>
+        <p style="font-size:.85rem;color:var(--text-2);line-height:1.75;margin-bottom:0">${j.description || ''}</p>
+        ${(j.requirements && j.requirements.length) ? `
+        <div class="job-section-title">Yêu cầu</div>
+        <ul class="job-list">${j.requirements.map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
+        ${(j.benefits && j.benefits.length) ? `
+        <div class="job-section-title">Phúc lợi</div>
+        <ul class="job-list">${j.benefits.map(b => `<li>${b}</li>`).join('')}</ul>` : ''}
+        <button class="apply-btn-inline" onclick="prefillPosition('${j.title.replace(/'/g,'\\\'')}')"
+                aria-label="Ứng tuyển vị trí ${j.title}">
+          <i class="fas fa-paper-plane"></i> Ứng tuyển vị trí này
+        </button>
+      </div>
+    </div>`).join('');
+
+  /* Also populate the select */
+  const sel = document.getElementById('position');
+  if (sel) {
+    const existing = Array.from(sel.options).map(o => o.value);
+    active.forEach(j => {
+      if (!existing.includes(j.title)) {
+        const opt = document.createElement('option');
+        opt.value = j.title;
+        opt.textContent = j.title;
+        sel.insertBefore(opt, sel.lastElementChild);
+      }
+    });
+  }
+
+  if (window.AOS) AOS.refresh();
+}
+
+function toggleJob(id) {
+  const card = document.getElementById('job-' + id);
+  if (!card) return;
+  const isOpen = card.classList.contains('open');
+  /* Close all */
+  document.querySelectorAll('.job-card.open').forEach(c => {
+    c.classList.remove('open');
+    c.querySelector('.job-card-header').setAttribute('aria-expanded', 'false');
+  });
+  if (!isOpen) {
+    card.classList.add('open');
+    card.querySelector('.job-card-header').setAttribute('aria-expanded', 'true');
+  }
+}
+
+function prefillPosition(title) {
+  const sel = document.getElementById('position');
+  if (sel) {
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === title) { sel.selectedIndex = i; break; }
+    }
+  }
+  document.getElementById('apply-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function loadJobs() {
+  try {
+    const res = await fetch('data/jobs.json');
+    renderJobs(await res.json());
+  } catch { renderJobs([]); }
+}
+
+/* ── Form validation & submit ── */
+document.getElementById('applyForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  /* Honeypot check */
+  if (document.getElementById('hp_website').value) return;
+
+  let valid = true;
+
+  function validateField(id, errId, check) {
+    const el = document.getElementById(id);
+    const errEl = document.getElementById(errId);
+    if (!check(el)) {
+      el.classList.add('error');
+      errEl.classList.add('visible');
+      if (valid) { el.focus(); valid = false; }
+    } else {
+      el.classList.remove('error');
+      errEl.classList.remove('visible');
+    }
+  }
+
+  validateField('fullName', 'err-fullName', el => el.value.trim().length >= 2);
+  validateField('email', 'err-email', el => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
+  validateField('phone', 'err-phone', el => /^[0-9\s\+\-]{9,15}$/.test(el.value.trim()));
+  validateField('position', 'err-position', el => el.value !== '');
+  validateField('cvFile', 'err-cvFile', el => el.files && el.files.length > 0);
+
+  if (!valid) return;
+
+  /* Submit */
+  const btn = document.getElementById('submitBtn');
+  const txt = document.getElementById('submitText');
+  btn.disabled = true;
+  txt.textContent = 'Đang gửi...';
+
+  try {
+    const formData = new FormData(this);
+    /* WORKER_URL can be injected from settings */
+    const workerUrl = (window.SN && window.SN.WORKER_URL) || 'https://sn-contact.workers.dev/api/apply';
+    const res = await fetch(workerUrl, { method: 'POST', body: formData });
+
+    if (res.ok) {
+      showToast('Hồ sơ đã được gửi thành công! Chúng tôi sẽ liên hệ bạn sớm.', 'success');
+      this.reset();
+    } else {
+      throw new Error('Server error');
+    }
+  } catch {
+    /* Fallback: show email instruction */
+    showToast('Vui lòng gửi CV qua email: songngoc.stmc@gmail.com', 'error');
+  } finally {
+    btn.disabled = false;
+    txt.textContent = 'Gửi đơn ứng tuyển';
+  }
+});
+
+/* Clear error on input */
+document.querySelectorAll('.form-control').forEach(el => {
+  el.addEventListener('input', function() {
+    this.classList.remove('error');
+    const errId = 'err-' + this.id;
+    const err = document.getElementById(errId);
+    if (err) err.classList.remove('visible');
+  });
+});
+
+document.addEventListener('DOMContentLoaded', loadJobs);
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+</script>
+</body>
+</html>

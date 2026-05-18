@@ -1,0 +1,53 @@
+# ─── Cloudflare Worker – wrangler.toml ───────────────────────────────────────
+# Dự án : Công ty TNHH Cơ Khí Xây Dựng Song Ngọc (SNCC)
+# Worker : Form handler + API proxy cho website songngoc.com.vn / sncc.vn
+# Docs   : https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name                = "sn-form"
+main                = "api/worker.js"
+compatibility_date  = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Biến môi trường (public, không nhạy cảm) ─────────────────────────────────
+[vars]
+ALLOWED_ORIGIN      = "https://songngoc.com.vn"
+SITE_NAME           = "Song Ngoc TNHH Co Khi Xay Dung"
+CONTACT_EMAIL       = "songngoc.stmc@gmail.com"
+RATE_LIMIT_REQUESTS = "10"
+RATE_LIMIT_WINDOW   = "60"
+
+# ── Secrets – đặt qua CLI, KHÔNG commit lên git ──────────────────────────────
+# wrangler secret put TURNSTILE_SECRET
+# wrangler secret put GAS_URL
+# wrangler secret put SMTP_USER       (nếu dùng email API)
+# wrangler secret put SMTP_PASS
+
+# ── KV Namespace – Rate limiting ─────────────────────────────────────────────
+# Tạo: wrangler kv:namespace create RATE_LIMIT
+# Sau đó thay REPLACE_WITH_KV_NAMESPACE_ID bằng ID thực
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id      = "REPLACE_WITH_KV_NAMESPACE_ID"
+# preview_id = "REPLACE_WITH_KV_PREVIEW_ID"
+
+# ── D1 Database (tuỳ chọn – lưu form submissions) ────────────────────────────
+# Tạo: wrangler d1 create sn-contacts
+# [[d1_databases]]
+# binding  = "DB"
+# database_name = "sn-contacts"
+# database_id   = "REPLACE_WITH_D1_DATABASE_ID"
+
+# ── Môi trường Preview (staging) ─────────────────────────────────────────────
+[env.preview]
+name = "sn-form-preview"
+vars = { ALLOWED_ORIGIN = "https://preview.sncc.vn" }
+
+# ── Môi trường Production ────────────────────────────────────────────────────
+[env.production]
+name = "sn-form"
+vars = { ALLOWED_ORIGIN = "https://songngoc.com.vn" }
+
+# ── Triggers (Cron jobs) ─────────────────────────────────────────────────────
+[triggers]
+crons = []
+# Ví dụ thêm cron hàng ngày: crons = ["0 1 * * *"]

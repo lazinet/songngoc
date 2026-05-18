@@ -1,0 +1,183 @@
+[
+  {
+    "id": 1,
+    "slug": "ky-su-xay-dung-giam-sat-cong-trinh",
+    "title": "Kỹ sư Xây dựng / Giám sát công trình",
+    "department": "Kỹ thuật - Thi công",
+    "type": "full-time",
+    "typeLabel": "Toàn thời gian",
+    "level": "Nhân viên / Chuyên viên",
+    "quantity": 5,
+    "salary": "15 - 25 triệu VND / tháng",
+    "location": "TP. Hồ Chí Minh & các công trình trên toàn quốc",
+    "posted": "2025-05-01",
+    "deadline": "2025-07-31",
+    "active": true,
+    "description": "Song Ngọc đang tìm kiếm Kỹ sư Xây dựng / Giám sát công trình để tham gia trực tiếp thi công và kiểm soát chất lượng tại các dự án xây dựng công nghiệp, cảng biển và hạ tầng trên toàn quốc. Đây là cơ hội tốt để phát triển sự nghiệp trong môi trường chuyên nghiệp với nhiều công trình thách thức.",
+    "requirements": [
+      "Tốt nghiệp Đại học chuyên ngành Kỹ thuật Xây dựng, Công trình thủy hoặc Cầu đường",
+      "Có ít nhất 2 năm kinh nghiệm thi công hoặc giám sát công trình xây dựng",
+      "Có khả năng đọc hiểu bản vẽ kỹ thuật, lập báo cáo tiến độ",
+      "Chứng chỉ hành nghề xây dựng là lợi thế",
+      "Sẵn sàng công tác xa nhà theo yêu cầu dự án",
+      "Có tinh thần trách nhiệm cao, làm việc độc lập và theo nhóm"
+    ],
+    "benefits": [
+      "Mức lương cạnh tranh theo năng lực và kinh nghiệm",
+      "Thưởng dự án, thưởng hiệu quả công việc theo quý và năm",
+      "Hỗ trợ chi phí đi lại, ăn ở khi công tác tại công trình",
+      "Tham gia BHXH, BHYT, BHTN đầy đủ theo quy định",
+      "Được đào tạo chuyên môn nâng cao, thi lấy chứng chỉ hành nghề",
+      "Môi trường làm việc năng động với nhiều dự án quy mô lớn"
+    ],
+    "contact": {
+      "name": "Phòng Nhân sự - Song Ngọc",
+      "email": "songngoc.stmc@gmail.com",
+      "phone": "086 893 7699"
+    }
+  },
+  {
+    "id": 2,
+    "slug": "ky-su-ket-cau-thep-bien",
+    "title": "Kỹ sư Kết cấu thép / Chuyên viên Chống ăn mòn biển",
+    "department": "Kỹ thuật - Chuyên ngành biển",
+    "type": "full-time",
+    "typeLabel": "Toàn thời gian",
+    "level": "Chuyên viên / Chuyên gia",
+    "quantity": 2,
+    "salary": "20 - 35 triệu VND / tháng",
+    "location": "TP. Hồ Chí Minh & dự án ven biển",
+    "posted": "2025-05-01",
+    "deadline": "2025-07-31",
+    "active": true,
+    "description": "Tuyển dụng Kỹ sư Kết cấu thép / Chuyên viên Chống ăn mòn biển để thực hiện các dự án bảo vệ kết cấu cầu cảng, giàn khoan và công trình biển. Vị trí yêu cầu kiến thức chuyên sâu về ăn mòn kim loại trong môi trường biển và kinh nghiệm thi công thực tế.",
+    "requirements": [
+      "Tốt nghiệp Đại học chuyên ngành Kỹ thuật Hóa học, Vật liệu, Cơ khí hoặc Xây dựng Công trình biển",
+      "Có ít nhất 3 năm kinh nghiệm trong lĩnh vực chống ăn mòn hoặc kết cấu thép biển",
+      "Hiểu biết về hệ thống bảo vệ cathodic (ICCP, SACP), tiêu chuẩn ISO 12944, NACE",
+      "Kinh nghiệm kiểm tra NDT (UT, PT, MT) là lợi thế lớn",
+      "Có khả năng giao tiếp tiếng Anh kỹ thuật",
+      "Chấp nhận làm việc ngoài khơi, trên biển theo ca"
+    ],
+    "benefits": [
+      "Mức lương hấp dẫn, thưởng dự án theo kết quả",
+      "Phụ cấp làm việc trên biển và môi trường đặc thù",
+      "Đào tạo chứng chỉ NACE, FROSIO tại nước ngoài",
+      "BHXH đầy đủ, bảo hiểm tai nạn 24/7",
+      "Cơ hội thăng tiến lên vị trí Trưởng nhóm, Quản lý dự án"
+    ],
+    "contact": {
+      "name": "Phòng Nhân sự - Song Ngọc",
+      "email": "songngoc.stmc@gmail.com",
+      "phone": "086 893 7699"
+    }
+  },
+  {
+    "id": 3,
+    "slug": "quan-ly-du-an-xay-dung",
+    "title": "Quản lý Dự án Xây dựng (Project Manager)",
+    "department": "Quản lý dự án",
+    "type": "full-time",
+    "typeLabel": "Toàn thời gian",
+    "level": "Quản lý / Trưởng nhóm",
+    "quantity": 2,
+    "salary": "30 - 50 triệu VND / tháng",
+    "location": "TP. Hồ Chí Minh",
+    "posted": "2025-05-01",
+    "deadline": "2025-07-31",
+    "active": true,
+    "description": "Song Ngọc cần tuyển Quản lý Dự án có kinh nghiệm để điều hành toàn diện các dự án xây dựng công nghiệp và cảng biển từ giai đoạn đấu thầu, triển khai đến nghiệm thu bàn giao. Đây là vị trí chủ chốt đòi hỏi kỹ năng lãnh đạo, quản lý rủi ro và giao tiếp hiệu quả với chủ đầu tư.",
+    "requirements": [
+      "Tốt nghiệp Đại học hoặc sau Đại học chuyên ngành Xây dựng, Kỹ thuật hoặc Quản lý Dự án",
+      "Ít nhất 5 năm kinh nghiệm quản lý dự án xây dựng, trong đó có ít nhất 2 dự án >50 tỷ VND",
+      "Có chứng chỉ PMP, PMI-RMP hoặc tương đương là lợi thế lớn",
+      "Thành thạo phần mềm quản lý dự án: MS Project, Primavera P6",
+      "Kỹ năng giao tiếp, đàm phán và giải quyết xung đột xuất sắc",
+      "Có khả năng đọc viết tiếng Anh chuyên ngành xây dựng"
+    ],
+    "benefits": [
+      "Mức lương top đầu ngành xây dựng",
+      "Thưởng hoàn thành dự án đúng tiến độ và trong ngân sách",
+      "Xe công ty hỗ trợ đi công trình",
+      "BHXH đầy đủ, bảo hiểm sức khỏe bổ sung cao cấp",
+      "Cơ hội trở thành cổ đông chiến lược của công ty"
+    ],
+    "contact": {
+      "name": "Ban Giám đốc - Song Ngọc",
+      "email": "songngoc@sncc.vn",
+      "phone": "086 893 7699"
+    }
+  },
+  {
+    "id": 4,
+    "slug": "ke-toan-tai-chinh-xay-dung",
+    "title": "Kế toán Tài chính / Kế toán công trình",
+    "department": "Tài chính - Kế toán",
+    "type": "full-time",
+    "typeLabel": "Toàn thời gian",
+    "level": "Nhân viên / Chuyên viên",
+    "quantity": 2,
+    "salary": "12 - 18 triệu VND / tháng",
+    "location": "TP. Hồ Chí Minh (Văn phòng Hiệp Bình)",
+    "posted": "2025-05-10",
+    "deadline": "2025-07-31",
+    "active": true,
+    "description": "Tuyển dụng Kế toán Tài chính / Kế toán công trình phụ trách hạch toán chi phí thi công, quản lý hợp đồng kinh tế và báo cáo tài chính theo đặc thù doanh nghiệp xây dựng. Vị trí làm việc tại văn phòng chính TP. Hồ Chí Minh, môi trường chuyên nghiệp.",
+    "requirements": [
+      "Tốt nghiệp Đại học chuyên ngành Kế toán, Kiểm toán, Tài chính",
+      "Ít nhất 2 năm kinh nghiệm kế toán, ưu tiên kinh nghiệm trong doanh nghiệp xây dựng",
+      "Thành thạo phần mềm kế toán MISA SME hoặc Fast Accounting",
+      "Nắm vững chế độ kế toán Việt Nam và quy định thuế hiện hành",
+      "Kỹ năng Excel nâng cao, khả năng lập báo cáo tài chính chính xác",
+      "Cẩn thận, trung thực và có khả năng làm việc dưới áp lực cao"
+    ],
+    "benefits": [
+      "Lương ổn định, tăng lương theo năng lực hàng năm",
+      "Thưởng Tết, thưởng hiệu quả kinh doanh công ty",
+      "BHXH, BHYT, BHTN đầy đủ",
+      "Môi trường văn phòng thoải mái, đồng nghiệp thân thiện",
+      "Được đào tạo nâng cao chuyên môn định kỳ"
+    ],
+    "contact": {
+      "name": "Phòng Nhân sự - Song Ngọc",
+      "email": "songngoc.stmc@gmail.com",
+      "phone": "086 893 7699"
+    }
+  },
+  {
+    "id": 5,
+    "slug": "truong-ca-doi-truong-cong-trinh",
+    "title": "Trưởng ca / Đội trưởng thi công",
+    "department": "Thi công - Công trường",
+    "type": "full-time",
+    "typeLabel": "Toàn thời gian",
+    "level": "Trưởng nhóm / Đội trưởng",
+    "quantity": 5,
+    "salary": "12 - 20 triệu VND / tháng + phụ cấp công trình",
+    "location": "Các công trình thi công trên toàn quốc",
+    "posted": "2025-05-15",
+    "deadline": "2025-08-15",
+    "active": true,
+    "description": "Tuyển dụng Trưởng ca / Đội trưởng thi công trực tiếp điều hành và kiểm soát chất lượng thi công tại công trường. Vị trí phù hợp với những cá nhân có kinh nghiệm thi công lâu năm, kỹ năng chỉ đạo nhân công và hiểu biết an toàn lao động công trường.",
+    "requirements": [
+      "Có ít nhất 3 năm kinh nghiệm thi công xây dựng hoặc cơ giới",
+      "Tốt nghiệp Trung cấp/Cao đẳng kỹ thuật xây dựng hoặc cơ khí trở lên",
+      "Có chứng chỉ an toàn lao động trong thi công xây dựng",
+      "Kỹ năng chỉ đạo, quản lý tổ đội công nhân hiệu quả",
+      "Có kinh nghiệm thi công cọc, bê tông, kết cấu thép là lợi thế",
+      "Sẵn sàng làm việc tại công trình xa, theo ca kíp"
+    ],
+    "benefits": [
+      "Lương cộng phụ cấp công trình hấp dẫn",
+      "Hỗ trợ chỗ ở, bữa ăn tại công trình",
+      "Thưởng hoàn thành đúng tiến độ",
+      "BHXH, BHYT, bảo hiểm tai nạn 24/7",
+      "Cơ hội thăng tiến lên Chỉ huy trưởng công trình"
+    ],
+    "contact": {
+      "name": "Phòng Nhân sự - Song Ngọc",
+      "email": "songngoc.stmc@gmail.com",
+      "phone": "086 893 7699"
+    }
+  }
+]

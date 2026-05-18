@@ -1,0 +1,511 @@
+[
+  {
+    "id": 1,
+    "slug": "du-an-img-phuoc-dong-cum-kcn-cau-cang-phuoc-dong",
+    "title": "DỰ ÁN IMG PHƯỚC ĐÔNG - CỤM KCN CẦU CẢNG PHƯỚC ĐÔNG",
+    "category": "cang",
+    "year": 2023,
+    "client": "Công ty TNHH IMG Phước Đông",
+    "location": "Long An",
+    "description": "Thi công hạ tầng cảng và khu công nghiệp tổng hợp Phước Đông, bao gồm hệ thống cầu cảng tiếp nhận tàu trọng tải lớn, san lấp mặt bằng, đường nội bộ và hạ tầng kỹ thuật đồng bộ. Công trình phục vụ phát triển cụm khu công nghiệp - cảng biển chiến lược tại khu vực đồng bằng sông Cửu Long.",
+    "image": "assets/images/projects/my-thuy-1766542803.jpg",
+    "gallery": [
+      "assets/images/projects/z737582147162071ae7dd9aa6f0fdfc061060a6485617e-1766976347.jpg",
+      "assets/images/projects/z7375777056501fde59d81bad4c2ff3296a26b34758d2b-1766975838.jpg"
+    ],
+    "featured": true,
+    "tags": ["cảng biển", "khu công nghiệp", "hạ tầng"]
+  },
+  {
+    "id": 2,
+    "slug": "du-an-nha-may-son-greenpro",
+    "title": "DỰ ÁN NHÀ MÁY SƠN GREENPRO",
+    "category": "congnghe",
+    "year": 2023,
+    "client": "Công ty Cổ phần Greenpro",
+    "location": "Bình Dương",
+    "description": "Xây dựng nhà máy sản xuất sơn công nghiệp GreenPro theo tiêu chuẩn nhà xưởng hiện đại, bao gồm thi công kết cấu thép tiền chế, hệ thống phòng cháy chữa cháy, xử lý nước thải và toàn bộ hạ tầng kỹ thuật phục vụ dây chuyền sản xuất sơn cao cấp.",
+    "image": "assets/images/projects/gree-1766541515.jpg",
+    "gallery": [
+      "assets/images/projects/green-1766541515.jpg",
+      "assets/images/projects/greennn-1766541515.jpg",
+      "assets/images/projects/1-1766541915.jpg"
+    ],
+    "featured": true,
+    "tags": ["nhà máy công nghiệp", "kết cấu thép", "xây dựng"]
+  },
+  {
+    "id": 3,
+    "slug": "du-an-dau-tu-xay-dung-cang-my-thuy",
+    "title": "DỰ ÁN ĐẦU TƯ XÂY DỰNG CẢNG MỸ THỦY",
+    "category": "cang",
+    "year": 2022,
+    "client": "Công ty TNHH Cảng Mỹ Thủy",
+    "location": "Quảng Trị",
+    "description": "Thi công xây dựng cảng biển nước sâu Mỹ Thủy tại tỉnh Quảng Trị, bao gồm công tác đóng cọc bê tông cốt thép, đúc cấu kiện bê tông đúc sẵn, lắp đặt kết cấu thép và hoàn thiện bến cảng tiếp nhận tàu hàng trọng tải lớn phục vụ xuất nhập khẩu hàng hóa khu vực miền Trung.",
+    "image": "assets/images/projects/my-thuy-1766542803.jpg",
+    "gallery": [
+      "assets/images/projects/z73758743655507243e7090e123828ef66f521ac2146c6-1766976776.jpg",
+      "assets/images/projects/z73759086767261d21547377f8e4d2cde3141131e72730-1766978741.jpg"
+    ],
+    "featured": true,
+    "tags": ["cảng biển", "cọc bê tông", "miền Trung"]
+  },
+  {
+    "id": 4,
+    "slug": "du-an-khu-dan-cu-an-phuoc-sai-gon",
+    "title": "DỰ ÁN KHU DÂN CƯ AN PHƯỚC SÀI GÒN",
+    "category": "dandu",
+    "year": 2022,
+    "client": "Tập đoàn An Phước Sài Gòn",
+    "location": "TP. Hồ Chí Minh",
+    "description": "Thi công san lấp, hạ tầng kỹ thuật và xây dựng dân dụng tại khu dân cư An Phước Sài Gòn. Dự án bao gồm hệ thống đường nội bộ, cấp thoát nước, điện chiếu sáng và hạ tầng tiện ích phục vụ hơn 500 hộ dân sinh sống trong khu đô thị hiện đại.",
+    "image": "assets/images/projects/an-phuoc-1766044952.jpg",
+    "gallery": [
+      "assets/images/projects/an-phoc-sai-gon-1765437038-1765438114.jpg",
+      "assets/images/projects/an-1766045096.jpg"
+    ],
+    "featured": false,
+    "tags": ["khu dân cư", "hạ tầng đô thị", "san lấp"]
+  },
+  {
+    "id": 5,
+    "slug": "du-an-can-ho-mau-va-van-phong-dieu-hanh-du-an-chung-cu-tan-binh",
+    "title": "DỰ ÁN CHUNG CƯ TÂN BÌNH",
+    "category": "dandu",
+    "year": 2021,
+    "client": "Chủ đầu tư Tân Bình",
+    "location": "Quận Tân Bình, TP. Hồ Chí Minh",
+    "description": "Thi công xây dựng căn hộ mẫu và văn phòng điều hành dự án chung cư tại quận Tân Bình. Công trình gồm hạng mục hoàn thiện nội thất cao cấp, hệ thống điện, nước, PCCC và các tiện ích chung cho tòa nhà căn hộ hiện đại đạt tiêu chuẩn quản lý chất lượng quốc tế.",
+    "image": "assets/images/projects/vp-1766545027.jpg",
+    "gallery": [
+      "assets/images/projects/vpdh-1-1766545027.png",
+      "assets/images/projects/trung-tam-1766545503.jpg"
+    ],
+    "featured": false,
+    "tags": ["chung cư", "nội thất", "xây dựng dân dụng"]
+  },
+  {
+    "id": 6,
+    "slug": "du-an-nha-may-dien-gio-hoa-binh-1",
+    "title": "DỰ ÁN NHÀ MÁY ĐIỆN GIÓ HÒA BÌNH 1",
+    "category": "diengio",
+    "year": 2022,
+    "client": "Công ty CP Năng lượng Tái tạo Hòa Bình",
+    "location": "Bạc Liêu",
+    "description": "Thi công nền móng trụ turbine gió, đường nội bộ công trường, hệ thống cáp điện ngầm và trạm biến áp cho nhà máy điện gió Hòa Bình 1 với tổng công suất 30 MW. Công trình thực hiện trong điều kiện địa hình đất yếu ven biển, áp dụng công nghệ xử lý nền tiên tiến.",
+    "image": "assets/images/projects/1-1764647605.jpg",
+    "gallery": [
+      "assets/images/projects/3-1764647605.jpg",
+      "assets/images/projects/z272739926362813fbf641aabd0e36f2a9123a2c2d6272-1766548308.jpg",
+      "assets/images/projects/z27273992611655cbe41840d66c20784cf1f55a1e53e9e-1766548308.jpg"
+    ],
+    "featured": true,
+    "tags": ["điện gió", "năng lượng tái tạo", "nền móng"]
+  },
+  {
+    "id": 7,
+    "slug": "du-an-cang-container-quoc-te-gemalink-cai-mep",
+    "title": "CẢNG CONTAINER QUỐC TẾ GEMALINK CÁI MÉP",
+    "category": "cang",
+    "year": 2021,
+    "client": "Công ty TNHH Cảng Container Quốc tế Gemalink",
+    "location": "Bà Rịa - Vũng Tàu",
+    "description": "Tham gia thi công hạng mục đặc biệt tại cảng container quốc tế Gemalink Cái Mép - một trong những cảng nước sâu lớn nhất Việt Nam. Công việc bao gồm thi công chống ăn mòn kết cấu thép cầu cảng, lắp đặt hệ thống bảo vệ cathodic và hoàn thiện bề mặt bê tông tiếp xúc môi trường biển.",
+    "image": "assets/images/projects/cai-mep-1766544413.jpg",
+    "gallery": [
+      "assets/images/projects/cai-mep-2-1766544413.jpg",
+      "assets/images/projects/3-16-1764736317.png",
+      "assets/images/projects/2-15-1764736317.png"
+    ],
+    "featured": true,
+    "tags": ["cảng container", "chống ăn mòn", "Cái Mép"]
+  },
+  {
+    "id": 8,
+    "slug": "du-an-cang-to-hop-hoa-dau-long-son-mien-nam-lsp",
+    "title": "TỔ HỢP HÓA DẦU LONG SƠN MIỀN NAM",
+    "category": "cang",
+    "year": 2022,
+    "client": "Công ty TNHH Long Sơn Petrochemicals (LSP)",
+    "location": "Bà Rịa - Vũng Tàu",
+    "description": "Thi công cảng chuyên dụng và các hạng mục hạ tầng kỹ thuật phục vụ tổ hợp hóa dầu Long Sơn - dự án FDI lớn nhất Việt Nam trong lĩnh vực hóa dầu. Công trình bao gồm đóng cọc thép, kết cấu bê tông bến cảng, hệ thống đường ống nội bộ và san lấp mặt bằng quy mô lớn.",
+    "image": "assets/images/projects/z5328197412683e3df8c3be101b4d89c23d754e3889235-1766738986.png",
+    "gallery": [
+      "assets/images/projects/z5328197454927fba6d7e2e4bd79b2578aa6f41525a719-1-1766738986.png",
+      "assets/images/projects/z73674585762520f85707272251e580917f4911590de1a-1766735404.jpg"
+    ],
+    "featured": true,
+    "tags": ["hóa dầu", "cảng chuyên dụng", "FDI"]
+  },
+  {
+    "id": 9,
+    "slug": "du-an-nha-may-dien-gio-ca-mau-1",
+    "title": "NHÀ MÁY ĐIỆN GIÓ CÀ MAU 1",
+    "category": "diengio",
+    "year": 2023,
+    "client": "Công ty CP Điện Gió Cà Mau",
+    "location": "Cà Mau",
+    "description": "Thi công nền móng tổ máy turbine gió ngoài khơi và trên bờ tại tỉnh Cà Mau, bao gồm công tác đóng cọc thép ống đường kính lớn, xử lý nền đất yếu, thi công bê tông cọc và đài móng turbine, đường cáp ngầm và đường nội bộ kết nối các tổ máy trong trang trại điện gió.",
+    "image": "assets/images/projects/1-1764660325.jpg",
+    "gallery": [
+      "assets/images/projects/3-1764660325.jpg",
+      "assets/images/projects/2-1764660566.jpg"
+    ],
+    "featured": true,
+    "tags": ["điện gió", "Cà Mau", "năng lượng sạch"]
+  },
+  {
+    "id": 10,
+    "slug": "du-an-nha-may-chieu-xa-can-tho",
+    "title": "NHÀ MÁY CHIẾU XẠ CẦN THƠ",
+    "category": "congnghe",
+    "year": 2021,
+    "client": "Công ty Cổ phần Chiếu Xạ Cần Thơ",
+    "location": "Cần Thơ",
+    "description": "Xây dựng nhà máy chiếu xạ thực phẩm xuất khẩu tại Cần Thơ đạt tiêu chuẩn quốc tế. Công trình yêu cầu kỹ thuật đặc biệt về kết cấu bê tông chắn xạ dày, hệ thống thông gió và phòng chống phóng xạ nghiêm ngặt, cùng hạ tầng phục vụ dây chuyền chiếu xạ thực phẩm xuất khẩu sang thị trường Mỹ và châu Âu.",
+    "image": "assets/images/projects/1-1764660325.jpg",
+    "gallery": [
+      "assets/images/projects/1-1764660566.jpg",
+      "assets/images/projects/2-10-1764660965.png"
+    ],
+    "featured": false,
+    "tags": ["nhà máy", "chiếu xạ", "thực phẩm xuất khẩu"]
+  },
+  {
+    "id": 11,
+    "slug": "du-an-xay-dung-cang-nha-may-mo-rong-vard-vung-tau",
+    "title": "CẢNG NHÀ MÁY MỞ RỘNG VARD VŨNG TÀU",
+    "category": "cang",
+    "year": 2022,
+    "client": "Công ty TNHH VARD Vũng Tàu",
+    "location": "Vũng Tàu",
+    "description": "Thi công mở rộng cảng và nhà máy đóng tàu VARD Vũng Tàu - đơn vị đóng tàu Na Uy tại Việt Nam. Dự án bao gồm xây dựng mới cầu tàu, nạo vét luồng, thi công khu xưởng sản xuất, hệ thống triền đà và các công trình phụ trợ phục vụ mở rộng năng lực sản xuất tàu biển cao cấp.",
+    "image": "assets/images/projects/dji02141-1766548727.jpg",
+    "gallery": [
+      "assets/images/projects/dji0217-1-1766548727.jpg",
+      "assets/images/projects/dji0208-1766739384.jpg"
+    ],
+    "featured": false,
+    "tags": ["đóng tàu", "cảng công nghiệp", "mở rộng"]
+  },
+  {
+    "id": 12,
+    "slug": "du-an-nha-may-nhiet-dien-vung-ang-ii",
+    "title": "NHÀ MÁY NHIỆT ĐIỆN VŨNG ÁNG II",
+    "category": "congnghe",
+    "year": 2023,
+    "client": "Công ty CP Nhiệt điện Vũng Áng II",
+    "location": "Hà Tĩnh",
+    "description": "Tham gia thi công các hạng mục dân dụng và công nghiệp tại dự án nhiệt điện Vũng Áng II với tổng công suất 1.200 MW. Phạm vi công việc bao gồm san lấp mặt bằng, xây dựng nhà điều hành, hạ tầng giao thông nội bộ, bể chứa nước và hệ thống thoát nước toàn khu.",
+    "image": "assets/images/projects/1-1764660325.jpg",
+    "gallery": [
+      "assets/images/projects/3-1764660325.jpg",
+      "assets/images/projects/3-11-1764660965.png"
+    ],
+    "featured": false,
+    "tags": ["nhiệt điện", "năng lượng", "công nghiệp nặng"]
+  },
+  {
+    "id": 13,
+    "slug": "du-an-cang-ben-thuy-noi-dia-nghe-an",
+    "title": "CẢNG BẾN THỦY NỘI ĐỊA NGHỆ AN",
+    "category": "cang",
+    "year": 2020,
+    "client": "Sở Giao thông Vận tải Nghệ An",
+    "location": "Nghệ An",
+    "description": "Xây dựng cảng bến thủy nội địa phục vụ vận chuyển hàng hóa khu vực Nghệ An. Công trình bao gồm thi công kè bờ, bến neo đậu, nhà điều hành và hạ tầng kỹ thuật phục vụ tiếp nhận tàu thuyền trọng tải vừa hoạt động trên tuyến đường thủy nội địa quốc gia.",
+    "image": "assets/images/projects/ben-thuy-noi-dia-1765437262.png",
+    "gallery": [
+      "assets/images/projects/z731181480247225992cdd17abb1c363bcb56becc5c8a2-1765352753.png",
+      "assets/images/projects/z7311814802473986d9802445e774b8550ec36e08b9041-1765352753.png"
+    ],
+    "featured": false,
+    "tags": ["cảng nội địa", "thủy nội địa", "kè bờ"]
+  },
+  {
+    "id": 14,
+    "slug": "du-an-khu-cong-nghiep-vsip-ii",
+    "title": "DỰ ÁN HẠ TẦNG KHU CÔNG NGHIỆP VSIP II",
+    "category": "phuhung",
+    "year": 2021,
+    "client": "Công ty Liên doanh VSIP Bình Dương",
+    "location": "Bình Dương",
+    "description": "Thi công hạ tầng kỹ thuật khu công nghiệp VSIP II Bình Dương bao gồm hệ thống đường nội bộ, cấp thoát nước, điện chiếu sáng và hạ tầng cây xanh. Dự án phục vụ thu hút đầu tư nước ngoài vào khu công nghiệp hiện đại theo tiêu chuẩn Singapore.",
+    "image": "assets/images/projects/khu-cong-nghiep-vsip-ii-a11-1766745376.jpg",
+    "gallery": [
+      "assets/images/projects/unnamed-1766745376.webp",
+      "assets/images/projects/vn-factory-lined-1766745376.webp"
+    ],
+    "featured": false,
+    "tags": ["khu công nghiệp", "VSIP", "hạ tầng"]
+  },
+  {
+    "id": 15,
+    "slug": "du-an-cong-trinh-chong-an-mon-bien",
+    "title": "CÔNG TRÌNH CHỐNG ĂN MÒN BIỂN CẢNG PHƯỚC AN",
+    "category": "cang",
+    "year": 2023,
+    "client": "Cảng Phước An - Tổng Công ty Hàng hải Việt Nam",
+    "location": "Đồng Nai",
+    "description": "Thực hiện công tác chống ăn mòn toàn diện cho kết cấu thép và bê tông cầu cảng Phước An đang trong giai đoạn xây dựng. Áp dụng hệ thống bảo vệ cathodic dòng cưỡng bức, phủ sơn epoxy biển chịu mặn và bọc polyurethane cho các cấu kiện chịu tác động trực tiếp của môi trường biển.",
+    "image": "assets/images/projects/z7375802147899ab7bf9add5fd32e76eb238edb0ff9fbd-1766978993.jpg",
+    "gallery": [
+      "assets/images/projects/z73758497432765360fd8dbd281603c0fb27b9f8da1f57-1766976956.jpg",
+      "assets/images/projects/z73758497628633add83461a853b274704d9af93e6c1ab-1766976956.jpg"
+    ],
+    "featured": false,
+    "tags": ["chống ăn mòn", "bảo vệ cathodic", "môi trường biển"]
+  },
+  {
+    "id": 16,
+    "slug": "du-an-san-lap-mat-bang-khu-cong-nghiep-rach-ba-lon",
+    "title": "SAN LẤP MẶT BẰNG KHU CÔNG NGHIỆP RẠCH BÀ LON",
+    "category": "phuhung",
+    "year": 2022,
+    "client": "Ban Quản lý KCN Long An",
+    "location": "Long An",
+    "description": "Thực hiện công tác san lấp mặt bằng quy mô lớn cho khu công nghiệp Rạch Bà Lon với diện tích hơn 150 ha. Sử dụng đội ngũ máy móc cơ giới hiện đại bao gồm máy đào, xe lu, máy bơm cát và thiết bị xử lý nền đất yếu đồng bằng sông Cửu Long.",
+    "image": "assets/images/projects/rach-ba-lon-1766483799.jpg",
+    "gallery": [
+      "assets/images/projects/z731192185484719d7d9f26a0b5fa0554c6dc682aca510-1766483251.jpg",
+      "assets/images/projects/z73119218550616f9fd585d0dd9c2f3ef681910daf3ce0-1766483251.jpg"
+    ],
+    "featured": false,
+    "tags": ["san lấp", "cơ giới", "khu công nghiệp"]
+  },
+  {
+    "id": 17,
+    "slug": "du-an-viet-pan-group-kho-lanh",
+    "title": "DỰ ÁN KHO LẠNH VIET-PAN GROUP",
+    "category": "congnghe",
+    "year": 2021,
+    "client": "Viet-Pan Group",
+    "location": "Tiền Giang",
+    "description": "Xây dựng kho lạnh bảo quản thủy sản và nông sản xuất khẩu cho Viet-Pan Group tại Tiền Giang. Công trình yêu cầu kỹ thuật cao về cách nhiệt, hệ thống làm lạnh công nghiệp, kết cấu thép tiền chế và bê tông nền chịu tải trọng xe nâng hoạt động trong điều kiện nhiệt độ âm sâu.",
+    "image": "assets/images/projects/viet-pan-1766045335.jpg",
+    "gallery": [
+      "assets/images/projects/1-1764660325.jpg"
+    ],
+    "featured": false,
+    "tags": ["kho lạnh", "thủy sản", "kết cấu thép"]
+  },
+  {
+    "id": 18,
+    "slug": "du-an-nha-may-xu-ly-nuoc-thai-khu-cong-nghiep",
+    "title": "NHÀ MÁY XỬ LÝ NƯỚC THẢI KHU CÔNG NGHIỆP SUNRISE",
+    "category": "congnghe",
+    "year": 2022,
+    "client": "Ban Quản lý KCN Sunrise",
+    "location": "Bình Dương",
+    "description": "Thi công xây dựng nhà máy xử lý nước thải tập trung cho khu công nghiệp Sunrise với công suất 5.000 m³/ngày đêm. Bao gồm hạng mục hồ sinh học, bể phản ứng, hệ thống bơm cống và nhà điều hành vận hành hệ thống xử lý nước thải công nghiệp đạt tiêu chuẩn môi trường QCVN.",
+    "image": "assets/images/projects/khu-xu-ly-nuoc-thai-sunrise3-1766547139.png",
+    "gallery": [
+      "assets/images/projects/2a-1766547139.jpg",
+      "assets/images/projects/z2419410614410d2b19eba97194997ff5153f07264b180-1766546536.jpg"
+    ],
+    "featured": false,
+    "tags": ["xử lý nước thải", "môi trường", "khu công nghiệp"]
+  },
+  {
+    "id": 19,
+    "slug": "du-an-cau-duong-giao-thong-nong-thon",
+    "title": "DỰ ÁN CẦU ĐƯỜNG GIAO THÔNG NÔNG THÔN ĐỒNG BẰNG SCL",
+    "category": "phuhung",
+    "year": 2020,
+    "client": "Ban Quản lý Dự án Giao thông tỉnh Vĩnh Long",
+    "location": "Vĩnh Long",
+    "description": "Thi công xây dựng và sửa chữa hệ thống cầu, đường giao thông nông thôn tại tỉnh Vĩnh Long. Dự án bao gồm xây mới 12 cầu bê tông cốt thép dự ứng lực, nâng cấp 25 km đường liên xã và gia cố đê bao phục vụ phát triển kinh tế nông thôn vùng đồng bằng sông Cửu Long.",
+    "image": "assets/images/projects/z73803498496545036eca14c6a82e2d1952ab0fd9a3ea5-1767079161.jpg",
+    "gallery": [
+      "assets/images/projects/z7380349849758b1fad81dcacf301222456448e6390888-1767079161.jpg",
+      "assets/images/projects/z73803498497599ff5fcbb7df4aa6285d9eca07a15dbc0-1767079161.jpg"
+    ],
+    "featured": false,
+    "tags": ["cầu đường", "giao thông nông thôn", "đồng bằng"]
+  },
+  {
+    "id": 20,
+    "slug": "du-an-nha-may-dien-gio-bac-lieu",
+    "title": "NHÀ MÁY ĐIỆN GIÓ BẠC LIÊU MỞ RỘNG",
+    "category": "diengio",
+    "year": 2021,
+    "client": "Công ty TNHH Xây lắp Điện gió Bạc Liêu",
+    "location": "Bạc Liêu",
+    "description": "Thi công mở rộng trang trại điện gió biển Bạc Liêu, hạng mục thi công đường nội bộ trên nền đất ngập mặn, thi công móng đặc biệt cho turbine gió trên biển, hệ thống cáp điện ngầm dưới nước và trạm biến áp trung thế kết nối lưới điện quốc gia.",
+    "image": "assets/images/projects/z27273992735929bcf796adc3f782559174eda8e0614c5-1766548308.jpg",
+    "gallery": [
+      "assets/images/projects/z26762248466830e5113b8a64abfbb6ea5bc11d5e471a6-1-1766548308.jpg",
+      "assets/images/projects/5-1766548308.jpg"
+    ],
+    "featured": false,
+    "tags": ["điện gió biển", "Bạc Liêu", "mở rộng"]
+  },
+  {
+    "id": 21,
+    "slug": "du-an-he-thong-cap-thoat-nuoc-khu-cong-nghiep-tan-phu-trung",
+    "title": "HỆ THỐNG CẤP THOÁT NƯỚC KCN TÂN PHÚ TRUNG",
+    "category": "phuhung",
+    "year": 2020,
+    "client": "Ban Quản lý KCN Tân Phú Trung",
+    "location": "TP. Hồ Chí Minh",
+    "description": "Thi công hệ thống cấp thoát nước hoàn chỉnh cho khu công nghiệp Tân Phú Trung giai đoạn 2, bao gồm lắp đặt đường ống cấp nước áp lực cao, hệ thống mương thoát nước bê tông đúc sẵn, trạm bơm tăng áp và hồ điều tiết nước mưa theo tiêu chuẩn môi trường.",
+    "image": "assets/images/projects/1-1764660566.jpg",
+    "gallery": [
+      "assets/images/projects/2-1764660566.jpg"
+    ],
+    "featured": false,
+    "tags": ["cấp thoát nước", "khu công nghiệp", "hạ tầng kỹ thuật"]
+  },
+  {
+    "id": 22,
+    "slug": "du-an-xay-dung-duong-noi-bo-cang-sai-gon",
+    "title": "ĐƯỜNG NỘI BỘ VÀ HẠ TẦNG CẢNG SÀI GÒN - HIỆP PHƯỚC",
+    "category": "cang",
+    "year": 2020,
+    "client": "Cảng Sài Gòn",
+    "location": "TP. Hồ Chí Minh",
+    "description": "Thi công hệ thống đường nội bộ, bãi container và hạ tầng kỹ thuật tại khu cảng Sài Gòn - Hiệp Phước. Công trình bao gồm rải bê tông nhựa đường, lắp đặt hệ thống điện chiếu sáng cảng, cân tải trọng xe và hệ thống camera giám sát an ninh bến bãi.",
+    "image": "assets/images/projects/z7375810733244c4bf32279b22a5f2b3d9bd8dabc90b2e-1766976251.jpg",
+    "gallery": [
+      "assets/images/projects/z7375777056501fde59d81bad4c2ff3296a26b34758d2b-1766975838.jpg"
+    ],
+    "featured": false,
+    "tags": ["đường nội bộ", "bãi container", "cảng Sài Gòn"]
+  },
+  {
+    "id": 23,
+    "slug": "du-an-khu-cong-nghiep-long-hau",
+    "title": "DỰ ÁN HẠ TẦNG KHU CÔNG NGHIỆP LONG HẬU",
+    "category": "phuhung",
+    "year": 2019,
+    "client": "Công ty Cổ phần Long Hậu",
+    "location": "Long An",
+    "description": "Thi công hạ tầng giai đoạn 3 khu công nghiệp Long Hậu bao gồm san lấp mặt bằng 80 ha, xây dựng đường nội bộ 6 làn xe, hệ thống thoát nước và điện hạ thế. Dự án hoàn thành đúng tiến độ đóng vai trò quan trọng thu hút nhà đầu tư nước ngoài vào khu vực Long An.",
+    "image": "assets/images/projects/z341776416028922cc375293e0951b69413c00b4f23fac2-1766548463.jpg",
+    "gallery": [
+      "assets/images/projects/z341776416068356731d476c2b7258546058723809c482-1766548463.jpg",
+      "assets/images/projects/z4271120841451d903d2fac48209a23640e54fb22b91811-1766548463.jpg"
+    ],
+    "featured": false,
+    "tags": ["khu công nghiệp", "san lấp", "Long Hậu"]
+  },
+  {
+    "id": 24,
+    "slug": "du-an-nha-may-che-bien-thuy-san-ben-tre",
+    "title": "NHÀ MÁY CHẾ BIẾN THỦY SẢN BẾN TRE",
+    "category": "congnghe",
+    "year": 2023,
+    "client": "Công ty CP Thủy sản Bến Tre",
+    "location": "Bến Tre",
+    "description": "Xây dựng nhà máy chế biến và xuất khẩu thủy sản tại Bến Tre đạt chuẩn HACCP và FDA Mỹ. Công trình bao gồm nhà xưởng kết cấu thép tiền chế, phòng cấp đông IQF, kho lạnh -25°C, hệ thống xử lý nước thải và khu hành chính đáp ứng yêu cầu kiểm tra của khách hàng quốc tế.",
+    "image": "assets/images/projects/1-1764660325.jpg",
+    "gallery": [
+      "assets/images/projects/1-1764660566.jpg"
+    ],
+    "featured": false,
+    "tags": ["thủy sản", "chế biến xuất khẩu", "HACCP"]
+  },
+  {
+    "id": 25,
+    "slug": "du-an-cong-trinh-cau-cang-long-son",
+    "title": "CẦU CẢNG XUẤT HÀNG TỔ HỢP LONG SƠN",
+    "category": "cang",
+    "year": 2023,
+    "client": "Long Son Petrochemicals Company Limited",
+    "location": "Bà Rịa - Vũng Tàu",
+    "description": "Thi công cầu cảng chuyên dụng xuất hàng hóa hóa dầu của tổ hợp Long Sơn. Công trình bao gồm đóng cọc thép ống biển, lắp dựng kết cấu thép cầu cảng, hệ thống loading arm xuất sản phẩm, cầu thang tiếp cận và hệ thống phòng cháy chữa cháy chuyên dụng cho sản phẩm hóa dầu nguy hiểm.",
+    "image": "assets/images/projects/z73674726330235b573bcf53ae3df666704564864e5b6c-1766735610.jpg",
+    "gallery": [
+      "assets/images/projects/z736748730771800e6e510fcdfe681bad881da8dcc9d5f-1766735780.jpg",
+      "assets/images/projects/z73674920581538aabc5a905d34315c2c4777e4e372c91-1766735849.jpg"
+    ],
+    "featured": false,
+    "tags": ["cầu cảng", "hóa dầu", "cọc thép ống biển"]
+  },
+  {
+    "id": 26,
+    "slug": "du-an-nha-xuong-cong-nghiep-binh-duong",
+    "title": "NHÓM NHÀ XƯỞNG CHO THUÊ KHU CÔNG NGHIỆP BÌNH DƯƠNG",
+    "category": "congnghe",
+    "year": 2022,
+    "client": "Công ty TNHH Đầu tư Bất động sản Công nghiệp BD",
+    "location": "Bình Dương",
+    "description": "Xây dựng nhóm nhà xưởng công nghiệp cho thuê diện tích mỗi xưởng 3.000-5.000 m² theo tiêu chuẩn xưởng sẵn sàng hoạt động. Kết cấu thép khẩu độ lớn không cột giữa, mái tôn cách nhiệt, sàn epoxy chịu tải nặng và hệ thống điện 3 pha đáp ứng yêu cầu sản xuất đa ngành.",
+    "image": "assets/images/projects/1-1764660325.jpg",
+    "gallery": [
+      "assets/images/projects/1-1766548575.jpg",
+      "assets/images/projects/2-1766548575.jpg"
+    ],
+    "featured": false,
+    "tags": ["nhà xưởng", "cho thuê", "kết cấu thép"]
+  },
+  {
+    "id": 27,
+    "slug": "du-an-ha-tang-cong-trinh-cang-thi-vai",
+    "title": "HẠ TẦNG CÔNG TRÌNH CẢNG THỊ VẢI - CÁI MÉP",
+    "category": "cang",
+    "year": 2019,
+    "client": "Tổng Công ty Hàng hải Việt Nam - VIMC",
+    "location": "Bà Rịa - Vũng Tàu",
+    "description": "Thi công hạ tầng kỹ thuật các hạng mục phụ trợ cảng Thị Vải - Cái Mép bao gồm đường nội bộ bến bãi, hệ thống điện chiếu sáng cảng, tường rào bảo vệ và nhà điều hành cảng. Dự án đóng góp vào hệ sinh thái cảng nước sâu lớn nhất Việt Nam tại khu vực Cái Mép - Thị Vải.",
+    "image": "assets/images/projects/z7367914732280a25cdf3c239b157fbaedfed738cb679e-1766742223.jpg",
+    "gallery": [
+      "assets/images/projects/z736791950707717bc7f7a204079e1d93b9a4896bac95e-1766742223.jpg",
+      "assets/images/projects/z736792604948748cea1aa03507007ba296ec70000de76-1766742307.jpg"
+    ],
+    "featured": false,
+    "tags": ["Cái Mép", "Thị Vải", "hạ tầng cảng"]
+  },
+  {
+    "id": 28,
+    "slug": "du-an-duc-san-cu-kien-be-tong",
+    "title": "SẢN XUẤT CẤU KIỆN BÊ TÔNG ĐÚC SẴN CHO DỰ ÁN HẠ TẦNG ĐBSCL",
+    "category": "phuhung",
+    "year": 2023,
+    "client": "Ban Quản lý Dự án Đầu tư Xây dựng tỉnh Đồng Tháp",
+    "location": "Đồng Tháp",
+    "description": "Sản xuất và cung cấp cấu kiện bê tông đúc sẵn cho hàng loạt công trình hạ tầng giao thông và thủy lợi tại đồng bằng sông Cửu Long. Sản phẩm bao gồm dầm cầu bê tông cốt thép dự ứng lực, cống hộp, tấm lát kênh mương và cọc vuông bê tông cốt thép chịu ăn mòn đất chua mặn.",
+    "image": "assets/images/projects/z33193083602022f9a4a454db63fe69822c001c5ca4cdc-1766981936.jpg",
+    "gallery": [
+      "assets/images/projects/z33193083678308afed191f3ad56fd8ac97a14afd26765-1766981936.jpg",
+      "assets/images/projects/z3319308341943744ab7e1f51e5f3dba26adfaee132127-1766981936.jpg"
+    ],
+    "featured": false,
+    "tags": ["đúc sẵn", "bê tông cốt thép", "đồng bằng SCL"]
+  },
+  {
+    "id": 29,
+    "slug": "du-an-nha-may-dien-gio-tan-phu-dong",
+    "title": "DỰ ÁN NHÀ MÁY ĐIỆN GIÓ TÂN PHÚ ĐÔNG",
+    "category": "diengio",
+    "year": 2022,
+    "client": "Công ty CP Điện Gió Tân Phú Đông",
+    "location": "Tiền Giang",
+    "description": "Thi công nền móng và hạ tầng phụ trợ cho trang trại điện gió ven biển Tân Phú Đông, Tiền Giang. Công việc bao gồm đóng cọc ống thép đường kính D800mm, đổ bê tông đài móng turbine, thi công đường công vụ trên nền đất yếu và lắp đặt hệ thống cáp ngầm nối các tua-bin với trạm biến áp.",
+    "image": "assets/images/projects/z272739926362813fbf641aabd0e36f2a9123a2c2d6272-1766548308.jpg",
+    "gallery": [
+      "assets/images/projects/z27273992735929bcf796adc3f782559174eda8e0614c5-1766548308.jpg",
+      "assets/images/projects/z7367581254370e8568b04d1858dfee5d42ddc17707258-1766737195.jpg"
+    ],
+    "featured": false,
+    "tags": ["điện gió", "Tiền Giang", "năng lượng tái tạo"]
+  },
+  {
+    "id": 30,
+    "slug": "du-an-cong-trinh-bien-khu-cong-nghiep-phu-my",
+    "title": "HẠ TẦNG KHU CÔNG NGHIỆP PHÚ MỸ 3 - CẢNG CHUYÊN DỤNG",
+    "category": "cang",
+    "year": 2023,
+    "client": "Công ty TNHH KCN Phú Mỹ 3",
+    "location": "Bà Rịa - Vũng Tàu",
+    "description": "Thi công hạ tầng cảng chuyên dụng và khu công nghiệp Phú Mỹ 3 giai đoạn phát triển mới. Công trình bao gồm xây dựng cầu cảng tiếp nhận tàu 50.000 DWT, hệ thống kho bãi, đường kết nối cảng và hạ tầng kỹ thuật tổng thể phục vụ các nhà đầu tư trong lĩnh vực công nghiệp nặng và logistics.",
+    "image": "assets/images/projects/z7367615988660a6ba6c888be83a80d393de17dbb703a1-1766737733.jpg",
+    "gallery": [
+      "assets/images/projects/z736765248480095fea48fd988161f8d18449c530316c5-1766738232.png",
+      "assets/images/projects/z7367655326884a352e1ba99d8d3ef9798ef0b8a7604da-1766738290.png"
+    ],
+    "featured": false,
+    "tags": ["Phú Mỹ", "cảng chuyên dụng", "khu công nghiệp"]
+  }
+]

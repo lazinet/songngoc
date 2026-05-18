@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+  <title>Liên Hệ — Song Ngọc Cơ Khí Xây Dựng</title>
+  <meta name="description" content="Liên hệ với Công ty TNHH Cơ Khí Xây Dựng Song Ngọc. Địa chỉ: VP-2-09, Tòa nhà St. Moritz, 1014 Phạm Văn Đồng, TP.HCM. Hotline: 086 893 7699.">
+  <link rel="canonical" href="https://songngoc.com.vn/lien-he.html">
+  <link rel="icon" type="image/png" href="assets/logos/logo-sn.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <!-- Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 991px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-info-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 36px;
+      box-shadow: var(--shadow-md); position: sticky; top: 88px;
+    }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 0; border-bottom: 1px solid var(--border-2);
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: var(--sn-green-lt); color: var(--sn-green);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .contact-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); }
+    .contact-value { font-size: .9rem; font-weight: 700; color: var(--text); margin-top: 3px; }
+    .contact-value a { color: var(--sn-green); }
+    .contact-value a:hover { text-decoration: underline; }
+
+    .form-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 40px;
+      box-shadow: var(--shadow-md);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-success {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .form-success i { font-size: 3.5rem; color: var(--sn-green); margin-bottom: 16px; }
+    .form-success h3 { margin-bottom: 10px; }
+    .form-success p { color: var(--text-3); }
+
+    /* Quick contact chips */
+    .quick-contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .qc-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 24px; font-size: .82rem; font-weight: 700;
+      transition: all var(--transition);
+    }
+    .qc-phone { background: var(--sn-green); color: #fff; }
+    .qc-phone:hover { background: var(--sn-green-dk); transform: translateY(-2px); }
+    .qc-zalo  { background: #0068FF; color: #fff; }
+    .qc-zalo:hover { background: #0054CC; transform: translateY(-2px); }
+    .qc-email { background: var(--sn-orange-lt); color: var(--sn-orange); border: 1.5px solid var(--sn-orange); }
+    .qc-email:hover { background: var(--sn-orange); color: #fff; transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+<div class="color-bar"></div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Song Ngọc — Trang chủ">
+      <img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="42">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <div class="nav-item"><a href="gioi-thieu.html" class="nav-link">Giới thiệu</a></div>
+      <div class="nav-item">
+        <a href="linh-vuc.html" class="nav-link">Lĩnh vực <i class="fas fa-chevron-down"></i></a>
+        <div class="nav-dropdown">
+          <a href="linh-vuc.html#thiet-ke"><i class="fas fa-drafting-compass"></i> Tư vấn &amp; Thiết kế</a>
+          <a href="linh-vuc.html#cong-nghiep"><i class="fas fa-industry"></i> Công trình Công nghiệp</a>
+          <a href="linh-vuc.html#cau-cang"><i class="fas fa-ship"></i> Cầu, Cảng, Giao thông</a>
+          <a href="linh-vuc.html#chong-an-mon"><i class="fas fa-shield-halved"></i> Chống ăn mòn biển</a>
+          <a href="linh-vuc.html#co-gioi"><i class="fas fa-tractor"></i> Cơ giới &amp; San lấp</a>
+          <a href="linh-vuc.html#duc-san"><i class="fas fa-cubes"></i> Cấu kiện đúc sẵn</a>
+          <a href="linh-vuc.html#cho-thue"><i class="fas fa-wrench"></i> Cho thuê thiết bị</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="du-an.html" class="nav-link">Dự án</a></div>
+      <div class="nav-item"><a href="tin-tuc.html" class="nav-link">Tin tức</a></div>
+      <div class="nav-item"><a href="hoat-dong.html" class="nav-link">Hoạt động</a></div>
+      <div class="nav-item"><a href="tuyen-dung.html" class="nav-link">Tuyển dụng</a></div>
+      <div class="nav-item"><a href="catalogue.html" class="nav-link">Hồ sơ năng lực</a></div>
+      <a href="lien-he.html" class="btn btn-primary btn-sm nav-cta active">
+        <i class="fas fa-phone"></i> Liên hệ
+      </a>
+    </nav>
+    <button class="hamburger" aria-label="Mở menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu di động">
+  <div class="mobile-nav-sep">Menu</div>
+  <a href="gioi-thieu.html"><i class="fas fa-building"></i> Giới thiệu</a>
+  <a href="linh-vuc.html"><i class="fas fa-layer-group"></i> Lĩnh vực hoạt động</a>
+  <a href="du-an.html"><i class="fas fa-hard-hat"></i> Dự án</a>
+  <a href="tin-tuc.html"><i class="fas fa-newspaper"></i> Tin tức</a>
+  <a href="hoat-dong.html"><i class="fas fa-people-group"></i> Hoạt động công ty</a>
+  <a href="tuyen-dung.html"><i class="fas fa-user-tie"></i> Tuyển dụng</a>
+  <a href="catalogue.html"><i class="fas fa-book-open"></i> Hồ sơ năng lực</a>
+  <a href="lien-he.html" class="active"><i class="fas fa-map-marker-alt"></i> Liên hệ</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Trang chủ</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Liên hệ</span>
+    </div>
+    <h1><i class="fas fa-map-marker-alt" style="color:var(--sn-orange);margin-right:10px"></i>Liên Hệ</h1>
+    <p>Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn — hãy liên hệ ngay hôm nay.</p>
+  </div>
+</div>
+
+<!-- QUICK CONTACT -->
+<section class="section-sm bg-surface">
+  <div class="container" style="text-align:center">
+    <p style="color:var(--text-3);margin-bottom:16px;font-size:.88rem">Liên hệ nhanh</p>
+    <div class="quick-contacts" style="justify-content:center">
+      <a href="tel:0868937699" class="qc-btn qc-phone"><i class="fas fa-phone"></i> 086 893 7699</a>
+      <a href="http://chat.zalo.me/0868937699" target="_blank" rel="noopener" class="qc-btn qc-zalo"><i class="fas fa-comment-dots"></i> Chat Zalo</a>
+      <a href="mailto:songngoc.stmc@gmail.com" class="qc-btn qc-email"><i class="fas fa-envelope"></i> Gửi Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTACT SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Info -->
+      <div data-aos="fade-right">
+        <div class="contact-info-card">
+          <h2 style="font-size:1.3rem;margin-bottom:6px">Thông tin liên hệ</h2>
+          <p style="color:var(--text-3);font-size:.82rem;margin-bottom:24px">Đội ngũ Song Ngọc luôn sẵn sàng hỗ trợ trong giờ hành chính.</p>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-building"></i></div>
+            <div>
+              <div class="contact-label">Tên công ty</div>
+              <div class="contact-value">Công ty TNHH Cơ Khí Xây Dựng Song Ngọc</div>
+              <div style="font-size:.72rem;color:var(--text-3);margin-top:3px">MST: 0312260211</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <div class="contact-label">Địa chỉ văn phòng</div>
+              <div class="contact-value">VP-2-09, Lầu 2, Tòa nhà St. Moritz<br>Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="contact-label">Hotline</div>
+              <div class="contact-value"><a href="tel:0868937699">086 893 7699</a></div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:songngoc.stmc@gmail.com">songngoc.stmc@gmail.com</a><br>
+                <a href="mailto:songngoc@sncc.vn">songngoc@sncc.vn</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <div class="contact-label">Giờ làm việc</div>
+              <div class="contact-value">Thứ 2 – Thứ 7: 07:30 – 17:30</div>
+              <div style="font-size:.72rem;color:var(--text-3);margin-top:3px">Chủ nhật: nghỉ</div>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <a href="https://www.facebook.com/songngoc.com.vn" target="_blank" rel="noopener"
+               style="width:38px;height:38px;border-radius:50%;background:#1877F2;color:#fff;display:flex;align-items:center;justify-content:center" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com/@songngocconstruction3109" target="_blank" rel="noopener"
+               style="width:38px;height:38px;border-radius:50%;background:#FF0000;color:#fff;display:flex;align-items:center;justify-content:center" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="http://chat.zalo.me/0868937699" target="_blank" rel="noopener"
+               style="width:38px;height:38px;border-radius:50%;background:#0068FF;color:#fff;display:flex;align-items:center;justify-content:center" aria-label="Zalo">
+              <i class="fas fa-comment-dots"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div data-aos="fade-left">
+        <div class="form-card">
+          <h2 style="font-size:1.3rem;margin-bottom:6px">Gửi yêu cầu tư vấn</h2>
+          <p style="color:var(--text-3);font-size:.82rem;margin-bottom:28px">Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong vòng <strong>24 giờ</strong>.</p>
+
+          <form id="contactForm" novalidate>
+            <!-- Honeypot anti-spam: bots fill this, humans don't see it -->
+            <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off"
+                   style="position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none"
+                   aria-hidden="true">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cf-name">Họ và tên <span class="req">*</span></label>
+                <input type="text" id="cf-name" name="name" class="form-control"
+                       placeholder="Nguyễn Văn A" required autocomplete="name">
+                <div class="form-error">Vui lòng nhập họ tên</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-company">Công ty / Tổ chức</label>
+                <input type="text" id="cf-company" name="company" class="form-control"
+                       placeholder="Tên công ty (nếu có)" autocomplete="organization">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cf-phone">Số điện thoại <span class="req">*</span></label>
+                <input type="tel" id="cf-phone" name="phone" class="form-control"
+                       placeholder="09x xxx xxxx" required autocomplete="tel">
+                <div class="form-error">Vui lòng nhập số điện thoại</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-email">Email <span class="req">*</span></label>
+                <input type="email" id="cf-email" name="email" class="form-control"
+                       placeholder="email@congty.vn" required autocomplete="email">
+                <div class="form-error">Email không hợp lệ</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cf-service">Dịch vụ quan tâm</label>
+              <select id="cf-service" name="service" class="form-control">
+                <option value="">-- Chọn lĩnh vực --</option>
+                <option>Tư vấn &amp; Thiết kế</option>
+                <option>Thi công Công trình Công nghiệp</option>
+                <option>Thi công Cầu, Cảng, Giao thông</option>
+                <option>Chống ăn mòn trên biển</option>
+                <option>Cơ giới &amp; San lấp mặt bằng</option>
+                <option>Cấu kiện đúc sẵn</option>
+                <option>Cho thuê thiết bị thi công</option>
+                <option>Khác</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cf-message">Nội dung yêu cầu <span class="req">*</span></label>
+              <textarea id="cf-message" name="message" class="form-control" rows="5"
+                        placeholder="Mô tả ngắn về dự án, yêu cầu kỹ thuật, thời gian cần tư vấn..." required></textarea>
+              <div class="form-error">Vui lòng nhập nội dung yêu cầu</div>
+            </div>
+
+            <!-- Cloudflare Turnstile -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAA..." style="margin-bottom:20px"></div>
+
+            <button type="submit" class="btn btn-primary btn-lg" id="contactSubmit" style="width:100%">
+              <i class="fas fa-paper-plane"></i> Gửi yêu cầu tư vấn
+            </button>
+          </form>
+
+          <!-- Success state -->
+          <div class="form-success" id="contactSuccess">
+            <i class="fas fa-circle-check"></i>
+            <h3>Gửi thành công!</h3>
+            <p>Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong vòng <strong>24 giờ</strong>.</p>
+            <button class="btn btn-outline" style="margin-top:20px" onclick="resetContactForm()">
+              <i class="fas fa-rotate-left"></i> Gửi yêu cầu khác
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section-sm bg-surface" aria-label="Bản đồ">
+  <div class="container">
+    <div class="sec-eyebrow" style="display:table;margin:0 auto 24px"><i class="fas fa-map"></i> Tìm Chúng Tôi Trên Bản Đồ</div>
+    <div class="map-wrap" data-aos="fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0!2d106.7348122!3d10.8380516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527010aa833e7%3A0x8df5d1a120509705!2zQ8O0bmcgVmnDqm4gUGjhuqduIE3hu4FtIFF1YW5nIFRydW5n!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Vị trí văn phòng Công ty Song Ngọc">
+      </iframe>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--text-3)">
+      <i class="fas fa-map-marker-alt" style="color:var(--sn-green)"></i>
+      VP-2-09, Lầu 2, Tòa nhà St. Moritz, Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM
+      &nbsp;|&nbsp;
+      <a href="https://www.google.com/maps/place/CÔNG+TY+TNHH+CƠ+KHÍ+XÂY+DỰNG+SONG+NGỌC/@10.8380516,106.7348122,17z" target="_blank" rel="noopener" style="color:var(--sn-green)">Chỉ đường <i class="fas fa-arrow-up-right-from-square" style="font-size:.7em"></i></a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" aria-label="Footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-logo"><img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="44"></div>
+      <p class="footer-desc">Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Đối tác tin cậy trong lĩnh vực cơ khí và xây dựng hạ tầng tại Việt Nam.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/songngoc.com.vn" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@songngocconstruction3109" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="http://chat.zalo.me/0868937699" class="social-btn" target="_blank" rel="noopener" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-heading">Điều Hướng</span>
+      <ul class="footer-links">
+        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+        <li><a href="linh-vuc.html">Lĩnh vực hoạt động</a></li>
+        <li><a href="du-an.html">Dự án</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+        <li><a href="hoat-dong.html">Hoạt động</a></li>
+        <li><a href="tuyen-dung.html">Tuyển dụng</a></li>
+        <li><a href="catalogue.html">Hồ sơ năng lực</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Lĩnh Vực</span>
+      <ul class="footer-links">
+        <li><a href="linh-vuc.html#thiet-ke">Tư vấn &amp; Thiết kế</a></li>
+        <li><a href="linh-vuc.html#cau-cang">Cầu, Cảng, Giao thông</a></li>
+        <li><a href="linh-vuc.html#cong-nghiep">Công trình Công nghiệp</a></li>
+        <li><a href="linh-vuc.html#chong-an-mon">Chống ăn mòn biển</a></li>
+        <li><a href="linh-vuc.html#co-gioi">Cơ giới &amp; San lấp</a></li>
+        <li><a href="linh-vuc.html#duc-san">Cấu kiện đúc sẵn</a></li>
+        <li><a href="linh-vuc.html#cho-thue">Cho thuê thiết bị</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Liên Hệ</span>
+      <ul class="footer-contact">
+        <li><a href="https://goo.gl/maps/songngoc" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i>VP-2-09, Lầu 2, Tòa nhà St. Moritz, 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</a></li>
+        <li><a href="tel:0868937699"><i class="fas fa-phone"></i> 086 893 7699</a></li>
+        <li><a href="mailto:songngoc.stmc@gmail.com"><i class="fas fa-envelope"></i> songngoc.stmc@gmail.com</a></li>
+        <li><a href="mailto:songngoc@sncc.vn"><i class="fas fa-envelope"></i> songngoc@sncc.vn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider-gradient"></div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© <span id="footerYear">2025</span> Công ty TNHH Cơ Khí Xây Dựng Song Ngọc. MST: 0312260211. Thiết kế bởi <a href="https://hathyo.com" target="_blank" rel="noopener">HATHYO</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+/* ── Contact Form ── */
+const form = document.getElementById('contactForm');
+const spam = { start: Date.now() };
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  /* Anti-spam checks */
+  const honey = form.querySelector('.hp-field');
+  if (honey && honey.value) return; // bot
+  if (Date.now() - spam.start < 2000) {
+    Toast.error('Gửi quá nhanh. Vui lòng thử lại.'); return;
+  }
+
+  /* Validate */
+  let valid = true;
+  form.querySelectorAll('[required]').forEach(f => {
+    const ok = f.value.trim().length > 0;
+    f.classList.toggle('invalid', !ok);
+    if (!ok) valid = false;
+  });
+  const emailEl = document.getElementById('cf-email');
+  if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+    emailEl.classList.add('invalid'); valid = false;
+  }
+  if (!valid) { Toast.error('Vui lòng kiểm tra lại thông tin.'); return; }
+
+  /* Get Turnstile token */
+  let token = '';
+  if (window.turnstile) {
+    try { token = window.turnstile.getResponse(); } catch {}
+    if (!token) { Toast.error('Vui lòng xác nhận bạn không phải bot.'); return; }
+  }
+
+  /* Submit */
+  const btn = document.getElementById('contactSubmit');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang gửi...';
+
+  const data = {
+    type: 'contact',
+    name:    document.getElementById('cf-name').value.trim(),
+    company: document.getElementById('cf-company').value.trim(),
+    phone:   document.getElementById('cf-phone').value.trim(),
+    email:   document.getElementById('cf-email').value.trim(),
+    service: document.getElementById('cf-service').value,
+    message: document.getElementById('cf-message').value.trim(),
+    token,
+    timestamp: new Date().toISOString(),
+    source: location.href,
+  };
+
+  try {
+    const WORKER = 'https://sn-form.songngoc.workers.dev';
+    const res = await fetch(WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const json = await res.json();
+    if (!res.ok || json.error) throw new Error(json.error || 'Server error');
+
+    /* Success */
+    form.style.display = 'none';
+    document.getElementById('contactSuccess').style.display = 'block';
+    if (window.gtag) gtag('event', 'form_submit', { event_category: 'Contact', event_label: data.service });
+  } catch (err) {
+    console.error(err);
+    Toast.error('Gửi thất bại. Vui lòng liên hệ trực tiếp qua hotline: 086 893 7699');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Gửi yêu cầu tư vấn';
+  }
+});
+
+function resetContactForm() {
+  form.reset();
+  form.querySelectorAll('.invalid').forEach(f => f.classList.remove('invalid'));
+  form.style.display = '';
+  document.getElementById('contactSuccess').style.display = 'none';
+  spam.start = Date.now();
+  if (window.turnstile) window.turnstile.reset();
+}
+
+/* Remove invalid class on input */
+form.querySelectorAll('.form-control').forEach(f => {
+  f.addEventListener('input', () => f.classList.remove('invalid'));
+});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-XXXXXXXXXX',{anonymize_ip:true});
+</script>
+</body>
+</html>

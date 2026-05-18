@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+  <title>Lĩnh Vực Hoạt Động — Công ty TNHH Cơ Khí Xây Dựng Song Ngọc</title>
+  <meta name="description" content="7 lĩnh vực hoạt động chuyên sâu của Song Ngọc: Tư vấn thiết kế, Công trình công nghiệp, Cầu cảng, Chống ăn mòn biển, Cơ giới san lấp, Đúc sẵn, Cho thuê thiết bị.">
+  <meta name="keywords" content="lĩnh vực song ngọc, thi công cầu cảng, chống ăn mòn biển, cơ giới san lấp, cấu kiện đúc sẵn, cho thuê thiết bị">
+  <meta name="author" content="Công ty TNHH Cơ Khí Xây Dựng Song Ngọc">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Lĩnh Vực Hoạt Động — Song Ngọc Construction">
+  <meta property="og:description" content="Giải pháp toàn diện trong cơ khí và xây dựng hạ tầng từ Song Ngọc.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://songngoc.com.vn/linh-vuc.html">
+  <meta property="og:image" content="https://songngoc.com.vn/assets/images/misc/og-cover.jpg">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Song Ngọc Construction">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lĩnh Vực Hoạt Động — Song Ngọc Construction">
+  <meta name="twitter:image" content="https://songngoc.com.vn/assets/images/misc/og-cover.jpg">
+
+  <link rel="canonical" href="https://songngoc.com.vn/linh-vuc.html">
+  <link rel="icon" type="image/png" href="assets/logos/logo-sn.png">
+  <link rel="apple-touch-icon" href="assets/logos/logo-sn.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, var(--sn-green-dk) 0%, var(--sn-green) 60%, var(--sn-green-mid) 100%);
+      padding: 80px 0 60px; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg') center/cover no-repeat;
+      opacity: .12;
+    }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero h1 { color: #fff; font-size: clamp(1.8rem,4vw,2.8rem); margin-bottom: 12px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .breadcrumb a, .breadcrumb span { font-size: .82rem; color: rgba(255,255,255,.75); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb .sep { color: rgba(255,255,255,.4); }
+    .breadcrumb .current { color: var(--sn-orange); font-weight: 700; }
+
+    /* Layout */
+    .lv-layout {
+      display: grid; grid-template-columns: 260px 1fr; gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .lv-layout { grid-template-columns: 1fr; } }
+
+    /* Sticky Sidebar */
+    .lv-sidebar {
+      position: sticky; top: calc(var(--header-h) + 20px);
+      background: var(--surface); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md); overflow: hidden;
+    }
+    .lv-sidebar-title {
+      background: var(--sn-green); color: #fff;
+      padding: 16px 20px; font-weight: 700; font-size: .88rem;
+    }
+    .lv-nav-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 20px; font-size: .85rem; color: var(--text-2);
+      border-bottom: 1px solid var(--border-2); transition: all var(--transition);
+      text-decoration: none;
+    }
+    .lv-nav-link:hover, .lv-nav-link.active {
+      background: var(--sn-green-lt); color: var(--sn-green); font-weight: 600;
+    }
+    .lv-nav-link i { width: 18px; text-align: center; color: var(--sn-green); flex-shrink: 0; }
+    .lv-nav-link:last-child { border-bottom: none; }
+
+    /* Sector sections */
+    .sector-section {
+      padding: 64px 0; scroll-margin-top: calc(var(--header-h) + 20px);
+      border-bottom: 1px solid var(--border-2);
+    }
+    .sector-section:last-child { border-bottom: none; }
+    .sector-header {
+      display: flex; align-items: center; gap: 20px; margin-bottom: 28px;
+    }
+    .sector-big-icon {
+      width: 72px; height: 72px; border-radius: var(--radius-md); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .sector-big-icon.green { background: var(--sn-green-lt); color: var(--sn-green); }
+    .sector-big-icon.orange { background: var(--sn-orange-lt); color: var(--sn-orange); }
+    .sector-header h2 { font-size: clamp(1.3rem,2.5vw,1.7rem); margin: 0; }
+    .sector-img {
+      border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 16/9;
+      box-shadow: var(--shadow-lg); margin-bottom: 28px;
+    }
+    .sector-img img { width: 100%; height: 100%; object-fit: cover; }
+    .sector-desc { color: var(--text-2); line-height: 1.8; margin-bottom: 20px; }
+    .service-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 12px; margin-top: 20px; }
+    .service-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: var(--bg); border-radius: var(--radius-sm);
+      padding: 12px 16px; font-size: .85rem; color: var(--text-2);
+    }
+    .service-item i { color: var(--sn-green); flex-shrink: 0; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- ── Color Bar ── -->
+<div class="color-bar"></div>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Song Ngọc — Trang chủ">
+      <img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="42">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <div class="nav-item">
+        <a href="gioi-thieu.html" class="nav-link">Giới thiệu</a>
+      </div>
+      <div class="nav-item">
+        <a href="linh-vuc.html" class="nav-link nav-active">Lĩnh vực <i class="fas fa-chevron-down"></i></a>
+        <div class="nav-dropdown">
+          <a href="linh-vuc.html#thiet-ke"><i class="fas fa-drafting-compass"></i> Tư vấn &amp; Thiết kế</a>
+          <a href="linh-vuc.html#cong-nghiep"><i class="fas fa-industry"></i> Công trình Công nghiệp</a>
+          <a href="linh-vuc.html#cau-cang"><i class="fas fa-ship"></i> Cầu, Cảng, Giao thông</a>
+          <a href="linh-vuc.html#chong-an-mon"><i class="fas fa-shield-halved"></i> Chống ăn mòn biển</a>
+          <a href="linh-vuc.html#co-gioi"><i class="fas fa-tractor"></i> Cơ giới &amp; San lấp</a>
+          <a href="linh-vuc.html#duc-san"><i class="fas fa-cubes"></i> Cấu kiện đúc sẵn</a>
+          <a href="linh-vuc.html#cho-thue"><i class="fas fa-wrench"></i> Cho thuê thiết bị</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="du-an.html" class="nav-link">Dự án</a></div>
+      <div class="nav-item"><a href="tin-tuc.html" class="nav-link">Tin tức</a></div>
+      <div class="nav-item"><a href="hoat-dong.html" class="nav-link">Hoạt động</a></div>
+      <div class="nav-item"><a href="tuyen-dung.html" class="nav-link">Tuyển dụng</a></div>
+      <div class="nav-item"><a href="catalogue.html" class="nav-link">Hồ sơ năng lực</a></div>
+      <a href="lien-he.html" class="btn btn-primary btn-sm nav-cta"><i class="fas fa-phone"></i> Liên hệ</a>
+    </nav>
+    <button class="hamburger" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu di động">
+  <div class="mobile-nav-sep">Menu</div>
+  <a href="gioi-thieu.html"><i class="fas fa-building"></i> Giới thiệu</a>
+  <a href="linh-vuc.html"><i class="fas fa-layer-group"></i> Lĩnh vực hoạt động</a>
+  <a href="du-an.html"><i class="fas fa-hard-hat"></i> Dự án</a>
+  <a href="tin-tuc.html"><i class="fas fa-newspaper"></i> Tin tức</a>
+  <a href="hoat-dong.html"><i class="fas fa-people-group"></i> Hoạt động công ty</a>
+  <a href="tuyen-dung.html"><i class="fas fa-user-tie"></i> Tuyển dụng</a>
+  <a href="catalogue.html"><i class="fas fa-book-open"></i> Hồ sơ năng lực</a>
+  <a href="lien-he.html"><i class="fas fa-map-marker-alt"></i> Liên hệ</a>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero" aria-label="Lĩnh vực hoạt động">
+  <div class="container page-hero-content">
+    <h1 data-aos="fade-up">Lĩnh Vực Hoạt Động</h1>
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-aos="fade-up" data-aos-delay="80">
+      <a href="index.html"><i class="fas fa-home"></i> Trang chủ</a>
+      <span class="sep"><i class="fas fa-chevron-right"></i></span>
+      <span class="current">Lĩnh vực hoạt động</span>
+    </nav>
+  </div>
+</section>
+
+<!-- ══ CONTENT ══ -->
+<div class="section">
+  <div class="container">
+    <div class="lv-layout">
+
+      <!-- Sidebar -->
+      <aside class="lv-sidebar" aria-label="Điều hướng lĩnh vực">
+        <div class="lv-sidebar-title"><i class="fas fa-layer-group"></i> Các Lĩnh Vực</div>
+        <a href="#thiet-ke" class="lv-nav-link"><i class="fas fa-drafting-compass"></i> Tư vấn &amp; Thiết kế</a>
+        <a href="#cong-nghiep" class="lv-nav-link"><i class="fas fa-industry"></i> Công trình Công nghiệp</a>
+        <a href="#cau-cang" class="lv-nav-link"><i class="fas fa-ship"></i> Cầu, Cảng, Giao thông</a>
+        <a href="#chong-an-mon" class="lv-nav-link"><i class="fas fa-shield-halved"></i> Chống ăn mòn biển</a>
+        <a href="#co-gioi" class="lv-nav-link"><i class="fas fa-tractor"></i> Cơ giới &amp; San lấp</a>
+        <a href="#duc-san" class="lv-nav-link"><i class="fas fa-cubes"></i> Cấu kiện đúc sẵn</a>
+        <a href="#cho-thue" class="lv-nav-link"><i class="fas fa-wrench"></i> Cho thuê thiết bị</a>
+      </aside>
+
+      <!-- Main content -->
+      <main>
+
+        <!-- 1. Tư vấn & Thiết kế -->
+        <section id="thiet-ke" class="sector-section" aria-labelledby="lv-thiet-ke">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon green"><i class="fas fa-drafting-compass"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 01</div>
+              <h2 id="lv-thiet-ke">Tư Vấn &amp; Thiết Kế</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/z7449467479411_64f7e529939d6a3d13a2ca0372d8b282.jpg"
+                 alt="Tư vấn thiết kế công trình công nghiệp Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Cung cấp dịch vụ tư vấn và thiết kế chuyên sâu cho các công trình công nghiệp, nhà xưởng, nhà máy sản xuất và công trình thủy lợi. Đội ngũ kỹ sư giàu kinh nghiệm đảm bảo thiết kế tối ưu về kết cấu, công năng và chi phí, đáp ứng đầy đủ tiêu chuẩn kỹ thuật Việt Nam và quốc tế.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Với đội ngũ kỹ sư thiết kế nhiều năm kinh nghiệm trong lĩnh vực công nghiệp và thủy công, Song Ngọc cung cấp giải pháp tư vấn thiết kế toàn diện từ khảo sát địa hình, địa chất đến lập hồ sơ thiết kế kỹ thuật, bản vẽ thi công và dự toán chi phí. Chúng tôi tư vấn thiết kế nhà máy, kho xưởng, công trình cảng bến, đê kè và hệ thống thủy lợi theo tiêu chuẩn TCVN, ASTM và Eurocode.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> Thiết kế nhà máy, kho xưởng công nghiệp</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Tư vấn kết cấu thép tiền chế</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Thiết kế công trình bến cảng, đê kè</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Lập dự toán và hồ sơ mời thầu</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Khảo sát địa hình, địa chất</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Thiết kế hệ thống thủy lợi</div>
+          </div>
+        </section>
+
+        <!-- 2. Công trình Công nghiệp -->
+        <section id="cong-nghiep" class="sector-section" aria-labelledby="lv-cong-nghiep">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon orange"><i class="fas fa-industry"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 02</div>
+              <h2 id="lv-cong-nghiep">Công Trình Công Nghiệp &amp; Dân Dụng</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/z7449467435174_105eaed475e529c3d29b051227c3b07e.jpg"
+                 alt="Thi công công trình công nghiệp dân dụng Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Thi công xây dựng các công trình công nghiệp và dân dụng quy mô lớn bao gồm nhà máy, kho xưởng, tòa nhà văn phòng, khu dân cư và công trình hạ tầng kỹ thuật. Cam kết chất lượng thi công theo đúng thiết kế, tiến độ hợp đồng và tiêu chuẩn an toàn lao động nghiêm ngặt.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Song Ngọc có năng lực thi công đa dạng công trình từ nhà xưởng kết cấu thép khẩu độ lớn, nhà máy sản xuất chuyên dụng đến tòa nhà văn phòng và khu dân cư phức hợp. Sở hữu đội ngũ thi công lành nghề, máy móc thiết bị hiện đại và hệ thống quản lý chất lượng ISO, chúng tôi đảm bảo mỗi công trình đều đạt tiêu chuẩn kỹ thuật cao nhất.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> Nhà máy, nhà xưởng kết cấu thép</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Tòa nhà văn phòng, thương mại</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Khu dân cư và nhà ở</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Công trình hạ tầng kỹ thuật</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Kho bãi, trung tâm logistics</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Nhà máy điện, năng lượng tái tạo</div>
+          </div>
+        </section>
+
+        <!-- 3. Cầu Cảng -->
+        <section id="cau-cang" class="sector-section" aria-labelledby="lv-cau-cang">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon green"><i class="fas fa-ship"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 03</div>
+              <h2 id="lv-cau-cang">Cầu, Cảng &amp; Giao Thông</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/z7449463285313_addf73c83335006be70c4d6d4a6a02ec.jpg"
+                 alt="Thi công cầu cảng giao thông Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Thi công chuyên nghiệp các công trình giao thông và hạ tầng cảng biển bao gồm cầu bê tông cốt thép, cầu treo, cảng hàng hóa, bến phà và hệ thống đường bộ cao tốc, quốc lộ. Có kinh nghiệm thi công tại các vùng địa hình khó khăn: đồng bằng ngập nước, ven biển và hải đảo.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Lĩnh vực thi công cầu cảng và giao thông là thế mạnh cốt lõi của Song Ngọc với nhiều công trình trọng điểm quốc gia đã thực hiện. Chúng tôi có năng lực thi công cầu bê tông dự ứng lực, cầu thép, cảng nước sâu tiếp nhận tàu lớn, đường cảng và hệ thống giao thông nội bộ khu công nghiệp.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cầu bê tông cốt thép dự ứng lực</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cảng biển nước sâu, bến cảng chuyên dụng</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Đường bộ, đường trong khu công nghiệp</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Bến phà, cầu tàu nội địa</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cầu thép khẩu độ lớn</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Hạ tầng cảng container</div>
+          </div>
+        </section>
+
+        <!-- 4. Chống ăn mòn -->
+        <section id="chong-an-mon" class="sector-section" aria-labelledby="lv-chong-an-mon">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon orange"><i class="fas fa-shield-halved"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 04</div>
+              <h2 id="lv-chong-an-mon">Chống Ăn Mòn Trên Biển</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/z7449467465873_ffb75b4c910f8a005590d5ac6980bd25.jpg"
+                 alt="Thi công chống ăn mòn biển Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Cung cấp giải pháp bảo vệ chống ăn mòn toàn diện cho các kết cấu thép và bê tông tiếp xúc môi trường biển xâm thực. Áp dụng công nghệ tiên tiến bao gồm hệ thống bảo vệ cathodic (ICCP/SACP), sơn phủ epoxy hàng hải cao cấp và vật liệu composite chống ăn mòn.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Song Ngọc là một trong số ít đơn vị tại Việt Nam có chuyên môn sâu về chống ăn mòn công trình biển. Chúng tôi cung cấp giải pháp tổng thể từ khảo sát hiện trạng ăn mòn, thiết kế hệ thống bảo vệ đến thi công và bảo trì định kỳ. Sản phẩm và vật liệu nhập khẩu từ các hãng uy tín quốc tế đảm bảo tuổi thọ bảo vệ 20-30 năm cho kết cấu biển.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> Hệ thống bảo vệ cathodic ICCP và SACP</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Sơn phủ epoxy, polyurethane hàng hải</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Bọc ống thép, ống bê tông chống ăn mòn</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Kiểm tra, bảo trì định kỳ công trình biển</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Khảo sát NDT (UT, PT, MT)</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Tư vấn theo tiêu chuẩn ISO 12944, NACE</div>
+          </div>
+        </section>
+
+        <!-- 5. Cơ giới & San lấp -->
+        <section id="co-gioi" class="sector-section" aria-labelledby="lv-co-gioi">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon green"><i class="fas fa-tractor"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 05</div>
+              <h2 id="lv-co-gioi">Cơ Giới &amp; San Lấp Mặt Bằng</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/san lap.jpg"
+                 alt="Thi công cơ giới san lấp mặt bằng Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Thực hiện công tác cơ giới hóa thi công quy mô lớn bao gồm san lấp mặt bằng, đào đắp đất, bơm hút bùn, xử lý nền đất yếu và hoàn thiện mặt bằng công trình. Sở hữu đội máy móc thiết bị cơ giới đồng bộ, công suất lớn phù hợp địa hình đồng bằng và ven biển.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Với đội ngũ máy móc thiết bị hiện đại gồm máy đào, xe lu, xe ủi, xe chở đất, máy bơm cát và thiết bị phụ trợ, Song Ngọc có khả năng thực hiện các hợp đồng san lấp mặt bằng hàng trăm hecta. Chúng tôi áp dụng công nghệ xử lý nền đất yếu như bấc thấm, cột xi măng đất, đệm cát và gia tải trước.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> San lấp mặt bằng quy mô lớn (&gt;100 ha)</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Đào đắp đất, xử lý nền đất yếu</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Bơm cát, bơm bùn thủy lực</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Gia tải, bấc thấm, cột xi măng đất</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Thi công đê, kè chắn sóng</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Hoàn thiện mặt bằng khu công nghiệp</div>
+          </div>
+        </section>
+
+        <!-- 6. Đúc sẵn -->
+        <section id="duc-san" class="sector-section" aria-labelledby="lv-duc-san">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon orange"><i class="fas fa-cubes"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 06</div>
+              <h2 id="lv-duc-san">Cấu Kiện Đúc Sẵn</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/z7449463347653_957523f8aa60d86b5fa3bf60e16ad618.jpg"
+                 alt="Sản xuất cấu kiện bê tông đúc sẵn Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Sản xuất và thi công lắp đặt các loại cấu kiện bê tông đúc sẵn chất lượng cao bao gồm cọc bê tông cốt thép, dầm cầu dự ứng lực, cống hộp, mương thoát nước và tấm đan. Quy trình sản xuất kiểm soát chặt chẽ đảm bảo chất lượng đồng đều, cường độ bê tông đạt yêu cầu thiết kế.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Song Ngọc đầu tư xưởng sản xuất cấu kiện bê tông đúc sẵn trang bị khuôn thép chính xác, hệ thống dưỡng hộ hơi nước và thiết bị kiểm tra chất lượng. Chúng tôi sản xuất cọc vuông BTCT C40-C50 từ 200×200 đến 400×400mm, dầm I, dầm T, cống hộp và các cấu kiện đặc biệt theo yêu cầu dự án.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cọc bê tông cốt thép C40-C50</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Dầm cầu bê tông dự ứng lực</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cống hộp, mương thoát nước đúc sẵn</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cấu kiện đặc biệt theo yêu cầu</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Tấm đan, đá lát vỉa hè</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Dầm I, dầm T cho kết cấu nhịp lớn</div>
+          </div>
+        </section>
+
+        <!-- 7. Cho thuê thiết bị -->
+        <section id="cho-thue" class="sector-section" aria-labelledby="lv-cho-thue">
+          <div class="sector-header" data-aos="fade-up">
+            <div class="sector-big-icon green"><i class="fas fa-wrench"></i></div>
+            <div>
+              <div class="sec-eyebrow" style="margin-bottom:8px"><i class="fas fa-layer-group"></i> Lĩnh vực 07</div>
+              <h2 id="lv-cho-thue">Cho Thuê Thiết Bị &amp; Nhân Công</h2>
+            </div>
+          </div>
+          <div class="sector-img" data-aos="fade-up">
+            <img src="assets/images/misc/z7449467428408_8399cb16d3992cacdbe4e6c02125a696.jpg"
+                 alt="Cho thuê thiết bị thi công chuyên dụng Song Ngọc" loading="lazy" width="900" height="506">
+          </div>
+          <p class="sector-desc" data-aos="fade-up">
+            Cung cấp dịch vụ cho thuê thiết bị thi công chuyên dụng và điều phối nhân công lành nghề cho các nhà thầu và chủ đầu tư. Đội thiết bị đa dạng từ máy đào, cần cẩu, búa đóng cọc đến thiết bị thủy công chuyên biệt, vận hành bởi đội lái máy nhiều kinh nghiệm.
+          </p>
+          <p class="sector-desc" data-aos="fade-up">
+            Dịch vụ cho thuê thiết bị và cung cấp nhân công của Song Ngọc giúp các đơn vị thi công tiếp cận nhanh nguồn lực máy móc và lao động chuyên nghiệp mà không cần đầu tư vốn lớn. Chúng tôi có sẵn đội máy đào thủy lực 5-30 tấn, cần cẩu bánh xích 50-150 tấn, búa rung đóng cọc ống thép, máy bơm bùn và các thiết bị phụ trợ.
+          </p>
+          <div class="service-list" data-aos="fade-up">
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cho thuê máy đào, xe lu, cần cẩu</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Búa rung, búa đóng cọc ống thép</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Cung cấp nhân công có tay nghề</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Đội lái máy có kinh nghiệm dày dặn</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Máy bơm bùn, bơm cát thủy lực</div>
+            <div class="service-item"><i class="fas fa-check-circle"></i> Thiết bị đặc chủng theo yêu cầu dự án</div>
+          </div>
+        </section>
+
+      </main>
+    </div><!-- .lv-layout -->
+  </div>
+</div>
+
+<!-- ══ CTA STRIP ══ -->
+<div style="background:linear-gradient(90deg,var(--sn-green-dk),var(--sn-green),var(--sn-green-mid));padding:56px 0">
+  <div class="container" style="text-align:center">
+    <h2 style="color:#fff;margin-bottom:14px" data-aos="fade-up">Cần tư vấn về lĩnh vực phù hợp?</h2>
+    <p style="color:rgba(255,255,255,.75);margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto" data-aos="fade-up" data-aos-delay="80">
+      Liên hệ Song Ngọc để được tư vấn giải pháp phù hợp nhất cho dự án của bạn.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap" data-aos="fade-up" data-aos-delay="160">
+      <a href="lien-he.html" class="btn btn-orange btn-lg"><i class="fas fa-paper-plane"></i> Liên hệ tư vấn</a>
+      <a href="du-an.html" class="btn btn-outline-white btn-lg"><i class="fas fa-hard-hat"></i> Xem dự án thực tế</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer" aria-label="Footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-logo">
+        <img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="44">
+      </div>
+      <p class="footer-desc">Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Đối tác tin cậy trong lĩnh vực cơ khí và xây dựng hạ tầng tại Việt Nam.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/songngoc.com.vn" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook Song Ngọc"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@songngocconstruction3109" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube Song Ngọc"><i class="fab fa-youtube"></i></a>
+        <a href="http://chat.zalo.me/0868937699" class="social-btn" target="_blank" rel="noopener" aria-label="Zalo Song Ngọc"><i class="fas fa-comment-dots"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-heading">Điều Hướng</span>
+      <ul class="footer-links">
+        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+        <li><a href="linh-vuc.html">Lĩnh vực hoạt động</a></li>
+        <li><a href="du-an.html">Dự án</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+        <li><a href="hoat-dong.html">Hoạt động</a></li>
+        <li><a href="tuyen-dung.html">Tuyển dụng</a></li>
+        <li><a href="catalogue.html">Hồ sơ năng lực</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Lĩnh Vực</span>
+      <ul class="footer-links">
+        <li><a href="linh-vuc.html#thiet-ke">Tư vấn &amp; Thiết kế</a></li>
+        <li><a href="linh-vuc.html#cau-cang">Cầu, Cảng, Giao thông</a></li>
+        <li><a href="linh-vuc.html#cong-nghiep">Công trình Công nghiệp</a></li>
+        <li><a href="linh-vuc.html#chong-an-mon">Chống ăn mòn biển</a></li>
+        <li><a href="linh-vuc.html#co-gioi">Cơ giới &amp; San lấp</a></li>
+        <li><a href="linh-vuc.html#duc-san">Cấu kiện đúc sẵn</a></li>
+        <li><a href="linh-vuc.html#cho-thue">Cho thuê thiết bị</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Liên Hệ</span>
+      <ul class="footer-contact">
+        <li><a href="https://www.google.com/maps/place/CÔNG+TY+TNHH+CƠ+KHÍ+XÂY+DỰNG+SONG+NGỌC/@10.8380516,106.7348122,17z" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> VP-2-09, Lầu 2, Tòa nhà St. Moritz, Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</a></li>
+        <li><a href="tel:0868937699"><i class="fas fa-phone"></i> 086 893 7699</a></li>
+        <li><a href="mailto:songngoc.stmc@gmail.com"><i class="fas fa-envelope"></i> songngoc.stmc@gmail.com</a></li>
+        <li><a href="mailto:songngoc@sncc.vn"><i class="fas fa-envelope"></i> songngoc@sncc.vn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider-gradient"></div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© <span id="footerYear">2025</span> Công ty TNHH Cơ Khí Xây Dựng Song Ngọc. MST: 0312260211. Thiết kế bởi <a href="https://hathyo.com" target="_blank" rel="noopener">HATHYO</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
+<div style="position:fixed;bottom:28px;left:20px;z-index:500;display:flex;flex-direction:column;gap:10px">
+  <a href="tel:0868937699" style="width:46px;height:46px;border-radius:50%;background:#00854A;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,133,74,.4);font-size:1.1rem" aria-label="Gọi điện Song Ngọc"><i class="fas fa-phone"></i></a>
+  <a href="http://chat.zalo.me/0868937699" target="_blank" rel="noopener" style="width:46px;height:46px;border-radius:50%;background:#0068FF;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,104,255,.4);font-size:1rem" aria-label="Chat Zalo Song Ngọc"><i class="fas fa-comment-dots"></i></a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+/* Highlight active sidebar link on scroll */
+(function() {
+  const sections = document.querySelectorAll('.sector-section');
+  const links = document.querySelectorAll('.lv-nav-link');
+  function onScroll() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    links.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+</script>
+</body>
+</html>

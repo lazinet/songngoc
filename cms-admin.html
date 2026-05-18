@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>CMS Admin — Song Ngọc</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="assets/logos/logo-sn.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ── CMS Design Tokens ── */
+    :root {
+      --sn-green: #00854A; --sn-green-dk: #005C34; --sn-green-lt: #E6F4ED;
+      --sn-orange: #F38022; --sn-orange-lt: #FEF0E3;
+      --sidebar-w: 240px;
+      --header-h: 56px;
+      --bg: #F4F6F8; --surface: #fff; --border: #DEE2E6;
+      --text: #212529; --text-2: #6C757D;
+      --shadow: 0 2px 8px rgba(0,0,0,.08);
+      --radius: 10px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); height: 100dvh; display: flex; overflow: hidden; }
+    a { color: var(--sn-green); text-decoration: none; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+    input, textarea, select { font-family: inherit; outline: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Login Screen ── */
+    #loginScreen {
+      position: fixed; inset: 0; z-index: 999;
+      background: linear-gradient(135deg, #0A100C, var(--sn-green-dk));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-box {
+      background: var(--surface); border-radius: 20px; padding: 40px 36px;
+      width: 100%; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      text-align: center;
+    }
+    .login-box img { height: 44px; margin: 0 auto 20px; }
+    .login-box h2 { font-size: 1.2rem; margin-bottom: 6px; }
+    .login-box p  { font-size: .82rem; color: var(--text-2); margin-bottom: 24px; }
+    .login-input {
+      width: 100%; padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: .9rem; margin-bottom: 14px;
+      transition: border-color .2s;
+    }
+    .login-input:focus { border-color: var(--sn-green); }
+    .login-btn {
+      width: 100%; padding: 12px; border-radius: 8px;
+      background: var(--sn-green); color: #fff;
+      font-size: .9rem; font-weight: 700;
+      transition: background .2s;
+    }
+    .login-btn:hover { background: var(--sn-green-dk); }
+    .login-error { display: none; color: #DC3545; font-size: .78rem; margin-top: 10px; }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w); min-width: var(--sidebar-w);
+      background: var(--text); color: rgba(255,255,255,.8);
+      display: flex; flex-direction: column; overflow: hidden;
+      transition: transform .25s;
+    }
+    .sidebar-logo {
+      padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-logo img { height: 32px; filter: brightness(0) invert(1); }
+    .sidebar-logo span { font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.7); }
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 0; }
+    .nav-group-label {
+      font-size: .62rem; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+      padding: 12px 20px 6px;
+    }
+    .nav-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; font-size: .82rem; font-weight: 600;
+      color: rgba(255,255,255,.65); transition: all .18s; border-radius: 0;
+      cursor: pointer; background: none; width: 100%; text-align: left;
+      border-left: 3px solid transparent;
+    }
+    .nav-link i { width: 18px; font-size: .85em; }
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,.06); }
+    .nav-link.active { color: #fff; background: rgba(0,133,74,.2); border-left-color: var(--sn-green); }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+    .sidebar-footer a {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; color: rgba(255,255,255,.5); transition: color .18s;
+    }
+    .sidebar-footer a:hover { color: #fff; }
+
+    /* ── Main layout ── */
+    .cms-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* ── Top bar ── */
+    .topbar {
+      height: var(--header-h); background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; flex-shrink: 0; box-shadow: var(--shadow);
+    }
+    .topbar-title { font-size: 1rem; font-weight: 800; }
+    .topbar-actions { display: flex; gap: 10px; align-items: center; }
+    .t-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: .78rem; font-weight: 700;
+      transition: all .18s;
+    }
+    .t-btn-primary { background: var(--sn-green); color: #fff; }
+    .t-btn-primary:hover { background: var(--sn-green-dk); }
+    .t-btn-ghost { background: var(--bg); color: var(--text-2); border: 1px solid var(--border); }
+    .t-btn-ghost:hover { background: var(--border); }
+    .t-btn-danger { background: #DC3545; color: #fff; }
+    .t-btn-danger:hover { background: #B02A37; }
+
+    /* ── Content area ── */
+    .cms-content { flex: 1; overflow-y: auto; padding: 24px; }
+
+    /* ── Dashboard cards ── */
+    .dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 28px; }
+    .dash-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; display: flex;
+      flex-direction: column; gap: 8px; box-shadow: var(--shadow);
+    }
+    .dash-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .dash-num  { font-size: 1.8rem; font-weight: 900; line-height: 1; }
+    .dash-lbl  { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--text-2); }
+
+    /* ── Table ── */
+    .cms-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .cms-table-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px;
+    }
+    .cms-table-title { font-weight: 800; font-size: .95rem; }
+    .search-input {
+      padding: 8px 12px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: .82rem; width: 220px;
+      transition: border-color .18s;
+    }
+    .search-input:focus { border-color: var(--sn-green); }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: var(--bg); padding: 10px 16px; text-align: left;
+      font-size: .72rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .5px; color: var(--text-2); white-space: nowrap;
+    }
+    tbody tr { border-top: 1px solid var(--border); }
+    tbody tr:hover { background: #F8F9FA; }
+    tbody td { padding: 12px 16px; font-size: .85rem; vertical-align: middle; }
+    .tb-img { width: 64px; height: 40px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+    .tb-badge {
+      display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 10px;
+      font-size: .68rem; font-weight: 700;
+    }
+    .tb-badge-green  { background: var(--sn-green-lt);  color: var(--sn-green);  }
+    .tb-badge-orange { background: var(--sn-orange-lt); color: var(--sn-orange); }
+    .tb-badge-gray   { background: #F1F3F5; color: #6C757D; }
+    .tb-actions { display: flex; gap: 6px; }
+    .tb-btn {
+      width: 30px; height: 30px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; transition: all .18s;
+    }
+    .tb-btn-edit { background: var(--sn-green-lt); color: var(--sn-green); }
+    .tb-btn-edit:hover { background: var(--sn-green); color: #fff; }
+    .tb-btn-del { background: #FEE2E2; color: #DC3545; }
+    .tb-btn-del:hover { background: #DC3545; color: #fff; }
+    .tb-btn-view { background: #E0F2FE; color: #0284C7; }
+    .tb-btn-view:hover { background: #0284C7; color: #fff; }
+
+    /* ── Pagination ── */
+    .pagination { display: flex; justify-content: flex-end; align-items: center; gap: 4px; padding: 12px 16px; border-top: 1px solid var(--border); }
+    .pg-btn {
+      width: 32px; height: 32px; border-radius: 7px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 700; background: var(--surface);
+      cursor: pointer; transition: all .18s; color: var(--text-2);
+    }
+    .pg-btn.active, .pg-btn:hover { background: var(--sn-green); color: #fff; border-color: var(--sn-green); }
+
+    /* ── Modal / Drawer ── */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 800;
+      background: rgba(0,0,0,.5); align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 16px; width: 100%;
+      max-width: 680px; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.2);
+      animation: modalIn .2s ease;
+    }
+    @keyframes modalIn { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 1;
+    }
+    .modal-header h3 { font-size: 1rem; font-weight: 800; }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+      color: var(--text-2); font-size: .9rem; transition: all .18s;
+    }
+    .modal-close:hover { background: var(--border); color: var(--text); }
+    .modal-body { padding: 24px; }
+    .modal-footer {
+      padding: 16px 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: flex-end; gap: 10px;
+    }
+
+    /* ── Form fields ── */
+    .field-group { margin-bottom: 18px; }
+    .field-label { display: block; font-size: .75rem; font-weight: 800; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-2); }
+    .field-input {
+      width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: .88rem; transition: border-color .18s;
+    }
+    .field-input:focus { border-color: var(--sn-green); }
+    textarea.field-input { min-height: 100px; resize: vertical; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field-hint { font-size: .7rem; color: var(--text-2); margin-top: 5px; }
+
+    /* ── Image upload ── */
+    .img-upload-zone {
+      border: 2px dashed var(--border); border-radius: 10px;
+      padding: 24px; text-align: center; cursor: pointer;
+      transition: border-color .18s, background .18s;
+    }
+    .img-upload-zone:hover { border-color: var(--sn-green); background: var(--sn-green-lt); }
+    .img-upload-zone i { font-size: 2rem; color: var(--text-2); margin-bottom: 8px; }
+    .img-preview { max-height: 120px; margin: 10px auto 0; border-radius: 8px; }
+
+    /* ── Contacts / submissions table ── */
+    .msg-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 20px; margin-bottom: 10px;
+      box-shadow: var(--shadow); transition: box-shadow .18s;
+    }
+    .msg-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+    .msg-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+    .msg-name { font-weight: 800; font-size: .92rem; }
+    .msg-date { font-size: .72rem; color: var(--text-2); }
+    .msg-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+    .msg-meta span { font-size: .78rem; color: var(--text-2); display: flex; align-items: center; gap: 5px; }
+    .msg-meta i { color: var(--sn-green); }
+    .msg-content { font-size: .85rem; color: var(--text-2); line-height: 1.6; }
+
+    /* ── Status indicator ── */
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+    .status-ok  { background: #198754; }
+    .status-err { background: #DC3545; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9000;
+      background: #198754; color: #fff; padding: 12px 22px; border-radius: 10px;
+      font-size: .85rem; font-weight: 700; box-shadow: 0 6px 20px rgba(0,0,0,.15);
+      display: none; align-items: center; gap: 10px;
+    }
+    .toast.show { display: flex; }
+    .toast.error { background: #DC3545; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; z-index: 700; transition: left .25s; }
+      .sidebar.mobile-open { left: 0; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+
+    /* Spinner */
+    .spin { animation: spin .7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginScreen">
+  <div class="login-box">
+    <img src="assets/logos/logo-sn.png" alt="Song Ngọc">
+    <h2>CMS Admin</h2>
+    <p>Đăng nhập để quản trị nội dung website</p>
+    <form id="loginForm">
+      <input type="password" id="loginPassword" class="login-input" placeholder="Mật khẩu quản trị" autocomplete="current-password" required>
+      <button type="submit" class="login-btn">
+        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+      </button>
+      <div class="login-error" id="loginError">Sai mật khẩu. Vui lòng thử lại.</div>
+    </form>
+  </div>
+</div>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="assets/logos/logo-sn.png" alt="SN">
+    <span>Song Ngọc CMS</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Tổng quan</div>
+    <button class="nav-link active" data-tab="dashboard">
+      <i class="fas fa-chart-pie"></i> Dashboard
+    </button>
+    <button class="nav-link" data-tab="messages">
+      <i class="fas fa-envelope"></i> Liên hệ
+      <span id="msgBadge" class="tb-badge tb-badge-orange" style="margin-left:auto;display:none">0</span>
+    </button>
+    <button class="nav-link" data-tab="applications">
+      <i class="fas fa-user-tie"></i> Hồ sơ ứng tuyển
+    </button>
+
+    <div class="nav-group-label" style="margin-top:8px">Nội dung</div>
+    <button class="nav-link" data-tab="projects">
+      <i class="fas fa-hard-hat"></i> Dự án
+    </button>
+    <button class="nav-link" data-tab="sectors">
+      <i class="fas fa-layer-group"></i> Lĩnh vực
+    </button>
+    <button class="nav-link" data-tab="news">
+      <i class="fas fa-newspaper"></i> Tin tức
+    </button>
+    <button class="nav-link" data-tab="activities">
+      <i class="fas fa-people-group"></i> Hoạt động
+    </button>
+    <button class="nav-link" data-tab="jobs">
+      <i class="fas fa-briefcase"></i> Tuyển dụng
+    </button>
+
+    <div class="nav-group-label" style="margin-top:8px">Cài đặt</div>
+    <button class="nav-link" data-tab="settings">
+      <i class="fas fa-gear"></i> Cài đặt website
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="index.html" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Xem website</a>
+    <div style="margin-top:10px">
+      <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="cms-main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="sidebarToggle" style="display:none;padding:6px 10px;border-radius:6px;background:var(--bg);border:1px solid var(--border)">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="topbar-title" id="tabTitle">Dashboard</div>
+    </div>
+    <div class="topbar-actions">
+      <button class="t-btn t-btn-ghost" id="refreshBtn" title="Làm mới dữ liệu">
+        <i class="fas fa-rotate-right"></i>
+      </button>
+      <button class="t-btn t-btn-primary hidden" id="addBtn">
+        <i class="fas fa-plus"></i> Thêm mới
+      </button>
+    </div>
+  </div>
+
+  <div class="cms-content" id="cmsContent">
+    <!-- Content injected by JS -->
+  </div>
+</main>
+
+<!-- ── EDIT MODAL ── -->
+<div class="modal-backdrop" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Thêm mới</h3>
+      <button class="modal-close" id="modalClose"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="modalBody"><!-- fields --></div>
+    <div class="modal-footer">
+      <button class="t-btn t-btn-ghost" id="modalCancel">Hủy</button>
+      <button class="t-btn t-btn-primary" id="modalSave">
+        <i class="fas fa-floppy-disk"></i> Lưu
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════
+   CONFIG
+════════════════════════════════ */
+const CMS = {
+  GAS_URL:  'https://script.google.com/macros/s/YOUR_GAS_ID/exec',
+  PASSWORD: '', // Set via login — stored in sessionStorage
+  PAGE_SIZE: 15,
+};
+
+/* ════════════════════════════════
+   AUTH
+════════════════════════════════ */
+const auth = {
+  check() { return sessionStorage.getItem('sn_cms_token') === 'ok'; },
+  login(pwd) {
+    /* NOTE: In production, replace with a real auth check against GAS or Cloudflare Worker */
+    const HASH = sessionStorage.getItem('sn_admin_hash') || ''; // set by GAS on first deploy
+    /* Simple: check against a locally-stored password (for demo) */
+    /* TODO: Replace with: await fetch(GAS + '?action=auth&pwd='+pwd) */
+    const LOCAL_PWD = localStorage.getItem('sn_cms_pwd') || 'SongNgoc@2024';
+    if (pwd === LOCAL_PWD) {
+      sessionStorage.setItem('sn_cms_token', 'ok');
+      return true;
+    }
+    return false;
+  },
+  logout() {
+    sessionStorage.removeItem('sn_cms_token');
+    location.reload();
+  }
+};
+
+/* Login form */
+document.getElementById('loginForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const pwd = document.getElementById('loginPassword').value;
+  if (auth.login(pwd)) {
+    document.getElementById('loginScreen').style.display = 'none';
+    init();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+});
+
+if (auth.check()) {
+  document.getElementById('loginScreen').style.display = 'none';
+}
+
+document.getElementById('logoutBtn').addEventListener('click', e => { e.preventDefault(); auth.logout(); });
+
+/* ════════════════════════════════
+   DATA LAYER
+════════════════════════════════ */
+const DataStore = {
+  _cache: {},
+
+  async load(tab) {
+    if (this._cache[tab]) return this._cache[tab];
+    try {
+      const url = `${CMS.GAS_URL}?tab=${tab}&token=${sessionStorage.getItem('sn_cms_token')}`;
+      const res  = await fetch(url);
+      const data = await res.json();
+      if (Array.isArray(data)) { this._cache[tab] = data; return data; }
+    } catch {}
+    /* Fallback to local JSON */
+    try {
+      const res  = await fetch(`data/${tab}.json`);
+      const data = await res.json();
+      this._cache[tab] = Array.isArray(data) ? data : [];
+      return this._cache[tab];
+    } catch { return []; }
+  },
+
+  async save(tab, record, action = 'upsert') {
+    delete this._cache[tab];
+    try {
+      const res = await fetch(CMS.GAS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'cms_write',
+          token: sessionStorage.getItem('sn_cms_token'),
+          tab, action, record,
+          id: record.id
+        })
+      });
+      return (await res.json()).success;
+    } catch (err) {
+      console.error('Save failed', err);
+      return false;
+    }
+  },
+
+  async delete(tab, id) {
+    delete this._cache[tab];
+    return this.save(tab, { id }, 'delete');
+  }
+};
+
+/* ════════════════════════════════
+   TOAST
+════════════════════════════════ */
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.className = `toast show${type === 'error' ? ' error' : ''}`;
+  el.innerHTML = `<i class="fas fa-${type === 'error' ? 'circle-xmark' : 'circle-check'}"></i> ${msg}`;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+/* ════════════════════════════════
+   MODAL
+════════════════════════════════ */
+const Modal = {
+  _onSave: null,
+  open(title, fieldsHtml, onSave) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').innerHTML  = fieldsHtml;
+    document.getElementById('editModal').classList.add('open');
+    this._onSave = onSave;
+    /* Image preview */
+    document.querySelectorAll('.img-upload-input').forEach(inp => {
+      inp.addEventListener('change', function() {
+        const prev = this.closest('.field-group').querySelector('.img-preview');
+        if (!prev || !this.files[0]) return;
+        const url = URL.createObjectURL(this.files[0]);
+        prev.src = url; prev.style.display = 'block';
+      });
+    });
+  },
+  close() {
+    document.getElementById('editModal').classList.remove('open');
+    this._onSave = null;
+  },
+  async save() {
+    const btn = document.getElementById('modalSave');
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-circle-notch spin"></i> Đang lưu...';
+    try {
+      await this._onSave?.();
+      this.close();
+      toast('Đã lưu thành công!');
+    } catch (err) {
+      toast(err.message || 'Lỗi khi lưu', 'error');
+    } finally {
+      btn.disabled = false; btn.innerHTML = '<i class="fas fa-floppy-disk"></i> Lưu';
+    }
+  }
+};
+
+document.getElementById('modalClose').addEventListener('click', () => Modal.close());
+document.getElementById('modalCancel').addEventListener('click', () => Modal.close());
+document.getElementById('modalSave').addEventListener('click', () => Modal.save());
+document.getElementById('editModal').addEventListener('click', e => { if (e.target === document.getElementById('editModal')) Modal.close(); });
+
+/* ════════════════════════════════
+   TAB SYSTEM
+════════════════════════════════ */
+const tabTitles = {
+  dashboard: 'Dashboard', messages: 'Liên hệ tư vấn', applications: 'Hồ sơ ứng tuyển',
+  projects: 'Quản lý Dự án', sectors: 'Lĩnh vực hoạt động', news: 'Tin tức',
+  activities: 'Hoạt động công ty', jobs: 'Vị trí Tuyển dụng', settings: 'Cài đặt Website'
+};
+let currentTab = 'dashboard';
+
+function setTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.tab === tab));
+  document.getElementById('tabTitle').textContent = tabTitles[tab] || tab;
+  const addable = ['projects','news','activities','jobs'].includes(tab);
+  document.getElementById('addBtn').classList.toggle('hidden', !addable);
+  renderTab(tab);
+}
+
+document.querySelectorAll('.nav-link[data-tab]').forEach(btn => {
+  btn.addEventListener('click', () => setTab(btn.dataset.tab));
+});
+
+document.getElementById('refreshBtn').addEventListener('click', () => {
+  DataStore._cache = {};
+  renderTab(currentTab);
+  toast('Đã làm mới dữ liệu!');
+});
+
+document.getElementById('addBtn').addEventListener('click', () => openAddModal(currentTab));
+
+/* ════════════════════════════════
+   RENDER TABS
+════════════════════════════════ */
+async function renderTab(tab) {
+  const el = document.getElementById('cmsContent');
+  el.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-2)"><i class="fas fa-circle-notch spin" style="font-size:2rem;color:var(--sn-green)"></i></div>';
+
+  switch(tab) {
+    case 'dashboard':    return renderDashboard();
+    case 'messages':     return renderMessages('lien-he');
+    case 'applications': return renderMessages('tuyen-dung');
+    case 'projects':     return renderCrudTable('du-an',  projCols,  openProjectModal);
+    case 'news':         return renderCrudTable('tin-tuc', newsCols,  openNewsModal);
+    case 'activities':   return renderCrudTable('hoat-dong', actCols, openActivityModal);
+    case 'jobs':         return renderCrudTable('tuyen-dung-posts', jobCols, openJobModal);
+    case 'settings':     return renderSettings();
+  }
+}
+
+/* ── Dashboard ── */
+async function renderDashboard() {
+  const [projects, news, activities, jobs, msgs, apps] = await Promise.all([
+    DataStore.load('du-an'), DataStore.load('tin-tuc'),
+    DataStore.load('hoat-dong'), DataStore.load('tuyen-dung-posts'),
+    DataStore.load('lien-he'), DataStore.load('tuyen-dung')
+  ]);
+
+  document.getElementById('cmsContent').innerHTML = `
+    <div class="dash-grid">
+      ${dashCard('Dự án', projects.length, 'fas fa-hard-hat', 'var(--sn-green)', 'var(--sn-green-lt)', 'projects')}
+      ${dashCard('Tin tức', news.length, 'fas fa-newspaper', 'var(--sn-orange)', 'var(--sn-orange-lt)', 'news')}
+      ${dashCard('Hoạt động', activities.length, 'fas fa-people-group', '#7C3AED', '#EDE9FE', 'activities')}
+      ${dashCard('Tuyển dụng', jobs.length, 'fas fa-briefcase', '#2563EB', '#EFF6FF', 'jobs')}
+      ${dashCard('Liên hệ', msgs.length, 'fas fa-envelope', '#DC3545', '#FEE2E2', 'messages')}
+      ${dashCard('Hồ sơ', apps.length, 'fas fa-user-tie', '#D97706', '#FFFBEB', 'applications')}
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="cms-table-wrap">
+        <div class="cms-table-header"><div class="cms-table-title">Liên hệ gần đây</div></div>
+        <div style="padding:16px">${msgs.slice(-5).reverse().map(m => `
+          <div style="padding:10px 0;border-bottom:1px solid var(--border)">
+            <div style="font-weight:700;font-size:.85rem">${m.ho_ten || m.name || '—'}</div>
+            <div style="font-size:.75rem;color:var(--text-2)">${m.dich_vu || m.service || ''} · ${formatDate(m.thoi_gian || m.timestamp)}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="cms-table-wrap">
+        <div class="cms-table-header"><div class="cms-table-title">Hồ sơ ứng tuyển gần đây</div></div>
+        <div style="padding:16px">${apps.slice(-5).reverse().map(a => `
+          <div style="padding:10px 0;border-bottom:1px solid var(--border)">
+            <div style="font-weight:700;font-size:.85rem">${a.ho_ten || a.name || '—'}</div>
+            <div style="font-size:.75rem;color:var(--text-2)">${a.vi_tri || a.position || ''} · ${formatDate(a.thoi_gian || a.timestamp)}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  /* Quick links */
+  document.querySelectorAll('[data-goto]').forEach(el => {
+    el.addEventListener('click', () => setTab(el.dataset.goto));
+  });
+}
+
+function dashCard(label, count, icon, color, bg, tabGoto) {
+  return `<div class="dash-card" style="cursor:pointer" data-goto="${tabGoto}">
+    <div class="dash-icon" style="background:${bg};color:${color}"><i class="${icon}"></i></div>
+    <div class="dash-num" style="color:${color}">${count}</div>
+    <div class="dash-lbl">${label}</div>
+  </div>`;
+}
+
+/* ── Messages ── */
+async function renderMessages(sheetTab) {
+  const data = (await DataStore.load(sheetTab)).slice().reverse();
+  const el = document.getElementById('cmsContent');
+  if (!data.length) { el.innerHTML = '<p style="text-align:center;padding:40px;color:var(--text-2)">Chưa có dữ liệu.</p>'; return; }
+  el.innerHTML = data.map(m => {
+    const name    = m.ho_ten    || m.name    || '—';
+    const phone   = m.dien_thoai|| m.phone   || '—';
+    const email   = m.email     || '—';
+    const service = m.dich_vu   || m.service || m.vi_tri || m.position || '';
+    const msg     = m.noi_dung  || m.message || '';
+    const ts      = m.thoi_gian || m.timestamp || '';
+    return `<div class="msg-card">
+      <div class="msg-header">
+        <div class="msg-name">${name}</div>
+        <div class="msg-date"><i class="fas fa-clock" style="margin-right:4px"></i>${formatDate(ts)}</div>
+      </div>
+      <div class="msg-meta">
+        <span><i class="fas fa-phone"></i><a href="tel:${phone}">${phone}</a></span>
+        <span><i class="fas fa-envelope"></i><a href="mailto:${email}">${email}</a></span>
+        ${service ? `<span><i class="fas fa-layer-group"></i>${service}</span>` : ''}
+      </div>
+      ${msg ? `<div class="msg-content">${msg}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+/* ── Generic CRUD Table ── */
+async function renderCrudTable(sheetTab, cols, openModalFn) {
+  const data = await DataStore.load(sheetTab);
+  const el   = document.getElementById('cmsContent');
+
+  let q = '';
+  let page = 1;
+
+  const render = () => {
+    const filtered = data.filter(r => !q || Object.values(r).some(v => String(v).toLowerCase().includes(q)));
+    const total = filtered.length;
+    const pages = Math.ceil(total / CMS.PAGE_SIZE);
+    const slice = filtered.slice((page-1)*CMS.PAGE_SIZE, page*CMS.PAGE_SIZE);
+
+    el.innerHTML = `
+      <div class="cms-table-wrap">
+        <div class="cms-table-header">
+          <div class="cms-table-title">Tổng cộng: <strong>${total}</strong></div>
+          <input type="search" class="search-input" placeholder="Tìm kiếm..." value="${q}" id="tbSearch">
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr>${cols.map(c => `<th>${c.label}</th>`).join('')}<th>Thao tác</th></tr></thead>
+          <tbody>
+            ${slice.length ? slice.map(row => `<tr>
+              ${cols.map(c => `<td>${c.render(row)}</td>`).join('')}
+              <td><div class="tb-actions">
+                <button class="tb-btn tb-btn-edit" data-id="${row.id}" title="Sửa"><i class="fas fa-pen"></i></button>
+                <button class="tb-btn tb-btn-del"  data-id="${row.id}" title="Xóa"><i class="fas fa-trash"></i></button>
+              </div></td>
+            </tr>`).join('') : '<tr><td colspan="99" style="text-align:center;padding:30px;color:var(--text-2)">Không có dữ liệu</td></tr>'}
+          </tbody>
+        </table>
+        </div>
+        <div class="pagination">
+          ${Array.from({length:pages},(_,i)=>`<button class="pg-btn${i+1===page?' active':''}" data-p="${i+1}">${i+1}</button>`).join('')}
+        </div>
+      </div>`;
+
+    /* Events */
+    el.querySelector('#tbSearch')?.addEventListener('input', e => { q = e.target.value.toLowerCase(); page=1; render(); });
+    el.querySelectorAll('.pg-btn').forEach(b => b.addEventListener('click', () => { page = +b.dataset.p; render(); }));
+    el.querySelectorAll('.tb-btn-edit').forEach(b => b.addEventListener('click', () => {
+      const item = data.find(r => String(r.id) === b.dataset.id);
+      if (item) openModalFn(item, sheetTab, data);
+    }));
+    el.querySelectorAll('.tb-btn-del').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('Xác nhận xóa?')) return;
+      const ok = await DataStore.delete(sheetTab, b.dataset.id);
+      if (ok) {
+        const idx = data.findIndex(r => String(r.id) === b.dataset.id);
+        if (idx >= 0) data.splice(idx, 1);
+        render(); toast('Đã xóa!');
+      } else { toast('Xóa thất bại!', 'error'); }
+    }));
+  };
+
+  render();
+}
+
+/* ── Column definitions ── */
+const projCols = [
+  { label: 'Ảnh',     render: r => r.image ? `<img class="tb-img" src="${r.image}" alt="">` : '—' },
+  { label: 'Tên dự án',render: r => `<strong style="font-size:.85rem">${r.title||r.ten||'—'}</strong>` },
+  { label: 'Danh mục', render: r => `<span class="tb-badge tb-badge-green">${r.category||r.danh_muc||''}</span>` },
+  { label: 'Năm',      render: r => r.year||r.nam||'' },
+  { label: 'Nổi bật',  render: r => r.featured=='1'||r.featured===true ? '<span class="tb-badge tb-badge-orange">✓</span>' : '' },
+];
+const newsCols = [
+  { label: 'Ảnh',   render: r => r.image ? `<img class="tb-img" src="${r.image}" alt="">` : '—' },
+  { label: 'Tiêu đề',render: r => `<strong style="font-size:.85rem">${r.title||r.tieu_de||'—'}</strong>` },
+  { label: 'Ngày',   render: r => formatDate(r.date||r.ngay||'') },
+  { label: 'Hiển thị',render: r => r.active=='1'||r.active===true ? '<span class="tb-badge tb-badge-green">✓</span>':'<span class="tb-badge tb-badge-gray">✗</span>' },
+];
+const actCols = [
+  { label: 'Ảnh',    render: r => r.image ? `<img class="tb-img" src="${r.image}" alt="">` : '—' },
+  { label: 'Tiêu đề',render: r => `<strong style="font-size:.85rem">${r.title||r.tieu_de||'—'}</strong>` },
+  { label: 'Loại',   render: r => `<span class="tb-badge tb-badge-green">${r.category||r.loai||''}</span>` },
+  { label: 'Ngày',   render: r => formatDate(r.date||r.ngay||'') },
+];
+const jobCols = [
+  { label: 'Vị trí',  render: r => `<strong style="font-size:.85rem">${r.title||r.vi_tri||'—'}</strong>` },
+  { label: 'Bộ phận', render: r => r.department||r.bo_phan||'' },
+  { label: 'Loại',    render: r => r.type||r.loai||'' },
+  { label: 'Hạn nộp', render: r => formatDate(r.deadline||r.han_nop||'') },
+  { label: 'Hiển thị',render: r => r.active=='1'||r.active===true ? '<span class="tb-badge tb-badge-green">Đang tuyển</span>':'<span class="tb-badge tb-badge-gray">Đóng</span>' },
+];
+
+/* ── Open Add Modals ── */
+function openAddModal(tab) {
+  const fns = { 'du-an': openProjectModal, 'tin-tuc': openNewsModal, 'hoat-dong': openActivityModal, 'tuyen-dung-posts': openJobModal };
+  fns[tab === 'projects' ? 'du-an' : tab === 'news' ? 'tin-tuc' : tab === 'activities' ? 'hoat-dong' : 'tuyen-dung-posts']?.({}, null, []);
+}
+
+function openProjectModal(item = {}, sheetTab = 'du-an', data = []) {
+  Modal.open(item.id ? 'Sửa dự án' : 'Thêm dự án', `
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Tên dự án *</label><input class="field-input" id="f-title" value="${esc(item.title||item.ten||'')}" placeholder="Tên dự án"></div>
+      <div class="field-group"><label class="field-label">Danh mục</label>
+        <select class="field-input" id="f-cat">
+          ${['Cầu cảng','Công nghiệp','Điện gió','Dân dụng','Hạ tầng','Chống ăn mòn'].map(c=>`<option${(item.category||item.danh_muc)===c?' selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Năm</label><input class="field-input" id="f-year" value="${esc(item.year||item.nam||'')}"></div>
+      <div class="field-group"><label class="field-label">Địa điểm</label><input class="field-input" id="f-loc" value="${esc(item.location||item.dia_diem||'')}"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Khách hàng / Chủ đầu tư</label><input class="field-input" id="f-client" value="${esc(item.client||item.chu_dau_tu||'')}"></div>
+    <div class="field-group"><label class="field-label">Mô tả ngắn</label><textarea class="field-input" id="f-desc" rows="3">${esc(item.description||item.mo_ta||'')}</textarea></div>
+    <div class="field-group"><label class="field-label">URL ảnh đại diện</label><input class="field-input" id="f-img" value="${esc(item.image||item.anh||'')}" placeholder="https://... hoặc assets/images/projects/..."><div class="field-hint">Dán URL ảnh hoặc đường dẫn tương đối trong thư mục dự án.</div></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label"><input type="checkbox" id="f-feat"${item.featured=='1'||item.featured===true?' checked':''}> Dự án nổi bật (hiện trên trang chủ)</label></div>
+      <div class="field-group"><label class="field-label"><input type="checkbox" id="f-active"${item.active!='0'?' checked':''}> Hiển thị</label></div>
+    </div>
+  `, async () => {
+    const record = {
+      id:       item.id || String(Date.now()),
+      title:    document.getElementById('f-title').value.trim(),
+      category: document.getElementById('f-cat').value,
+      year:     document.getElementById('f-year').value,
+      location: document.getElementById('f-loc').value,
+      client:   document.getElementById('f-client').value,
+      description: document.getElementById('f-desc').value,
+      image:    document.getElementById('f-img').value,
+      featured: document.getElementById('f-feat').checked ? '1' : '0',
+      active:   document.getElementById('f-active').checked ? '1' : '0',
+      slug:     slugify(document.getElementById('f-title').value),
+    };
+    if (!record.title) throw new Error('Tên dự án không được để trống');
+    const ok = await DataStore.save('du-an', record);
+    if (!ok) throw new Error('Lưu thất bại');
+    if (item.id) { const idx = data.findIndex(r=>r.id===item.id); if(idx>=0) data[idx]=record; }
+    else data.unshift(record);
+    renderTab(currentTab);
+  });
+}
+
+function openNewsModal(item = {}, sheetTab = 'tin-tuc', data = []) {
+  Modal.open(item.id ? 'Sửa tin tức' : 'Thêm tin tức', `
+    <div class="field-group"><label class="field-label">Tiêu đề *</label><input class="field-input" id="f-title" value="${esc(item.title||item.tieu_de||'')}"></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Danh mục</label>
+        <select class="field-input" id="f-cat">
+          ${['Dự án','Thị trường','Kỹ thuật','Song Ngọc','Tuyển dụng'].map(c=>`<option${(item.category)===c?' selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field-group"><label class="field-label">Ngày đăng</label><input class="field-input" type="date" id="f-date" value="${item.date||item.ngay||''}"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Tóm tắt</label><textarea class="field-input" id="f-desc" rows="3">${esc(item.description||item.tom_tat||'')}</textarea></div>
+    <div class="field-group"><label class="field-label">URL ảnh</label><input class="field-input" id="f-img" value="${esc(item.image||item.anh||'')}"></div>
+    <div class="field-group"><label class="field-label">URL nguồn / link chi tiết</label><input class="field-input" id="f-url" value="${esc(item.url||item.link||'')}"></div>
+    <div class="field-group"><label class="field-label"><input type="checkbox" id="f-active"${item.active!='0'?' checked':''}> Hiển thị</label></div>
+  `, async () => {
+    const record = {
+      id: item.id || String(Date.now()),
+      title: document.getElementById('f-title').value.trim(),
+      category: document.getElementById('f-cat').value,
+      date: document.getElementById('f-date').value,
+      description: document.getElementById('f-desc').value,
+      image: document.getElementById('f-img').value,
+      url:   document.getElementById('f-url').value,
+      active: document.getElementById('f-active').checked ? '1' : '0',
+    };
+    if (!record.title) throw new Error('Tiêu đề không được để trống');
+    const ok = await DataStore.save('tin-tuc', record);
+    if (!ok) throw new Error('Lưu thất bại');
+    if (item.id) { const idx=data.findIndex(r=>r.id===item.id); if(idx>=0)data[idx]=record; }
+    else data.unshift(record);
+    renderTab(currentTab);
+  });
+}
+
+function openActivityModal(item = {}, sheetTab = 'hoat-dong', data = []) {
+  Modal.open(item.id ? 'Sửa hoạt động' : 'Thêm hoạt động', `
+    <div class="field-group"><label class="field-label">Tiêu đề *</label><input class="field-input" id="f-title" value="${esc(item.title||'')}" placeholder="Ví dụ: Team Building 2024"></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Loại hoạt động</label>
+        <select class="field-input" id="f-cat">
+          ${['Team Building','Khám sức khỏe','Thiện nguyện','Lễ kỷ niệm','Du lịch','Khác'].map(c=>`<option${item.category===c?' selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field-group"><label class="field-label">Ngày tổ chức</label><input class="field-input" type="date" id="f-date" value="${item.date||item.ngay||''}"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Mô tả</label><textarea class="field-input" id="f-desc" rows="3">${esc(item.description||item.mo_ta||'')}</textarea></div>
+    <div class="field-group"><label class="field-label">URL ảnh đại diện</label><input class="field-input" id="f-img" value="${esc(item.image||item.anh||'')}"></div>
+    <div class="field-group"><label class="field-label">Album ảnh (URL, ngăn cách bởi dấu phẩy)</label><textarea class="field-input" id="f-gallery" rows="2">${esc(item.gallery||'')}</textarea></div>
+  `, async () => {
+    const record = {
+      id: item.id || String(Date.now()),
+      title: document.getElementById('f-title').value.trim(),
+      category: document.getElementById('f-cat').value,
+      date: document.getElementById('f-date').value,
+      description: document.getElementById('f-desc').value,
+      image: document.getElementById('f-img').value,
+      gallery: document.getElementById('f-gallery').value,
+      active: '1',
+    };
+    if (!record.title) throw new Error('Tiêu đề không được để trống');
+    const ok = await DataStore.save('hoat-dong', record);
+    if (!ok) throw new Error('Lưu thất bại');
+    if (item.id) { const idx=data.findIndex(r=>r.id===item.id); if(idx>=0)data[idx]=record; }
+    else data.unshift(record);
+    renderTab(currentTab);
+  });
+}
+
+function openJobModal(item = {}, sheetTab = 'tuyen-dung-posts', data = []) {
+  Modal.open(item.id ? 'Sửa vị trí tuyển dụng' : 'Thêm vị trí tuyển dụng', `
+    <div class="field-group"><label class="field-label">Vị trí *</label><input class="field-input" id="f-title" value="${esc(item.title||item.vi_tri||'')}"></div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Bộ phận</label><input class="field-input" id="f-dept" value="${esc(item.department||item.bo_phan||'')}"></div>
+      <div class="field-group"><label class="field-label">Loại hợp đồng</label>
+        <select class="field-input" id="f-type">
+          ${['Toàn thời gian','Bán thời gian','Thực tập','Hợp đồng'].map(t=>`<option${(item.type||item.loai)===t?' selected':''}>${t}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group"><label class="field-label">Địa điểm</label><input class="field-input" id="f-loc" value="${esc(item.location||item.dia_diem||'TP. Hồ Chí Minh')}"></div>
+      <div class="field-group"><label class="field-label">Hạn nộp hồ sơ</label><input class="field-input" type="date" id="f-deadline" value="${item.deadline||item.han_nop||''}"></div>
+    </div>
+    <div class="field-group"><label class="field-label">Mức lương / Thu nhập</label><input class="field-input" id="f-salary" value="${esc(item.salary||item.luong||'')}"></div>
+    <div class="field-group"><label class="field-label">Mô tả công việc</label><textarea class="field-input" id="f-desc" rows="4">${esc(item.description||item.mo_ta||'')}</textarea></div>
+    <div class="field-group"><label class="field-label">Yêu cầu</label><textarea class="field-input" id="f-req" rows="3">${esc(item.requirements||item.yeu_cau||'')}</textarea></div>
+    <div class="field-group"><label class="field-label"><input type="checkbox" id="f-active"${item.active!='0'?' checked':''}> Đang tuyển (hiển thị trên website)</label></div>
+  `, async () => {
+    const record = {
+      id: item.id || String(Date.now()),
+      title: document.getElementById('f-title').value.trim(),
+      department: document.getElementById('f-dept').value,
+      type: document.getElementById('f-type').value,
+      location: document.getElementById('f-loc').value,
+      deadline: document.getElementById('f-deadline').value,
+      salary: document.getElementById('f-salary').value,
+      description: document.getElementById('f-desc').value,
+      requirements: document.getElementById('f-req').value,
+      active: document.getElementById('f-active').checked ? '1' : '0',
+    };
+    if (!record.title) throw new Error('Vị trí không được để trống');
+    const ok = await DataStore.save('tuyen-dung-posts', record);
+    if (!ok) throw new Error('Lưu thất bại');
+    if (item.id) { const idx=data.findIndex(r=>r.id===item.id); if(idx>=0)data[idx]=record; }
+    else data.unshift(record);
+    renderTab(currentTab);
+  });
+}
+
+async function renderSettings() {
+  const settings = (await DataStore.load('settings'))[0] || {};
+  document.getElementById('cmsContent').innerHTML = `
+    <div style="max-width:680px">
+      <div class="cms-table-wrap" style="padding:24px">
+        <h3 style="margin-bottom:20px;font-size:1rem">Cài đặt chung</h3>
+        <div class="field-group"><label class="field-label">Tiêu đề website (title tag)</label>
+          <input class="field-input" id="s-title" value="${esc(settings.site_title||'Song Ngọc — Cơ Khí Xây Dựng')}"></div>
+        <div class="field-group"><label class="field-label">Mô tả website (meta description)</label>
+          <textarea class="field-input" id="s-desc" rows="3">${esc(settings.site_description||'')}</textarea></div>
+        <div class="field-row">
+          <div class="field-group"><label class="field-label">Google Analytics ID</label>
+            <input class="field-input" id="s-ga" value="${esc(settings.ga_id||'G-XXXXXXXXXX')}" placeholder="G-XXXXXXXXXX"></div>
+          <div class="field-group"><label class="field-label">Google Maps Embed URL</label>
+            <input class="field-input" id="s-map" value="${esc(settings.maps_embed||'')}"></div>
+        </div>
+        <div class="field-row">
+          <div class="field-group"><label class="field-label">Facebook URL</label>
+            <input class="field-input" id="s-fb" value="${esc(settings.facebook||'https://www.facebook.com/songngoc.com.vn')}"></div>
+          <div class="field-group"><label class="field-label">YouTube URL</label>
+            <input class="field-input" id="s-yt" value="${esc(settings.youtube||'https://www.youtube.com/@songngocconstruction3109')}"></div>
+        </div>
+        <div class="field-row">
+          <div class="field-group"><label class="field-label">Cloudflare Turnstile Site Key</label>
+            <input class="field-input" id="s-ts" value="${esc(settings.turnstile_key||'')}" placeholder="0x4AAAAAAA..."></div>
+          <div class="field-group"><label class="field-label">Mật khẩu CMS (đổi mật khẩu)</label>
+            <input class="field-input" type="password" id="s-pwd" placeholder="Để trống = không đổi"></div>
+        </div>
+        <button class="t-btn t-btn-primary" id="saveSettings">
+          <i class="fas fa-floppy-disk"></i> Lưu cài đặt
+        </button>
+      </div>
+
+      <div class="cms-table-wrap" style="padding:24px;margin-top:20px">
+        <h3 style="margin-bottom:16px;font-size:1rem">Thông tin liên hệ</h3>
+        <div class="field-group"><label class="field-label">Địa chỉ văn phòng</label>
+          <input class="field-input" id="s-addr" value="${esc(settings.address||'VP-2-09, Lầu 2, Tòa nhà St. Moritz, 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM')}"></div>
+        <div class="field-row">
+          <div class="field-group"><label class="field-label">Hotline</label>
+            <input class="field-input" id="s-phone" value="${esc(settings.phone||'086 893 7699')}"></div>
+          <div class="field-group"><label class="field-label">Email chính</label>
+            <input class="field-input" id="s-email" value="${esc(settings.email||'songngoc.stmc@gmail.com')}"></div>
+        </div>
+        <button class="t-btn t-btn-primary" id="saveContact" style="margin-top:4px">
+          <i class="fas fa-floppy-disk"></i> Lưu thông tin liên hệ
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('saveSettings').addEventListener('click', async function() {
+    this.disabled = true; this.innerHTML = '<i class="fas fa-circle-notch spin"></i> Đang lưu...';
+    const newPwd = document.getElementById('s-pwd').value;
+    if (newPwd) localStorage.setItem('sn_cms_pwd', newPwd);
+    const record = {
+      id: settings.id || '1',
+      site_title: document.getElementById('s-title').value,
+      site_description: document.getElementById('s-desc').value,
+      ga_id: document.getElementById('s-ga').value,
+      maps_embed: document.getElementById('s-map').value,
+      facebook: document.getElementById('s-fb').value,
+      youtube: document.getElementById('s-yt').value,
+      turnstile_key: document.getElementById('s-ts').value,
+    };
+    await DataStore.save('settings', record);
+    toast('Đã lưu cài đặt!');
+    this.disabled = false; this.innerHTML = '<i class="fas fa-floppy-disk"></i> Lưu cài đặt';
+  });
+
+  document.getElementById('saveContact').addEventListener('click', async function() {
+    this.disabled = true; this.innerHTML = '<i class="fas fa-circle-notch spin"></i> Đang lưu...';
+    const record = {
+      id: settings.id || '1',
+      address: document.getElementById('s-addr').value,
+      phone: document.getElementById('s-phone').value,
+      email: document.getElementById('s-email').value,
+    };
+    await DataStore.save('settings', record);
+    toast('Đã lưu thông tin liên hệ!');
+    this.disabled = false; this.innerHTML = '<i class="fas fa-floppy-disk"></i> Lưu thông tin liên hệ';
+  });
+}
+
+/* ════════════════════════════════
+   UTILS
+════════════════════════════════ */
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function formatDate(d) { try { return d ? new Date(d).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'}) : '—'; } catch { return d||'—'; } }
+function slugify(str) { return str.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-'); }
+
+/* ════════════════════════════════
+   INIT
+════════════════════════════════ */
+function init() {
+  /* Sidebar mobile toggle */
+  const toggle = document.getElementById('sidebarToggle');
+  const sidebar = document.getElementById('sidebar');
+  if (window.innerWidth <= 768) { toggle.style.display = ''; }
+  toggle?.addEventListener('click', () => sidebar.classList.toggle('mobile-open'));
+
+  setTab('dashboard');
+}
+
+if (auth.check()) init();
+</script>
+</body>
+</html>

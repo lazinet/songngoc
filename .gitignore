@@ -1,0 +1,51 @@
+# ─── Thư mục tài liệu ban đầu / internal ───────────────────────────────────
+initial/
+
+# ─── Biến môi trường & secrets ───────────────────────────────────────────────
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.staging
+*.local
+secrets.json
+secrets/
+credentials/
+*.pem
+*.key
+
+# ─── Editor ──────────────────────────────────────────────────────────────────
+.vscode/settings.json.local
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+._*
+
+# ─── Build artifacts ─────────────────────────────────────────────────────────
+node_modules/
+dist/
+build/
+.output/
+.wrangler/
+.cache/
+*.tsbuildinfo
+
+# ─── Cloudflare ──────────────────────────────────────────────────────────────
+wrangler.toml.local
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ─── Temp / backup ───────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
+*.bak.*

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+  <title>Tin Tức &amp; Sự Kiện — Công ty TNHH Cơ Khí Xây Dựng Song Ngọc</title>
+  <meta name="description" content="Cập nhật tin tức mới nhất về ngành xây dựng, thị trường, kỹ thuật và các hoạt động của Công ty TNHH Cơ Khí Xây Dựng Song Ngọc.">
+  <meta name="keywords" content="tin tức song ngọc, tin xây dựng, thị trường xây dựng, kỹ thuật xây dựng, song ngọc news">
+  <meta name="author" content="Công ty TNHH Cơ Khí Xây Dựng Song Ngọc">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Tin Tức &amp; Sự Kiện — Song Ngọc Construction">
+  <meta property="og:description" content="Cập nhật tin tức mới nhất về ngành xây dựng và hoạt động Song Ngọc.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://songngoc.com.vn/tin-tuc.html">
+  <meta property="og:image" content="https://songngoc.com.vn/assets/images/misc/og-cover.jpg">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Song Ngọc Construction">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tin Tức — Song Ngọc Construction">
+  <meta name="twitter:image" content="https://songngoc.com.vn/assets/images/misc/og-cover.jpg">
+
+  <link rel="canonical" href="https://songngoc.com.vn/tin-tuc.html">
+  <link rel="icon" type="image/png" href="assets/logos/logo-sn.png">
+  <link rel="apple-touch-icon" href="assets/logos/logo-sn.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, var(--sn-green-dk) 0%, var(--sn-green) 60%, var(--sn-green-mid) 100%);
+      padding: 80px 0 60px; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg') center/cover no-repeat;
+      opacity: .12;
+    }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-hero h1 { color: #fff; font-size: clamp(1.8rem,4vw,2.8rem); margin-bottom: 12px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .breadcrumb a, .breadcrumb span { font-size: .82rem; color: rgba(255,255,255,.75); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb .sep { color: rgba(255,255,255,.4); }
+    .breadcrumb .current { color: var(--sn-orange); font-weight: 700; }
+
+    /* Filter */
+    .news-filter {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .filter-chip {
+      padding: 8px 18px; border-radius: 20px; font-size: .82rem; font-weight: 600;
+      border: 1.5px solid var(--border); color: var(--text-2); cursor: pointer;
+      transition: all var(--transition); background: var(--surface);
+    }
+    .filter-chip:hover { border-color: var(--sn-green); color: var(--sn-green); }
+    .filter-chip.active { background: var(--sn-green); color: #fff; border-color: var(--sn-green); }
+
+    /* Featured news */
+    .featured-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; margin-bottom: 56px;
+    }
+    @media (max-width: 768px) { .featured-grid { grid-template-columns: 1fr; } }
+
+    .news-featured-main {
+      background: var(--surface); border-radius: var(--radius-lg);
+      overflow: hidden; box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-2); transition: all var(--transition);
+    }
+    .news-featured-main:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .news-featured-main .img-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .news-featured-main .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .news-featured-main:hover .img-wrap img { transform: scale(1.04); }
+    .featured-body { padding: 24px; }
+    .news-cat-badge {
+      display: inline-block; background: var(--sn-green-lt); color: var(--sn-green);
+      font-size: .68rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+    }
+    .featured-body h2 { font-size: 1.2rem; margin-bottom: 10px; line-height: 1.4; }
+    .featured-body p { font-size: .85rem; color: var(--text-3); line-height: 1.7; margin-bottom: 14px; }
+
+    .news-small-stack { display: flex; flex-direction: column; gap: 16px; }
+    .news-small {
+      display: flex; gap: 14px; background: var(--surface);
+      border-radius: var(--radius-md); overflow: hidden;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-2);
+      transition: all var(--transition); flex: 1;
+    }
+    .news-small:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .news-small .img-wrap { width: 110px; flex-shrink: 0; overflow: hidden; }
+    .news-small .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .news-small-body { padding: 14px 14px 14px 0; }
+    .news-small-body .news-cat-badge { margin-bottom: 6px; }
+    .news-small-body h3 { font-size: .85rem; margin-bottom: 6px; line-height: 1.4; }
+    .news-small-body .meta { font-size: .72rem; color: var(--text-3); }
+
+    /* News grid */
+    .news-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;
+    }
+    .news-card {
+      background: var(--surface); border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border-2);
+      transition: all var(--transition);
+    }
+    .news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .news-card .img-wrap { aspect-ratio: 16/10; overflow: hidden; }
+    .news-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .news-card:hover .img-wrap img { transform: scale(1.05); }
+    .news-card-body { padding: 20px; }
+    .news-card-body h3 { font-size: .95rem; margin: 8px 0; line-height: 1.4; }
+    .news-card-body p { font-size: .8rem; color: var(--text-3); line-height: 1.65; margin-bottom: 14px; }
+    .news-meta { font-size: .73rem; color: var(--text-3); display: flex; gap: 12px; align-items: center; margin-bottom: 4px; }
+    .read-more { font-size: .78rem; font-weight: 700; color: var(--sn-green); display: inline-flex; align-items: center; gap: 6px; transition: gap var(--transition); }
+    .read-more:hover { gap: 10px; }
+
+    /* Pagination */
+    .pagination { display: flex; justify-content: center; gap: 6px; margin-top: 48px; flex-wrap: wrap; }
+    .page-btn {
+      width: 38px; height: 38px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; font-weight: 700; border: 1.5px solid var(--border);
+      color: var(--text-2); cursor: pointer; background: var(--surface);
+      transition: all var(--transition);
+    }
+    .page-btn:hover { border-color: var(--sn-green); color: var(--sn-green); }
+    .page-btn.active { background: var(--sn-green); color: #fff; border-color: var(--sn-green); }
+    .page-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* Loading */
+    .skeleton { background: linear-gradient(90deg, var(--border-2) 25%, var(--border) 50%, var(--border-2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius-sm); }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-3); grid-column: 1/-1; }
+    .empty-state i { font-size: 3rem; margin-bottom: 16px; opacity: .4; display: block; }
+  </style>
+</head>
+<body>
+
+<div class="color-bar"></div>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Song Ngọc — Trang chủ">
+      <img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="42">
+    </a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <div class="nav-item"><a href="gioi-thieu.html" class="nav-link">Giới thiệu</a></div>
+      <div class="nav-item">
+        <a href="linh-vuc.html" class="nav-link">Lĩnh vực <i class="fas fa-chevron-down"></i></a>
+        <div class="nav-dropdown">
+          <a href="linh-vuc.html#thiet-ke"><i class="fas fa-drafting-compass"></i> Tư vấn &amp; Thiết kế</a>
+          <a href="linh-vuc.html#cong-nghiep"><i class="fas fa-industry"></i> Công trình Công nghiệp</a>
+          <a href="linh-vuc.html#cau-cang"><i class="fas fa-ship"></i> Cầu, Cảng, Giao thông</a>
+          <a href="linh-vuc.html#chong-an-mon"><i class="fas fa-shield-halved"></i> Chống ăn mòn biển</a>
+          <a href="linh-vuc.html#co-gioi"><i class="fas fa-tractor"></i> Cơ giới &amp; San lấp</a>
+          <a href="linh-vuc.html#duc-san"><i class="fas fa-cubes"></i> Cấu kiện đúc sẵn</a>
+          <a href="linh-vuc.html#cho-thue"><i class="fas fa-wrench"></i> Cho thuê thiết bị</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="du-an.html" class="nav-link">Dự án</a></div>
+      <div class="nav-item"><a href="tin-tuc.html" class="nav-link nav-active">Tin tức</a></div>
+      <div class="nav-item"><a href="hoat-dong.html" class="nav-link">Hoạt động</a></div>
+      <div class="nav-item"><a href="tuyen-dung.html" class="nav-link">Tuyển dụng</a></div>
+      <div class="nav-item"><a href="catalogue.html" class="nav-link">Hồ sơ năng lực</a></div>
+      <a href="lien-he.html" class="btn btn-primary btn-sm nav-cta"><i class="fas fa-phone"></i> Liên hệ</a>
+    </nav>
+    <button class="hamburger" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu di động">
+  <div class="mobile-nav-sep">Menu</div>
+  <a href="gioi-thieu.html"><i class="fas fa-building"></i> Giới thiệu</a>
+  <a href="linh-vuc.html"><i class="fas fa-layer-group"></i> Lĩnh vực hoạt động</a>
+  <a href="du-an.html"><i class="fas fa-hard-hat"></i> Dự án</a>
+  <a href="tin-tuc.html"><i class="fas fa-newspaper"></i> Tin tức</a>
+  <a href="hoat-dong.html"><i class="fas fa-people-group"></i> Hoạt động công ty</a>
+  <a href="tuyen-dung.html"><i class="fas fa-user-tie"></i> Tuyển dụng</a>
+  <a href="catalogue.html"><i class="fas fa-book-open"></i> Hồ sơ năng lực</a>
+  <a href="lien-he.html"><i class="fas fa-map-marker-alt"></i> Liên hệ</a>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero" aria-label="Tin tức và sự kiện">
+  <div class="container page-hero-content">
+    <h1 data-aos="fade-up">Tin Tức &amp; Sự Kiện</h1>
+    <nav class="breadcrumb" aria-label="Breadcrumb" data-aos="fade-up" data-aos-delay="80">
+      <a href="index.html"><i class="fas fa-home"></i> Trang chủ</a>
+      <span class="sep"><i class="fas fa-chevron-right"></i></span>
+      <span class="current">Tin tức</span>
+    </nav>
+  </div>
+</section>
+
+<!-- ══ NEWS CONTENT ══ -->
+<section class="section" aria-labelledby="sec-news">
+  <div class="container">
+
+    <!-- Featured section -->
+    <div class="sec-title" data-aos="fade-up">
+      <div class="sec-eyebrow"><i class="fas fa-fire"></i> Nổi Bật</div>
+      <h2 id="sec-news">Tin Tức <em>Nổi Bật</em></h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="featured-grid" id="featuredNews" data-aos="fade-up">
+      <!-- Populated by JS -->
+      <div style="background:var(--border-2);border-radius:var(--radius-lg);aspect-ratio:16/9;animation:shimmer 1.5s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,var(--border-2) 25%,var(--border) 50%,var(--border-2) 75%)"></div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="flex:1;background:var(--border-2);border-radius:var(--radius-md);animation:shimmer 1.5s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,var(--border-2) 25%,var(--border) 50%,var(--border-2) 75%)"></div>
+        <div style="flex:1;background:var(--border-2);border-radius:var(--radius-md);animation:shimmer 1.5s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,var(--border-2) 25%,var(--border) 50%,var(--border-2) 75%)"></div>
+      </div>
+    </div>
+
+    <!-- All news -->
+    <div style="margin-top:56px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px" data-aos="fade-up">
+        <h3 style="font-size:1.2rem">Tất Cả Tin Tức</h3>
+        <div class="news-filter" role="group" aria-label="Lọc tin tức">
+          <button class="filter-chip active" data-cat="all" aria-pressed="true">Tất cả</button>
+          <button class="filter-chip" data-cat="du-an" aria-pressed="false">Dự án</button>
+          <button class="filter-chip" data-cat="thi-truong" aria-pressed="false">Thị trường</button>
+          <button class="filter-chip" data-cat="ky-thuat" aria-pressed="false">Kỹ thuật</button>
+          <button class="filter-chip" data-cat="song-ngoc" aria-pressed="false">Song Ngọc</button>
+        </div>
+      </div>
+
+      <div class="news-grid" id="newsGrid" aria-live="polite" aria-label="Danh sách tin tức">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="pagination" id="pagination" role="navigation" aria-label="Phân trang tin tức"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div style="background:linear-gradient(90deg,var(--sn-green-dk),var(--sn-green),var(--sn-green-mid));padding:56px 0">
+  <div class="container" style="text-align:center">
+    <h2 style="color:#fff;margin-bottom:14px" data-aos="fade-up">Theo dõi Song Ngọc</h2>
+    <p style="color:rgba(255,255,255,.75);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto" data-aos="fade-up" data-aos-delay="80">
+      Cập nhật tin tức mới nhất từ Song Ngọc qua mạng xã hội.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap" data-aos="fade-up" data-aos-delay="160">
+      <a href="https://www.facebook.com/songngoc.com.vn" target="_blank" rel="noopener" class="btn btn-orange btn-lg" aria-label="Facebook Song Ngọc"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="https://www.youtube.com/@songngocconstruction3109" target="_blank" rel="noopener" class="btn btn-outline-white btn-lg" aria-label="YouTube Song Ngọc"><i class="fab fa-youtube"></i> YouTube</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer" aria-label="Footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-logo"><img src="assets/logos/logo-sn.png" alt="Song Ngọc" width="140" height="44"></div>
+      <p class="footer-desc">Công ty TNHH Cơ Khí Xây Dựng Song Ngọc — Đối tác tin cậy trong lĩnh vực cơ khí và xây dựng hạ tầng tại Việt Nam.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/songngoc.com.vn" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook Song Ngọc"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@songngocconstruction3109" class="social-btn" target="_blank" rel="noopener" aria-label="YouTube Song Ngọc"><i class="fab fa-youtube"></i></a>
+        <a href="http://chat.zalo.me/0868937699" class="social-btn" target="_blank" rel="noopener" aria-label="Zalo Song Ngọc"><i class="fas fa-comment-dots"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-heading">Điều Hướng</span>
+      <ul class="footer-links">
+        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+        <li><a href="linh-vuc.html">Lĩnh vực hoạt động</a></li>
+        <li><a href="du-an.html">Dự án</a></li>
+        <li><a href="tin-tuc.html">Tin tức</a></li>
+        <li><a href="hoat-dong.html">Hoạt động</a></li>
+        <li><a href="tuyen-dung.html">Tuyển dụng</a></li>
+        <li><a href="catalogue.html">Hồ sơ năng lực</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Lĩnh Vực</span>
+      <ul class="footer-links">
+        <li><a href="linh-vuc.html#thiet-ke">Tư vấn &amp; Thiết kế</a></li>
+        <li><a href="linh-vuc.html#cau-cang">Cầu, Cảng, Giao thông</a></li>
+        <li><a href="linh-vuc.html#cong-nghiep">Công trình Công nghiệp</a></li>
+        <li><a href="linh-vuc.html#chong-an-mon">Chống ăn mòn biển</a></li>
+        <li><a href="linh-vuc.html#co-gioi">Cơ giới &amp; San lấp</a></li>
+        <li><a href="linh-vuc.html#duc-san">Cấu kiện đúc sẵn</a></li>
+        <li><a href="linh-vuc.html#cho-thue">Cho thuê thiết bị</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-heading">Liên Hệ</span>
+      <ul class="footer-contact">
+        <li><a href="https://www.google.com/maps/place/CÔNG+TY+TNHH+CƠ+KHÍ+XÂY+DỰNG+SONG+NGỌC/@10.8380516,106.7348122,17z" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> VP-2-09, Lầu 2, Tòa nhà St. Moritz, Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM</a></li>
+        <li><a href="tel:0868937699"><i class="fas fa-phone"></i> 086 893 7699</a></li>
+        <li><a href="mailto:songngoc.stmc@gmail.com"><i class="fas fa-envelope"></i> songngoc.stmc@gmail.com</a></li>
+        <li><a href="mailto:songngoc@sncc.vn"><i class="fas fa-envelope"></i> songngoc@sncc.vn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="divider-gradient"></div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© <span id="footerYear">2025</span> Công ty TNHH Cơ Khí Xây Dựng Song Ngọc. MST: 0312260211. Thiết kế bởi <a href="https://hathyo.com" target="_blank" rel="noopener">HATHYO</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
+<div style="position:fixed;bottom:28px;left:20px;z-index:500;display:flex;flex-direction:column;gap:10px">
+  <a href="tel:0868937699" style="width:46px;height:46px;border-radius:50%;background:#00854A;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,133,74,.4);font-size:1.1rem" aria-label="Gọi điện Song Ngọc"><i class="fas fa-phone"></i></a>
+  <a href="http://chat.zalo.me/0868937699" target="_blank" rel="noopener" style="width:46px;height:46px;border-radius:50%;background:#0068FF;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,104,255,.4);font-size:1rem" aria-label="Chat Zalo Song Ngọc"><i class="fas fa-comment-dots"></i></a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+const PAGE_SIZE = 10;
+let allNews = [];
+let currentCat = 'all';
+let currentPage = 1;
+
+function fmtDate(d) {
+  try { return new Date(d).toLocaleDateString('vi-VN', {day:'2-digit',month:'2-digit',year:'numeric'}); }
+  catch { return d || ''; }
+}
+function truncate(s, n) { return s && s.length > n ? s.slice(0,n).trimEnd()+'…' : (s||''); }
+
+function catLabel(cat) {
+  const m = { 'du-an':'Dự án','thi-truong':'Thị trường','ky-thuat':'Kỹ thuật','song-ngoc':'Song Ngọc' };
+  return m[cat] || cat || 'Tin tức';
+}
+
+function renderFeatured(items) {
+  const wrap = document.getElementById('featuredNews');
+  if (!items.length) { wrap.innerHTML = ''; return; }
+  const [main, ...rest] = items;
+  const smalls = rest.slice(0, 2);
+
+  wrap.innerHTML = `
+    <a href="#" class="news-featured-main" aria-label="Đọc tin: ${main.title}">
+      <div class="img-wrap">
+        <img src="${main.image || 'assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg'}"
+             alt="${main.title}" loading="lazy" width="700" height="394">
+      </div>
+      <div class="featured-body">
+        <span class="news-cat-badge">${catLabel(main.category)}</span>
+        <h2>${main.title}</h2>
+        <p>${truncate(main.description, 140)}</p>
+        <span class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></span>
+      </div>
+    </a>
+    <div class="news-small-stack">
+      ${smalls.map(n => `
+        <a href="#" class="news-small" aria-label="Đọc tin: ${n.title}">
+          <div class="img-wrap">
+            <img src="${n.image || 'assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg'}"
+                 alt="${n.title}" loading="lazy" width="110" height="110">
+          </div>
+          <div class="news-small-body">
+            <span class="news-cat-badge">${catLabel(n.category)}</span>
+            <h3>${n.title}</h3>
+            <p class="meta"><i class="fas fa-calendar" aria-hidden="true"></i> ${fmtDate(n.date)}</p>
+          </div>
+        </a>
+      `).join('')}
+    </div>`;
+}
+
+function renderGrid(items, page) {
+  const grid = document.getElementById('newsGrid');
+  const start = (page - 1) * PAGE_SIZE;
+  const slice = items.slice(start, start + PAGE_SIZE);
+  if (!slice.length) {
+    grid.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>Không có tin tức trong danh mục này.</p></div>';
+    return;
+  }
+  grid.innerHTML = slice.map(n => `
+    <article class="news-card" data-aos="fade-up">
+      <div class="img-wrap">
+        <img src="${n.image || 'assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg'}"
+             alt="${n.title}" loading="lazy" width="360" height="225">
+      </div>
+      <div class="news-card-body">
+        <span class="news-cat-badge">${catLabel(n.category)}</span>
+        <div class="news-meta">
+          <span><i class="fas fa-calendar" aria-hidden="true"></i> ${fmtDate(n.date)}</span>
+        </div>
+        <h3>${n.title}</h3>
+        <p>${truncate(n.description, 100)}</p>
+        <a href="#" class="read-more" aria-label="Đọc thêm bài: ${n.title}">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>`).join('');
+  if (window.AOS) AOS.refresh();
+}
+
+function renderPagination(total, page) {
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+  const pag = document.getElementById('pagination');
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''} aria-label="Trang trước"><i class="fas fa-chevron-left"></i></button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button class="page-btn ${i===page?'active':''}" onclick="goPage(${i})" aria-label="Trang ${i}" aria-current="${i===page?'page':'false'}">${i}</button>`;
+  }
+  html += `<button class="page-btn" onclick="goPage(${page+1})" ${page===totalPages?'disabled':''} aria-label="Trang sau"><i class="fas fa-chevron-right"></i></button>`;
+  pag.innerHTML = html;
+}
+
+function getFiltered() {
+  return currentCat === 'all' ? allNews : allNews.filter(n => n.category === currentCat);
+}
+
+function goPage(p) {
+  const filtered = getFiltered();
+  const total = Math.ceil(filtered.length / PAGE_SIZE);
+  if (p < 1 || p > total) return;
+  currentPage = p;
+  renderGrid(filtered, currentPage);
+  renderPagination(filtered.length, currentPage);
+  document.getElementById('newsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.querySelectorAll('.filter-chip').forEach(btn => {
+  btn.addEventListener('click', function() {
+    currentCat = this.dataset.cat;
+    currentPage = 1;
+    document.querySelectorAll('.filter-chip').forEach(b => {
+      b.classList.toggle('active', b === this);
+      b.setAttribute('aria-pressed', b === this ? 'true' : 'false');
+    });
+    const filtered = getFiltered();
+    renderGrid(filtered, 1);
+    renderPagination(filtered.length, 1);
+  });
+});
+
+/* Fallback static news if no news.json exists */
+const STATIC_NEWS = [
+  { id:1, title:'Song Ngọc hoàn thành dự án Cảng Mỹ Thủy giai đoạn 2', category:'du-an', date:'2024-11-15', description:'Công ty TNHH Cơ Khí Xây Dựng Song Ngọc đã hoàn thành thành công hạng mục thi công bến cảng giai đoạn 2 tại Cảng Mỹ Thủy, Quảng Trị, bàn giao cho chủ đầu tư đúng tiến độ hợp đồng.', image:'assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg' },
+  { id:2, title:'Thị trường xây dựng cảng biển 2024: Cơ hội và thách thức', category:'thi-truong', date:'2024-10-20', description:'Phân tích xu hướng đầu tư hạ tầng cảng biển tại Việt Nam trong bối cảnh tăng trưởng xuất nhập khẩu và sự dịch chuyển chuỗi cung ứng toàn cầu.', image:'assets/images/misc/z7449463285313_addf73c83335006be70c4d6d4a6a02ec.jpg' },
+  { id:3, title:'Công nghệ chống ăn mòn biển tiên tiến được áp dụng tại Việt Nam', category:'ky-thuat', date:'2024-09-05', description:'Hệ thống bảo vệ cathodic ICCP thế hệ mới đang được Song Ngọc triển khai thành công tại nhiều dự án cảng biển, kéo dài tuổi thọ công trình lên 30 năm.', image:'assets/images/misc/z7449467465873_ffb75b4c910f8a005590d5ac6980bd25.jpg' },
+  { id:4, title:'Song Ngọc ký kết hợp đồng dự án KCN Phước Đông – Long An', category:'song-ngoc', date:'2024-08-12', description:'Lễ ký kết hợp đồng thi công hạ tầng cụm khu công nghiệp - cảng biển Phước Đông giữa Song Ngọc và IMG Phước Đông với tổng giá trị đầu tư hàng trăm tỷ đồng.', image:'assets/images/misc/z7449467379208_4e2d606e7fa3806443f06e698d58e106.jpg' },
+  { id:5, title:'Đánh giá vật liệu composite chống ăn mòn cho cọc thép cảng biển', category:'ky-thuat', date:'2024-07-20', description:'Nghiên cứu so sánh hiệu quả của các loại vật liệu composite bọc cọc thép trong môi trường nước biển xâm thực tại khu vực miền Nam Việt Nam.', image:'assets/images/misc/z7449463304593_1bd00024d5ccd07e3ef27710ce83723a.jpg' },
+  { id:6, title:'Song Ngọc tham dự Vietnam Construction Expo 2024', category:'song-ngoc', date:'2024-06-10', description:'Đại diện Song Ngọc tham dự triển lãm xây dựng quốc tế lớn nhất Việt Nam, giới thiệu năng lực thi công và công nghệ chống ăn mòn biển tiên tiến.', image:'assets/images/misc/z7449467470358_5d17658c12ab0c13a76a1d3e9e798425.jpg' },
+  { id:7, title:'Tổng quan thị trường vật liệu xây dựng quý 3/2024', category:'thi-truong', date:'2024-05-25', description:'Giá vật liệu xây dựng trong quý 3/2024 có xu hướng ổn định sau giai đoạn biến động. Phân tích chi tiết về thép, xi măng, vật liệu chống thấm và dự báo quý 4.', image:'assets/images/misc/z7449467412522_9de98a85d3ca301b3b4b65f0017e2613.jpg' },
+  { id:8, title:'Hoàn thành nhà máy sơn GreenPro – Bình Dương', category:'du-an', date:'2024-04-18', description:'Song Ngọc bàn giao thành công nhà máy sơn công nghiệp GreenPro tại Bình Dương, đúng tiến độ và vượt chất lượng yêu cầu của chủ đầu tư.', image:'assets/images/misc/z7449463340610_3f21c74897157809572c3cfea8552e1a.jpg' },
+  { id:9, title:'An toàn lao động trong thi công cảng biển: Bài học thực tiễn', category:'ky-thuat', date:'2024-03-30', description:'Chia sẻ từ chuyên gia an toàn lao động Song Ngọc về quy trình quản lý an toàn trong thi công công trình cảng biển, đặc biệt khi làm việc trên mặt nước và môi trường áp lực cao.', image:'assets/images/misc/z7449467443839_6f35b4e6043524e7ac6c20cc5ae00184.jpg' },
+  { id:10, title:'Song Ngọc được vinh danh Top 10 nhà thầu xây dựng uy tín 2023', category:'song-ngoc', date:'2024-02-14', description:'Song Ngọc vinh dự nhận danh hiệu Top 10 Nhà thầu Xây dựng Uy tín năm 2023 do Hiệp hội Nhà thầu Xây dựng Việt Nam bình chọn, ghi nhận nỗ lực và chất lượng thi công xuất sắc.', image:'assets/images/misc/z7449467489752_82885b1078ebe95e5c76d8c05d11eaaf.jpg' },
+  { id:11, title:'Triển khai hệ thống quản lý dự án số tại Song Ngọc', category:'song-ngoc', date:'2024-01-20', description:'Song Ngọc chính thức triển khai hệ thống quản lý dự án kỹ thuật số, tích hợp BIM và phần mềm Primavera P6 nhằm nâng cao hiệu quả điều hành và kiểm soát tiến độ.', image:'assets/images/misc/z7449467481466_2a1a6163d58c0d2b5889b46aa872d200.jpg' },
+  { id:12, title:'Xu hướng xây dựng xanh và bền vững tại Việt Nam 2024', category:'thi-truong', date:'2023-12-15', description:'Phân tích xu hướng thi công xanh, sử dụng vật liệu tái chế và ứng dụng năng lượng tái tạo trong các dự án xây dựng công nghiệp tại Việt Nam.', image:'assets/images/misc/z7449467424873_cc10a6577f7d3d120fc3badf0574a578.jpg' }
+];
+
+async function loadNews() {
+  try {
+    const res = await fetch('data/news.json');
+    if (res.ok) {
+      allNews = await res.json();
+    } else { allNews = STATIC_NEWS; }
+  } catch { allNews = STATIC_NEWS; }
+
+  renderFeatured(allNews.slice(0, 3));
+  const filtered = getFiltered();
+  renderGrid(filtered, 1);
+  renderPagination(filtered.length, 1);
+}
+
+document.addEventListener('DOMContentLoaded', loadNews);
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+</script>
+</body>
+</html>

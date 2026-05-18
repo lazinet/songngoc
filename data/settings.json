@@ -1,0 +1,95 @@
+{
+  "company": {
+    "name": "Công ty TNHH Cơ Khí Xây Dựng Song Ngọc",
+    "shortName": "Song Ngọc",
+    "brandName": "SNCC",
+    "taxCode": "0312260211",
+    "founded": 2014,
+    "slogan": "Kiến tạo công trình - Vững bền tương lai",
+    "description": "Công ty TNHH Cơ Khí Xây Dựng Song Ngọc là doanh nghiệp chuyên nghiệp trong lĩnh vực thi công xây dựng công nghiệp, cảng biển và hạ tầng kỹ thuật. Với hơn 10 năm kinh nghiệm, Song Ngọc đã và đang thực hiện hàng trăm dự án trọng điểm trên khắp Việt Nam, khẳng định vị thế là nhà thầu thi công uy tín hàng đầu khu vực phía Nam.",
+    "logo": {
+      "main": "assets/logos/logo-songngoc.png",
+      "white": "assets/logos/logo-songngoc-white.png",
+      "favicon": "assets/logos/favicon.png"
+    }
+  },
+  "contact": {
+    "address": "VP-2-09, Lầu 2, Tòa nhà St. Moritz, 1014 Phạm Văn Đồng, Phường Hiệp Bình Chánh, TP. Thủ Đức, TP. Hồ Chí Minh",
+    "addressShort": "1014 Phạm Văn Đồng, P. Hiệp Bình, TP.HCM",
+    "phones": [
+      {
+        "label": "Kinh doanh",
+        "number": "0868937699",
+        "display": "086 893 7699"
+      }
+    ],
+    "emails": [
+      {
+        "label": "Chung",
+        "address": "songngoc.stmc@gmail.com"
+      },
+      {
+        "label": "Công ty",
+        "address": "songngoc@sncc.vn"
+      }
+    ],
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.041!2d106.7348122!3d10.8380516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sCÔNG+TY+TNHH+CƠ+KHÍ+XÂY+DỰNG+SONG+NGỌC!5e0!3m2!1svi!2svn",
+    "mapLink": "https://www.google.com/maps/place/CÔNG+TY+TNHH+CƠ+KHÍ+XÂY+DỰNG+SONG+NGỌC/@10.8380516,106.7348122,17z"
+  },
+  "social": {
+    "facebook": {
+      "url": "https://www.facebook.com/songngoc.com.vn",
+      "handle": "songngoc.com.vn",
+      "label": "Facebook Song Ngọc"
+    },
+    "youtube": {
+      "url": "https://www.youtube.com/@songngocconstruction3109",
+      "handle": "@songngocconstruction3109",
+      "label": "YouTube Song Ngọc"
+    },
+    "zalo": {
+      "url": "https://zalo.me/0868937699",
+      "phone": "0868937699",
+      "label": "Zalo Song Ngọc"
+    }
+  },
+  "seo": {
+    "siteName": "Song Ngọc - Cơ Khí Xây Dựng",
+    "siteUrl": "https://sncc.vn",
+    "defaultTitle": "Công ty TNHH Cơ Khí Xây Dựng Song Ngọc | SNCC",
+    "defaultDescription": "Song Ngọc - Nhà thầu xây dựng uy tín chuyên thi công công trình công nghiệp, cảng biển, đường giao thông và chống ăn mòn biển tại Việt Nam.",
+    "defaultKeywords": "cơ khí xây dựng, Song Ngọc, thi công cảng biển, xây dựng công nghiệp, chống ăn mòn biển, san lấp mặt bằng, kết cấu thép, điện gió, SNCC",
+    "ogImage": "assets/images/misc/og-image.jpg",
+    "language": "vi",
+    "locale": "vi_VN"
+  },
+  "theme": {
+    "primaryColor": "#00854A",
+    "secondaryColor": "#F38022",
+    "primaryDark": "#005C34",
+    "fontFamily": "Be Vietnam Pro, Segoe UI, sans-serif"
+  },
+  "navigation": {
+    "main": [
+      { "label": "Trang chủ", "href": "/", "icon": "fa-house" },
+      { "label": "Giới thiệu", "href": "/gioi-thieu.html", "icon": "fa-circle-info" },
+      { "label": "Lĩnh vực", "href": "/linh-vuc.html", "icon": "fa-layer-group" },
+      { "label": "Dự án", "href": "/du-an.html", "icon": "fa-folder-open" },
+      { "label": "Tin tức", "href": "/tin-tuc.html", "icon": "fa-newspaper" },
+      { "label": "Tuyển dụng", "href": "/tuyen-dung.html", "icon": "fa-briefcase" },
+      { "label": "Liên hệ", "href": "/lien-he.html", "icon": "fa-phone" }
+    ]
+  },
+  "stats": {
+    "yearsExperience": 10,
+    "projectsCompleted": 100,
+    "clients": 50,
+    "employees": 300,
+    "provinces": 20
+  },
+  "analytics": {
+    "googleAnalyticsId": "",
+    "facebookPixelId": "",
+    "googleTagManagerId": ""
+  }
+}

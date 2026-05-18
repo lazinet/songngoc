@@ -1,0 +1,139 @@
+[
+  {
+    "id": 1,
+    "slug": "team-building",
+    "title": "Team Building",
+    "category": "team-building",
+    "categoryLabel": "Hoạt động đội nhóm",
+    "date": "2024-04-20",
+    "location": "Vũng Tàu, Bà Rịa - Vũng Tàu",
+    "description": "Chương trình team building thường niên của Song Ngọc tại bãi biển Vũng Tàu - nơi toàn thể cán bộ nhân viên văn phòng và công trường cùng nhau thư giãn, vui chơi và gắn kết tình đồng nghiệp. Các hoạt động bao gồm trò chơi bãi biển, thi đấu thể thao, tiệc nướng BBQ và đêm lửa trại gala.",
+    "images": [
+      "assets/images/activities/A.jpg",
+      "assets/images/activities/B.jpg",
+      "assets/images/activities/C.jpg",
+      "assets/images/activities/D.jpg",
+      "assets/images/activities/E.jpg",
+      "assets/images/activities/F.jpg"
+    ],
+    "coverImage": "assets/images/activities/Banner.png",
+    "participants": 120,
+    "highlight": true
+  },
+  {
+    "id": 2,
+    "slug": "kham-suc-khoe-dinh-ky-2024",
+    "title": "Khám sức khỏe định kỳ 2024",
+    "category": "kham-suc-khoe",
+    "categoryLabel": "Chăm sóc sức khỏe",
+    "date": "2024-03-15",
+    "location": "Phòng khám Medic, TP. Hồ Chí Minh",
+    "description": "Công ty tổ chức chương trình khám sức khỏe định kỳ toàn diện cho toàn thể cán bộ nhân viên tại các phòng khám uy tín. Gói khám bao gồm khám tổng quát, xét nghiệm máu, siêu âm ổ bụng, đo điện tim, chụp X-quang phổi và khám chuyên khoa theo nhu cầu. Thể hiện sự quan tâm thiết thực của Ban lãnh đạo đến sức khỏe người lao động.",
+    "images": [
+      "assets/images/activities/1.jpg",
+      "assets/images/activities/2.jpg",
+      "assets/images/activities/3.jpg"
+    ],
+    "coverImage": "assets/images/activities/1.jpg",
+    "participants": 85,
+    "highlight": false
+  },
+  {
+    "id": 3,
+    "slug": "hoat-dong-thien-nguyen-trung-thu-2023",
+    "title": "Hoạt động thiện nguyện Trung Thu 2023",
+    "category": "thien-nguyen",
+    "categoryLabel": "Thiện nguyện",
+    "date": "2023-09-28",
+    "location": "Mái ấm trẻ em Bình Chánh, TP. Hồ Chí Minh",
+    "description": "Nhân dịp Tết Trung Thu, tập thể Song Ngọc đã đến thăm và tặng quà cho các em nhỏ tại mái ấm trẻ em hoàn cảnh khó khăn ở huyện Bình Chánh. Đoàn đã trao tặng hộp bánh Trung Thu, đèn lồng, đồ chơi và tiền mặt hỗ trợ quỹ học bổng cho các em. Đây là hoạt động thiện nguyện thường niên thể hiện trách nhiệm xã hội của doanh nghiệp.",
+    "images": [
+      "assets/images/activities/11.jpg",
+      "assets/images/activities/22.jpg",
+      "assets/images/activities/33.jpg",
+      "assets/images/activities/44.jpg"
+    ],
+    "coverImage": "assets/images/activities/11.jpg",
+    "participants": 30,
+    "highlight": false
+  },
+  {
+    "id": 4,
+    "slug": "le-ky-niem-thanh-lap-cong-ty",
+    "title": "Lễ kỷ niệm 10 năm thành lập Công ty",
+    "category": "le-ky-niem",
+    "categoryLabel": "Kỷ niệm & Sự kiện",
+    "date": "2024-01-15",
+    "location": "Nhà hàng Sài Gòn Palace, TP. Hồ Chí Minh",
+    "description": "Lễ kỷ niệm 10 năm thành lập Công ty TNHH Cơ Khí Xây Dựng Song Ngọc diễn ra trang trọng với sự tham dự của toàn thể cán bộ nhân viên, đối tác chiến lược và khách mời đặc biệt. Sự kiện ghi dấu hành trình 10 năm phát triển bền vững, vinh danh những cá nhân xuất sắc và công bố định hướng phát triển trong thập kỷ tiếp theo.",
+    "images": [
+      "assets/images/activities/55.jpg",
+      "assets/images/activities/66.jpg",
+      "assets/images/activities/77.jpg",
+      "assets/images/activities/88.jpg",
+      "assets/images/activities/99.jpg"
+    ],
+    "coverImage": "assets/images/activities/55.jpg",
+    "participants": 200,
+    "highlight": true
+  },
+  {
+    "id": 5,
+    "slug": "team-building-da-lat-2023",
+    "title": "Team Building Đà Lạt 2023",
+    "category": "team-building",
+    "categoryLabel": "Hoạt động đội nhóm",
+    "date": "2023-06-10",
+    "location": "Đà Lạt, Lâm Đồng",
+    "description": "Chuyến du lịch kết hợp team building tại thành phố ngàn hoa Đà Lạt dành cho đội ngũ quản lý và nhân viên văn phòng Song Ngọc. Chương trình bao gồm tham quan địa danh nổi tiếng, hoạt động ngoài trời, hội thảo nội bộ và bữa tiệc kết thúc chuyến đi đầm ấm, tạo động lực làm việc cho cả nhóm.",
+    "images": [
+      "assets/images/activities/a.jpg",
+      "assets/images/activities/d.jpg",
+      "assets/images/activities/f.jpg",
+      "assets/images/activities/g.jpg",
+      "assets/images/activities/s.jpg"
+    ],
+    "coverImage": "assets/images/activities/a.jpg",
+    "participants": 45,
+    "highlight": false
+  },
+  {
+    "id": 6,
+    "slug": "cham-lo-tet-2024",
+    "title": "Chăm lo Tết 2024 - Trao quà công nhân",
+    "category": "thien-nguyen",
+    "categoryLabel": "Thiện nguyện",
+    "date": "2024-01-28",
+    "location": "Các công trình thi công Song Ngọc",
+    "description": "Trước thềm Tết Nguyên Đán Giáp Thìn 2024, Ban lãnh đạo công ty đã đến từng công trường thăm hỏi và trao quà Tết cho toàn bộ công nhân kỹ thuật đang thi công xa nhà. Mỗi phần quà gồm tiền thưởng Tết, thực phẩm và vé xe về quê đón Tết, thể hiện tấm lòng ấm áp của Song Ngọc dành cho người lao động.",
+    "images": [
+      "assets/images/activities/1.jpg",
+      "assets/images/activities/2.jpg",
+      "assets/images/activities/3.jpg",
+      "assets/images/activities/4.jpg",
+      "assets/images/activities/5.jpg",
+      "assets/images/activities/6.jpg"
+    ],
+    "coverImage": "assets/images/activities/1.jpg",
+    "participants": 250,
+    "highlight": true
+  },
+  {
+    "id": 7,
+    "slug": "hoi-thao-an-toan-lao-dong-2024",
+    "title": "Hội thảo An toàn Lao động 2024",
+    "category": "le-ky-niem",
+    "categoryLabel": "Đào tạo & Hội thảo",
+    "date": "2024-05-15",
+    "location": "Văn phòng Song Ngọc, TP. Hồ Chí Minh",
+    "description": "Song Ngọc tổ chức hội thảo nội bộ về an toàn lao động trong thi công xây dựng và môi trường biển. Các chuyên gia chia sẻ về quy trình nhận diện nguy cơ, sử dụng thiết bị bảo hộ cá nhân và xử lý tình huống khẩn cấp. Toàn bộ công nhân viên được cấp chứng chỉ an toàn lao động sau hội thảo.",
+    "images": [
+      "assets/images/activities/10.jpg",
+      "assets/images/activities/11.jpg",
+      "assets/images/activities/12.jpg"
+    ],
+    "coverImage": "assets/images/activities/10.jpg",
+    "participants": 95,
+    "highlight": false
+  }
+]

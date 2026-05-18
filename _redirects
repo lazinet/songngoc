@@ -1,0 +1,36 @@
+# ─── Cloudflare Pages – _redirects ──────────────────────────────────────────
+# Tài liệu: https://developers.cloudflare.com/pages/configuration/redirects/
+# Cú pháp : <source> <destination> [status]
+# Chú ý   : Rules được ưu tiên theo thứ tự từ trên xuống.
+
+# ── Alias trang tiếng Anh → tiếng Việt ──────────────────────────────────────
+/home               /index.html                 301
+/index              /index.html                 301
+/about              /gioi-thieu.html            301
+/about-us           /gioi-thieu.html            301
+/contact            /lien-he.html               301
+/contact-us         /lien-he.html               301
+/projects           /du-an.html                 301
+/portfolio          /du-an.html                 301
+/news               /tin-tuc.html               301
+/blog               /tin-tuc.html               301
+/recruitment        /tuyen-dung.html            301
+/careers            /tuyen-dung.html            301
+/jobs               /tuyen-dung.html            301
+/sectors            /linh-vuc.html              301
+/services           /linh-vuc.html              301
+/profile            /catalogue.html             301
+/catalogue          /catalogue.html             301
+/activities         /hoat-dong.html             301
+
+# ── URL cũ / SEO legacy ───────────────────────────────────────────────────────
+/du-an/             /du-an.html                 301
+/tin-tuc/           /tin-tuc.html               301
+/linh-vuc/          /linh-vuc.html              301
+/gioi-thieu/        /gioi-thieu.html            301
+/lien-he/           /lien-he.html               301
+/tuyen-dung/        /tuyen-dung.html            301
+/hoat-dong/         /hoat-dong.html             301
+
+# ── 404 fallback (phải đặt cuối cùng) ───────────────────────────────────────
+/*                  /404.html                   404

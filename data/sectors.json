@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "slug": "tu-van-thiet-ke-nha-cong-nghiep",
+    "title": "Tư vấn thiết kế nhà công nghiệp, công trình thủy",
+    "shortTitle": "Tư vấn & Thiết kế",
+    "description": "Cung cấp dịch vụ tư vấn và thiết kế chuyên sâu cho các công trình công nghiệp, nhà xưởng, nhà máy sản xuất và công trình thủy lợi. Đội ngũ kỹ sư giàu kinh nghiệm đảm bảo thiết kế tối ưu về kết cấu, công năng và chi phí, đáp ứng đầy đủ tiêu chuẩn kỹ thuật Việt Nam và quốc tế.",
+    "longDescription": "Với đội ngũ kỹ sư thiết kế nhiều năm kinh nghiệm trong lĩnh vực công nghiệp và thủy công, Song Ngọc cung cấp giải pháp tư vấn thiết kế toàn diện từ khảo sát địa hình, địa chất đến lập hồ sơ thiết kế kỹ thuật, bản vẽ thi công và dự toán chi phí. Chúng tôi tư vấn thiết kế nhà máy, kho xưởng, công trình cảng bến, đê kè và hệ thống thủy lợi theo tiêu chuẩn TCVN, ASTM và Eurocode.",
+    "icon": "fa-solid fa-drafting-compass",
+    "image": "assets/images/sectors/tu-van-thiet-ke.jpg",
+    "highlights": [
+      "Thiết kế nhà máy, kho xưởng công nghiệp",
+      "Tư vấn kết cấu thép tiền chế",
+      "Thiết kế công trình bến cảng, đê kè",
+      "Lập dự toán và hồ sơ mời thầu"
+    ],
+    "color": "#00854A"
+  },
+  {
+    "id": 2,
+    "slug": "thi-cong-cong-trinh-cong-nghiep-dan-dung",
+    "title": "Thi công XD Công trình Công nghiệp và Dân dụng",
+    "shortTitle": "Công nghiệp & Dân dụng",
+    "description": "Thi công xây dựng các công trình công nghiệp và dân dụng quy mô lớn bao gồm nhà máy, kho xưởng, tòa nhà văn phòng, khu dân cư và công trình hạ tầng kỹ thuật. Cam kết chất lượng thi công theo đúng thiết kế, tiến độ hợp đồng và tiêu chuẩn an toàn lao động nghiêm ngặt.",
+    "longDescription": "Song Ngọc có năng lực thi công đa dạng công trình từ nhà xưởng kết cấu thép khẩu độ lớn, nhà máy sản xuất chuyên dụng đến tòa nhà văn phòng và khu dân cư phức hợp. Sở hữu đội ngũ thi công lành nghề, máy móc thiết bị hiện đại và hệ thống quản lý chất lượng ISO, chúng tôi đảm bảo mỗi công trình đều đạt tiêu chuẩn kỹ thuật cao nhất.",
+    "icon": "fa-solid fa-building",
+    "image": "assets/images/sectors/cong-nghiep-dan-dung.jpg",
+    "highlights": [
+      "Nhà máy, nhà xưởng kết cấu thép",
+      "Tòa nhà văn phòng, thương mại",
+      "Khu dân cư và nhà ở",
+      "Công trình hạ tầng kỹ thuật"
+    ],
+    "color": "#00854A"
+  },
+  {
+    "id": 3,
+    "slug": "thi-cong-cau-cang-duong-giao-thong",
+    "title": "Thi công Cầu, Cảng, Đường giao thông",
+    "shortTitle": "Cầu - Cảng - Đường",
+    "description": "Thi công chuyên nghiệp các công trình giao thông và hạ tầng cảng biển bao gồm cầu bê tông cốt thép, cầu treo, cảng hàng hóa, bến phà và hệ thống đường bộ cao tốc, quốc lộ. Có kinh nghiệm thi công tại các vùng địa hình khó khăn: đồng bằng ngập nước, ven biển và hải đảo.",
+    "longDescription": "Lĩnh vực thi công cầu cảng và giao thông là thế mạnh cốt lõi của Song Ngọc với nhiều công trình trọng điểm quốc gia đã thực hiện. Chúng tôi có năng lực thi công cầu bê tông dự ứng lực, cầu thép, cảng nước sâu tiếp nhận tàu lớn, đường cảng và hệ thống giao thông nội bộ khu công nghiệp. Đội ngũ thi công có kinh nghiệm làm việc trong môi trường nước mặn, đất yếu đặc thù vùng đồng bằng sông Cửu Long.",
+    "icon": "fa-solid fa-bridge",
+    "image": "assets/images/sectors/cau-cang-duong.jpg",
+    "highlights": [
+      "Cầu bê tông cốt thép dự ứng lực",
+      "Cảng biển nước sâu, bến cảng chuyên dụng",
+      "Đường bộ, đường trong khu công nghiệp",
+      "Bến phà, cầu tàu nội địa"
+    ],
+    "color": "#F38022"
+  },
+  {
+    "id": 4,
+    "slug": "thi-cong-chong-an-mon-tren-bien",
+    "title": "Thi công chống ăn mòn trên biển",
+    "shortTitle": "Chống ăn mòn biển",
+    "description": "Cung cấp giải pháp bảo vệ chống ăn mòn toàn diện cho các kết cấu thép và bê tông tiếp xúc môi trường biển xâm thực. Áp dụng công nghệ tiên tiến bao gồm hệ thống bảo vệ cathodic (ICCP/SACP), sơn phủ epoxy hàng hải cao cấp và vật liệu composite chống ăn mòn.",
+    "longDescription": "Song Ngọc là một trong số ít đơn vị tại Việt Nam có chuyên môn sâu về chống ăn mòn công trình biển. Chúng tôi cung cấp giải pháp tổng thể từ khảo sát hiện trạng ăn mòn, thiết kế hệ thống bảo vệ đến thi công và bảo trì định kỳ. Sản phẩm và vật liệu nhập khẩu từ các hãng uy tín quốc tế đảm bảo tuổi thọ bảo vệ 20-30 năm cho kết cấu biển.",
+    "icon": "fa-solid fa-shield-halved",
+    "image": "assets/images/sectors/chong-an-mon.jpg",
+    "highlights": [
+      "Hệ thống bảo vệ cathodic ICCP và SACP",
+      "Sơn phủ epoxy, polyurethane hàng hải",
+      "Bọc ống thép ống bê tông chống ăn mòn",
+      "Kiểm tra, bảo trì định kỳ công trình biển"
+    ],
+    "color": "#F38022"
+  },
+  {
+    "id": 5,
+    "slug": "thi-cong-co-gioi-san-lap-ha-tang",
+    "title": "Thi công cơ giới, san lấp mặt bằng, hạ tầng",
+    "shortTitle": "Cơ giới & San lấp",
+    "description": "Thực hiện công tác cơ giới hóa thi công quy mô lớn bao gồm san lấp mặt bằng, đào đắp đất, bơm hút bùn, xử lý nền đất yếu và hoàn thiện mặt bằng công trình. Sở hữu đội máy móc thiết bị cơ giới đồng bộ, công suất lớn phù hợp địa hình đồng bằng và ven biển.",
+    "longDescription": "Với đội ngũ máy móc thiết bị hiện đại gồm máy đào, xe lu, xe ủi, xe chở đất, máy bơm cát và thiết bị phụ trợ, Song Ngọc có khả năng thực hiện các hợp đồng san lấp mặt bằng hàng trăm hecta. Chúng tôi áp dụng công nghệ xử lý nền đất yếu như bấc thấm, cột xi măng đất, đệm cát và gia tải trước đảm bảo nền ổn định lâu dài.",
+    "icon": "fa-solid fa-tractor",
+    "image": "assets/images/sectors/co-gioi-san-lap.jpg",
+    "highlights": [
+      "San lấp mặt bằng quy mô lớn (>100 ha)",
+      "Đào đắp đất, xử lý nền đất yếu",
+      "Bơm cát, bơm bùn thủy lực",
+      "Gia tải, bấc thấm, cột xi măng đất"
+    ],
+    "color": "#00854A"
+  },
+  {
+    "id": 6,
+    "slug": "thi-cong-cau-kien-duc-san",
+    "title": "Thi công cấu kiện đúc sẵn",
+    "shortTitle": "Cấu kiện đúc sẵn",
+    "description": "Sản xuất và thi công lắp đặt các loại cấu kiện bê tông đúc sẵn chất lượng cao bao gồm cọc bê tông cốt thép, dầm cầu dự ứng lực, cống hộp, mương thoát nước và tấm đan. Quy trình sản xuất kiểm soát chặt chẽ đảm bảo chất lượng đồng đều, cường độ bê tông đạt yêu cầu thiết kế.",
+    "longDescription": "Song Ngọc đầu tư xưởng sản xuất cấu kiện bê tông đúc sẵn trang bị khuôn thép chính xác, hệ thống dưỡng hộ hơi nước và thiết bị kiểm tra chất lượng. Chúng tôi sản xuất cọc vuông BTCT C40-C50 từ 200x200 đến 400x400mm, dầm I, dầm T, cống hộp và các cấu kiện đặc biệt theo yêu cầu dự án. Năng lực sản xuất đạt hàng nghìn mét cọc và hàng trăm tấn cấu kiện mỗi tháng.",
+    "icon": "fa-solid fa-cubes",
+    "image": "assets/images/sectors/duc-san.jpg",
+    "highlights": [
+      "Cọc bê tông cốt thép C40-C50",
+      "Dầm cầu bê tông dự ứng lực",
+      "Cống hộp, mương thoát nước đúc sẵn",
+      "Cấu kiện đặc biệt theo yêu cầu"
+    ],
+    "color": "#F38022"
+  },
+  {
+    "id": 7,
+    "slug": "cho-thue-thiet-bi-cung-cap-nhan-cong",
+    "title": "Cho thuê thiết bị thi công, cung cấp nhân công",
+    "shortTitle": "Cho thuê thiết bị & Nhân công",
+    "description": "Cung cấp dịch vụ cho thuê thiết bị thi công chuyên dụng và điều phối nhân công lành nghề cho các nhà thầu và chủ đầu tư. Đội thiết bị đa dạng từ máy đào, cần cẩu, búa đóng cọc đến thiết bị thủy công chuyên biệt, vận hành bởi đội lái máy nhiều kinh nghiệm.",
+    "longDescription": "Dịch vụ cho thuê thiết bị và cung cấp nhân công của Song Ngọc giúp các đơn vị thi công tiếp cận nhanh nguồn lực máy móc và lao động chuyên nghiệp mà không cần đầu tư vốn lớn. Chúng tôi có sẵn đội máy đào thủy lực 5-30 tấn, cần cẩu bánh xích 50-150 tấn, búa rung đóng cọc ống thép, máy bơm bùn và các thiết bị phụ trợ. Nhân công được đào tạo bài bản, có chứng chỉ an toàn lao động.",
+    "icon": "fa-solid fa-people-carry-box",
+    "image": "assets/images/sectors/cho-thue-thiet-bi.jpg",
+    "highlights": [
+      "Cho thuê máy đào, xe lu, cần cẩu",
+      "Búa rung, búa đóng cọc ống thép",
+      "Cung cấp nhân công có tay nghề",
+      "Đội lái máy có kinh nghiệm dày dặn"
+    ],
+    "color": "#00854A"
+  }
+]
