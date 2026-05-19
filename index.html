@@ -79,10 +79,10 @@
 
   <style>
     /* ── Index-specific ── */
-    /* Gradient vignette on top of canvas for left-side text contrast */
+    /* Overlay đều hai bên — không tạo cảm giác lệch trái */
     .hero-content-gradient {
       position: absolute; inset: 0; z-index: 5;
-      background: linear-gradient(105deg, rgba(5,12,7,.85) 0%, rgba(5,12,7,.45) 50%, transparent 100%);
+      background: rgba(5, 12, 7, 0.55);
       pointer-events: none;
     }
     .hero { padding: 80px 0; }
@@ -150,9 +150,42 @@
       padding: 56px 0;
     }
 
+    /* About grid — 2 cols desktop, 1 col mobile (visual trên, text dưới) */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    /* Hero content — canh giữa */
+    .hero-content { text-align: center; margin: 0 auto; }
+    .hero-eyebrow { justify-content: center; }
+    .hero-desc    { margin-left: auto; margin-right: auto; }
+    .hero-stats   { justify-content: center; }
+    .hero-btns    { justify-content: center; }
+    .hero-content-gradient {
+      /* Đổi sang full overlay khi content centered */
+      background: linear-gradient(to bottom, rgba(5,12,7,.55) 0%, rgba(5,12,7,.25) 100%) !important;
+    }
+
+    /* Hero buttons — bằng nhau, padding gọn */
+    .hero-btns .btn { flex: 1; min-width: 140px; max-width: 220px; justify-content: center; padding: 12px 20px; }
+
     @media (max-width: 991px) {
       .about-img-float { display: none; }
       .about-badge { left: auto; right: 0; }
+    }
+    @media (max-width: 767px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-visual { order: -1; } /* visual nằm trên text */
+    }
+    @media (max-width: 640px) {
+      /* Buttons hero: full row mỗi nút khi rất nhỏ */
+      .hero-btns { flex-direction: column; align-items: stretch; gap: 10px; }
+      .hero-btns .btn { max-width: 100%; }
+      /* Hero stats: 2x2 grid */
+      .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
     }
   </style>
 </head>
@@ -232,8 +265,7 @@
   <canvas id="heroCanvas" aria-hidden="true"></canvas>
   <!-- Left gradient for text legibility, above canvas -->
   <div class="hero-content-gradient" aria-hidden="true"></div>
-  <div class="container" style="position:relative;z-index:10">
-    <div class="hero-content">
+  <div class="hero-content">
       <p class="hero-eyebrow hero-anim">Cơ Khí Xây Dựng Song Ngọc</p>
       <h1 class="hero-anim">
         Vững Chắc <em>Từng Công Trình</em>,<br>
@@ -269,39 +301,14 @@
           <div class="hero-stat-label">Nhân sự chuyên nghiệp</div>
         </div>
       </div>
-    </div>
   </div>
-  <div class="hero-scroll-hint" aria-hidden="true" style="z-index:10;position:relative">Cuộn xuống</div>
+  <div class="hero-scroll-hint" aria-hidden="true">Cuộn xuống</div>
 </section>
-
-<!-- ══ STATS STRIP ══ -->
-<div class="stats-strip" aria-label="Số liệu nổi bật">
-  <div class="container">
-    <div class="grid-4">
-      <div class="stat-item" data-aos="fade-up">
-        <div class="stat-num"><span data-count="12" data-suffix="+">12+</span></div>
-        <div class="stat-label">Năm kinh nghiệm</div>
-      </div>
-      <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-        <div class="stat-num"><span data-count="200" data-suffix="+">200+</span></div>
-        <div class="stat-label">Dự án hoàn thành</div>
-      </div>
-      <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-        <div class="stat-num"><span data-count="50" data-suffix="+">50+</span></div>
-        <div class="stat-label">Đối tác chiến lược</div>
-      </div>
-      <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-        <div class="stat-num"><span data-count="300" data-suffix="+">300+</span></div>
-        <div class="stat-label">Nhân sự chuyên nghiệp</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ══ GIỚI THIỆU ══ -->
 <section class="section bg-surface" id="gioi-thieu" aria-labelledby="sec-about">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
+    <div class="about-grid">
       <div class="about-visual" data-aos="fade-right">
         <div class="about-img-main">
           <img src="assets/images/misc/z7449467375898_7907cd8e28b187f77823ec39c5646fe5.jpg"
