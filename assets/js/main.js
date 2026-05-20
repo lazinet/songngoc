@@ -8,7 +8,7 @@
 const SN = {
   green:  '#00854A',
   orange: '#F38022',
-  GAS_URL: 'https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec',
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbxZxkr8LQ2WMIW471iNWytBeii1-lKCs5xR3eQTvAzPFS_UgrlCDV3JqbHizXmjgfv-HA/exec',
   WORKER_URL: 'https://sn-form.songngoc.workers.dev',
   TURNSTILE_SITEKEY: 'YOUR_TURNSTILE_SITEKEY',
   GA_ID: 'G-XXXXXXXXXX',
