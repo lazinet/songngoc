@@ -283,8 +283,8 @@
               <div class="form-error">Vui lòng nhập nội dung yêu cầu</div>
             </div>
 
-            <!-- Cloudflare Turnstile -->
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAA..." style="margin-bottom:20px"></div>
+            <!-- Cloudflare Turnstile — ẩn đến khi có sitekey thật -->
+            <!-- <div class="cf-turnstile" data-sitekey="0x4AAAAAAA..." style="margin-bottom:20px"></div> -->
 
             <button type="submit" class="btn btn-primary btn-lg" id="contactSubmit" style="width:100%">
               <i class="fas fa-paper-plane"></i> Gửi yêu cầu tư vấn
@@ -416,11 +416,13 @@ form.addEventListener('submit', async function(e) {
   }
   if (!valid) { Toast.error('Vui lòng kiểm tra lại thông tin.'); return; }
 
-  /* Get Turnstile token */
+  /* Turnstile token — chỉ check khi widget đã được enable (sitekey thật) */
   let token = '';
   if (window.turnstile) {
-    try { token = window.turnstile.getResponse(); } catch {}
-    if (!token) { Toast.error('Vui lòng xác nhận bạn không phải bot.'); return; }
+    try { token = window.turnstile.getResponse() || ''; } catch {}
+    /* Chỉ block khi widget visible và có sitekey thật */
+    const widget = document.querySelector('.cf-turnstile:not([style*="display:none"])');
+    if (widget && !token) { Toast.error('Vui lòng xác nhận bạn không phải bot.'); return; }
   }
 
   /* Submit */
@@ -442,16 +444,19 @@ form.addEventListener('submit', async function(e) {
   };
 
   try {
-    const WORKER = 'https://sn-form.songngoc.workers.dev';
-    const res = await fetch(WORKER, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    const json = await res.json();
-    if (!res.ok || json.error) throw new Error(json.error || 'Server error');
+    /* Gửi thẳng tới GAS — no-cors vì GAS không hỗ trợ CORS preflight.
+       Response sẽ là opaque (không đọc được) nhưng dữ liệu VẪN được ghi vào Sheets. */
+    await fetch(
+      'https://script.google.com/macros/s/AKfycbxZxkr8LQ2WMIW471iNWytBeii1-lKCs5xR3eQTvAzPFS_UgrlCDV3JqbHizXmjgfv-HA/exec',
+      {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }
+    );
 
-    /* Success */
+    /* Hiển thị thành công ngay (response opaque không đọc được với no-cors) */
     form.style.display = 'none';
     document.getElementById('contactSuccess').style.display = 'block';
     if (window.gtag) gtag('event', 'form_submit', { event_category: 'Contact', event_label: data.service });
