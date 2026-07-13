@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Ví dụ GSAP SVG Morphing</title>
+    <!-- Nhúng thư viện GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Nhúng Plugin MorphSVG (Lưu ý: Bản thương mại đầy đủ cần tài khoản Club GreenSock, dưới đây là link dùng thử công khai trên CodePen) -->
+    <script src="https://assets.codepen.io/16327/MorphSVGPlugin3.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        svg {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+        }
+        .control-btn {
+            position: absolute;
+            bottom: 50px;
+            padding: 12px 24px;
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Khung chứa SVG -->
+    <svg viewBox="0 0 1350 1050">
+        <!-- 
+          Hình gốc ban đầu (ở đây ví dụ là 1 nét thẳng nằm ngang), 
+          được đặt id="startPath" để GSAP điều khiển 
+        -->
+        <path id="dynamicPath" d="M 100,500 L 1250,500" fill="none" stroke="orange" stroke-width="10" stroke-linecap="round"/>
+
+        <!-- 
+          Các hình mục tiêu (ẩn đi bằng display:none), 
+          đây chính là dữ liệu tọa độ bo tròn đã tính toán ở câu trước 
+        -->
+        <path id="targetShape1" style="display:none;" d="M 260.185,28.978 Q 267.949,0.000 297.949,0.000 L 1303.225,0.000 L 1273.111,112.388 L 354.187,112.388 L 304.112,299.270 L 872.607,738.623 L 862.800,775.225 L 60.228,775.225 L 90.343,662.837 L 599.009,662.837 L 201.344,355.508 Q 177.607,337.163 185.371,308.185 Z" />
+        
+        <path id="targetShape2" style="display:none;" d="M 440.425,224.775 L 430.618,261.377 L 999.113,700.730 L 949.038,887.612 L 30.114,887.612 L 0.000,1000.000 L 1005.276,1000.000 Q 1035.276,1000.000 1043.041,971.022 L 1117.854,691.815 Q 1125.619,662.837 1101.881,644.492 L 704.217,337.163 L 1212.883,337.163 L 1242.997,224.775 Z" />
+    </svg>
+
+    <button class="control-btn" onclick="startTransformation()">Bắt đầu biến hình</button>
+
+    <script>
+        // Kích hoạt plugin MorphSVG
+        gsap.registerPlugin(MorphSVGPlugin);
+
+        function startTransformation() {
+            // Khởi tạo một Timeline chuyển động liền mạch
+            let tl = gsap.timeline();
+
+            // Bước 1: Biến đường thẳng ban đầu thành "Hình 1" trong 2.5 giây
+            tl.to("#dynamicPath", {
+                duration: 2.5,
+                morphSVG: "#targetShape1", // Chỉ định id của hình mục tiêu
+                fill: "orange",            // Đổi màu nền sang cam khi hoàn thành hình khối
+                strokeWidth: 0,            // Ẩn đường viền stroke đi
+                ease: "power2.inOut"       // Hiệu ứng mượt ở đầu và cuối gia tốc
+            })
+            // Bước 2: Chờ 1 giây, sau đó biến từ "Hình 1" sang "Hình 2" trong 2 giây
+            .to("#dynamicPath", {
+                delay: 1,
+                duration: 2,
+                morphSVG: "#targetShape2",
+                fill: "green",             // Đổi mượt từ màu cam sang màu lục
+                ease: "elastic.out(1, 0.75)" // Thêm chút hiệu ứng đàn hồi sinh động
+            });
+        }
+    </script>
+</body>
+</html>

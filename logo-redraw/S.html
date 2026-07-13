@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Logo Redraw — HATHYO / Song Ngọc</title>
+<style>
+  :root {
+    color-scheme: light dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f4f5f7;
+    color: #1b1e23;
+    display: flex;
+    min-height: 100vh;
+  }
+  #panel {
+    width: 320px;
+    flex: none;
+    background: #ffffff;
+    border-right: 1px solid #e2e4e8;
+    padding: 24px 20px;
+    overflow-y: auto;
+  }
+  #panel h1 {
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+  #panel .sub {
+    font-size: 12px;
+    color: #767b85;
+    margin: 0 0 20px;
+  }
+  fieldset {
+    border: 1px solid #e2e4e8;
+    border-radius: 8px;
+    margin: 0 0 16px;
+    padding: 12px 14px 16px;
+  }
+  legend {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4b4f58;
+    padding: 0 4px;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  label span { flex: none; color: #4b4f58; }
+  input[type="number"] {
+    width: 100px;
+    padding: 5px 7px;
+    border: 1px solid #ccd0d6;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  input[type="color"] {
+    width: 44px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #ccd0d6;
+    border-radius: 6px;
+    background: none;
+    cursor: pointer;
+  }
+  .hex {
+    width: 78px;
+    padding: 5px 7px;
+    border: 1px solid #ccd0d6;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: ui-monospace, monospace;
+    text-transform: uppercase;
+  }
+  .color-row { gap: 8px; }
+  #derived {
+    font-size: 12px;
+    font-family: ui-monospace, "SFMono-Regular", monospace;
+    color: #4b4f58;
+    line-height: 1.7;
+  }
+  #derived b { color: #1b1e23; }
+  button {
+    width: 100%;
+    padding: 9px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #1b1e23;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  button:hover { background: #33373f; }
+  #stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  #svgWrap {
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  #logoSvg { display: block; width: 100%; height: auto; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #16181c; color: #e7e9ec; }
+    #panel { background: #1d2025; border-color: #2b2f36; }
+    fieldset { border-color: #2b2f36; }
+    legend { color: #b7bcc5; }
+    label span { color: #b7bcc5; }
+    input[type="number"], .hex, input[type="color"] { background: #16181c; border-color: #3a3f47; color: #e7e9ec; }
+    #derived { color: #b7bcc5; }
+    #derived b { color: #e7e9ec; }
+  }
+</style>
+</head>
+<body>
+
+<div id="panel">
+  <h1>Logo Redraw</h1>
+  <p class="sub">Vẽ lại logo HATHYO theo công thức tham số hoá.</p>
+
+  <fieldset>
+    <legend>Ngõ vào</legend>
+    <label><span>α (độ)</span><input type="number" id="inAlpha" value="15" min="1" max="89" step="0.5"></label>
+    <label><span>h (px)</span><input type="number" id="inH" value="1000" min="10" step="1"></label>
+    <label><span>Bo góc (px)</span><input type="number" id="inRadius" value="50" min="0" step="1"></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Màu sắc</legend>
+    <label class="color-row"><span>Logo màu 1</span>
+      <input type="color" id="inColor1" value="#f47115">
+      <input type="text" class="hex" id="inColor1Hex" value="#F47115">
+    </label>
+    <label class="color-row"><span>Logo màu 2</span>
+      <input type="color" id="inColor2" value="#108449">
+      <input type="text" class="hex" id="inColor2Hex" value="#108449">
+    </label>
+    <label class="color-row"><span>Nền logo</span>
+      <input type="color" id="inBg" value="#ffffff">
+      <input type="text" class="hex" id="inBgHex" value="#FFFFFF">
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Giá trị thứ cấp</legend>
+    <div id="derived"></div>
+  </fieldset>
+
+  <button id="btnDownload">Tải xuống SVG</button>
+</div>
+
+<div id="stage">
+  <div id="svgWrap">
+    <svg id="logoSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+</div>
+
+<script>
+// =============================================
+// Giao điểm 2 đường thẳng (tương đương xCross/yCross trong VBA)
+// Đường 1 qua A,B — Đường 2 qua C,D
+// =============================================
+function lineCross(P1, P2, P3, P4) {
+  const denom = (P1.x - P2.x) * (P3.y - P4.y) - (P1.y - P2.y) * (P3.x - P4.x);
+  if (Math.abs(denom) < 1e-8) return { x: NaN, y: NaN };
+  const numX = (P1.x * P2.y - P2.x * P1.y) * (P3.x - P4.x) - (P3.x * P4.y - P4.x * P3.y) * (P1.x - P2.x);
+  const numY = (P1.x * P2.y - P2.x * P1.y) * (P3.y - P4.y) - (P3.x * P4.y - P4.x * P3.y) * (P1.y - P2.y);
+  return { x: numX / denom, y: numY / denom };
+}
+
+function computePoints(alphaDeg, h) {
+  const alpha = alphaDeg * Math.PI / 180;
+  const cosA = Math.cos(alpha);
+  const tanA = Math.tan(alpha);
+
+  const a = h / cosA;
+  const d = h / (6 + 3 * cosA);
+  const s = d / cosA;
+
+  const P = {};
+  P.O = { x: 0, y: 0 };
+  P.D = { x: 0, y: h };
+  P.A = { x: h * tanA, y: 0 };
+  P.S = { x: P.A.x + s, y: P.A.y };
+  P.T = { x: P.S.x + s, y: P.A.y };
+  P.B = { x: P.A.x + a, y: 0 };
+  P.C = { x: a, y: h };
+
+  P.p1 = { x: d * tanA * 1, y: h - d * 1 };
+  P.p2 = { x: d * tanA * 2, y: h - d * 2 };
+  P.p3 = { x: d * tanA * 3, y: h - d * 3 };
+  P.p4 = { x: P.A.x - d * tanA * (4 - 3), y: d * (4 - 3) };
+  P.p5 = { x: P.A.x - d * tanA * (5 - 3), y: d * (5 - 3) };
+  P.p6 = { x: P.A.x - d * tanA * (6 - 3), y: d * (6 - 3) };
+
+  P.p7  = { x: P.p4.x + s, y: P.p4.y };
+  P.p9  = { x: P.p5.x + 2 * s, y: P.p5.y };
+  P.p12 = { x: P.p4.x + a, y: P.p4.y };
+  P.p13 = { x: P.p5.x + a, y: P.p5.y };
+  P.p14 = { x: P.p6.x + a, y: P.p6.y };
+  P.p15 = { x: P.p3.x + a, y: P.p3.y };
+  P.p16 = { x: P.p2.x + a, y: P.p2.y };
+  P.p17 = { x: P.p1.x + a, y: P.p1.y };
+  P.p18 = { x: P.C.x - s, y: P.C.y };
+  P.p19 = { x: P.p17.x - s, y: P.p17.y };
+  P.p21 = { x: P.B.x - s, y: P.B.y };
+  P.p22 = { x: P.p21.x - s, y: P.p21.y };
+  P.p25 = { x: P.p18.x - s, y: P.p18.y };
+
+  P.p8  = lineCross(P.p5, P.p17, P.S, P.p7);
+  P.p10 = lineCross(P.p4, P.p16, P.p9, P.T);
+  P.p11 = lineCross(P.A, P.p15, P.p6, P.p14);
+  P.p20 = lineCross(P.p4, P.p16, P.p18, P.p21);
+  P.p23 = lineCross(P.p5, P.p17, P.p22, P.p25);
+  P.p24 = lineCross(P.p2, P.p16, P.p22, P.p25);
+  P.p26 = lineCross(P.p6, P.C, P.p3, P.p15);
+
+  return { P, a, d, s };
+}
+
+// =============================================
+// Dựng path SVG từ danh sách đỉnh, bo tròn tại các đỉnh chỉ định
+// =============================================
+function trimPoint(from, to, dist) {
+  const dx = to.x - from.x, dy = to.y - from.y;
+  const len = Math.hypot(dx, dy);
+  const t = (len < 1e-9) ? 0 : Math.min(dist, len / 2) / len;
+  return { x: from.x + dx * t, y: from.y + dy * t };
+}
+
+function buildRoundedPath(vertices, roundSet, radius) {
+  const n = vertices.length;
+  let d = '';
+  for (let i = 0; i < n; i++) {
+    const prev = vertices[(i - 1 + n) % n];
+    const cur = vertices[i];
+    const next = vertices[(i + 1) % n];
+    if (radius > 0 && roundSet.has(cur.label)) {
+      const p1 = trimPoint(cur, prev, radius);
+      const p2 = trimPoint(cur, next, radius);
+      d += (i === 0 ? `M ${p1.x},${p1.y} ` : `L ${p1.x},${p1.y} `);
+      d += `Q ${cur.x},${cur.y} ${p2.x},${p2.y} `;
+    } else {
+      d += (i === 0 ? `M ${cur.x},${cur.y} ` : `L ${cur.x},${cur.y} `);
+    }
+  }
+  d += 'Z';
+  return d;
+}
+
+function fmt(v) { return Math.round(v * 1000) / 1000; }
+
+function render() {
+  const alphaDeg = parseFloat(document.getElementById('inAlpha').value) || 15;
+  const h = parseFloat(document.getElementById('inH').value) || 1000;
+  const radius = parseFloat(document.getElementById('inRadius').value) || 0;
+  const color1 = document.getElementById('inColor1').value;
+  const color2 = document.getElementById('inColor2').value;
+  const bg = document.getElementById('inBg').value;
+
+  const { P, a, d, s } = computePoints(alphaDeg, h);
+
+  const label = (name, pt) => Object.assign({ label: name }, pt);
+
+  const shape1 = [
+    label('A', P.A), label('B', P.B), label('12', P.p12), label('7', P.p7),
+    label('8', P.p8), label('23', P.p23), label('24', P.p24), label('2', P.p2),
+    label('3', P.p3), label('26', P.p26), label('6', P.p6)
+  ];
+  const shape2 = [
+    label('9', P.p9), label('10', P.p10), label('20', P.p20), label('19', P.p19),
+    label('1', P.p1), label('D', P.D), label('C', P.C), label('15', P.p15),
+    label('11', P.p11), label('14', P.p14), label('13', P.p13)
+  ];
+
+  const round1 = new Set(['A', '6']);
+  const round2 = new Set(['C', '15']);
+
+  const path1 = buildRoundedPath(shape1, round1, radius);
+  const path2 = buildRoundedPath(shape2, round2, radius);
+
+  // bounding box
+  const all = [...shape1, ...shape2];
+  const xs = all.map(p => p.x), ys = all.map(p => p.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const pad = Math.max(maxX - minX, maxY - minY) * 0.08;
+  const vbX = minX - pad, vbY = minY - pad;
+  const vbW = (maxX - minX) + pad * 2;
+  const vbH = (maxY - minY) + pad * 2;
+
+  const svg = document.getElementById('logoSvg');
+  svg.setAttribute('viewBox', `${fmt(vbX)} ${fmt(vbY)} ${fmt(vbW)} ${fmt(vbH)}`);
+  svg.innerHTML = `
+    <rect x="${fmt(vbX)}" y="${fmt(vbY)}" width="${fmt(vbW)}" height="${fmt(vbH)}" fill="${bg}" />
+    <path d="${path1}" fill="${color1}" stroke="none" />
+    <path d="${path2}" fill="${color2}" stroke="none" />
+  `;
+
+  document.getElementById('derived').innerHTML =
+    `α = <b>${alphaDeg}</b>°&nbsp;&nbsp; h = <b>${fmt(h)}</b> px<br>` +
+    `a = <b>${fmt(a)}</b><br>` +
+    `d = <b>${fmt(d)}</b><br>` +
+    `s = <b>${fmt(s)}</b>`;
+}
+
+function syncColorHex(colorId, hexId) {
+  const colorInput = document.getElementById(colorId);
+  const hexInput = document.getElementById(hexId);
+  colorInput.addEventListener('input', () => {
+    hexInput.value = colorInput.value.toUpperCase();
+    render();
+  });
+  hexInput.addEventListener('change', () => {
+    let v = hexInput.value.trim();
+    if (!v.startsWith('#')) v = '#' + v;
+    if (/^#[0-9A-Fa-f]{6}$/.test(v)) {
+      colorInput.value = v;
+      hexInput.value = v.toUpperCase();
+      render();
+    }
+  });
+}
+
+['inAlpha', 'inH', 'inRadius'].forEach(id => {
+  document.getElementById(id).addEventListener('input', render);
+});
+syncColorHex('inColor1', 'inColor1Hex');
+syncColorHex('inColor2', 'inColor2Hex');
+syncColorHex('inBg', 'inBgHex');
+
+document.getElementById('btnDownload').addEventListener('click', () => {
+  const svg = document.getElementById('logoSvg');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svg);
+  if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+    source = source.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+  const blob = new Blob([source], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'logo-hathyo.svg';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+render();
+</script>
+
+</body>
+</html>
