@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>SN Growth — Biểu Đồ Tăng Trưởng (video nền xanh đen)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  .viewport { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; }
+  #stage { width: 1920px; height: 1080px; transform-origin: center center; flex: none; position: relative; }
+  #stage svg { display: block; width: 100%; height: 100%; }
+  #exportOverlay {
+    display: none; position: fixed; inset: 0; z-index: 999; background: #000;
+    align-items: center; justify-content: center; flex-direction: column; gap: 14px;
+  }
+  #exportOverlay.active { display: flex; }
+  #exportCanvas { width: auto; height: auto; max-width: 100vw; max-height: 92vh; }
+  #exportLabel { font-family: ui-monospace, monospace; font-size: 13px; color: #cfd2ff; }
+  #hud {
+    position: fixed; left: 12px; bottom: 12px; z-index: 10;
+    font-family: ui-monospace, monospace; font-size: 12px; color: #9aa0ff;
+    background: rgba(0,0,0,.55); padding: 8px 12px; border-radius: 8px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  #hud button {
+    font-family: inherit; font-size: 12px; background: #1b1e3a; color: #cfd2ff;
+    border: 1px solid #3a3f7a; border-radius: 5px; padding: 4px 10px; cursor: pointer;
+  }
+  #hud button:hover { background: #2a2f5a; }
+  #hud button:disabled { opacity: .5; cursor: default; }
+  #exportStatus { color: #ffd23f; }
+</style>
+</head>
+<body>
+
+<div class="viewport">
+  <div id="stage">
+  </div>
+</div>
+
+<div id="exportOverlay">
+  <canvas id="exportCanvas" width="1920" height="1080"></canvas>
+  <div id="exportLabel">Đang ghi hình…</div>
+</div>
+
+<div id="hud">
+  <button id="btnReplay">Phát lại</button>
+  <button id="btnExport">Xuất video</button>
+  <button id="btnExportSvg">Xuất SVG động (nền trong suốt)</button>
+  <span id="hudTime">0.0s / 0.0s</span>
+  <span id="exportStatus"></span>
+</div>
+
+<script id="mainScript">
+const svgNS = 'http://www.w3.org/2000/svg';
+const W = 1920, H = 1080;
+const BG = '#040354'; // xanh đen — nền video, khớp màu nền tối dùng chung cho 8 hiệu ứng gốc
+const COLOR1 = '#F47115'; // cam
+const COLOR2 = '#108449'; // lục
+const CYAN = '#5eead4';
+const FONT = "Tahoma, 'Segoe UI', Arial, sans-serif"; // Tahoma phủ tốt dấu tiếng Việt (bài học từ Harbor)
+
+// =============================================
+// 5 mốc lịch sử thật của Song Ngọc — ĐÚNG nội dung được cung cấp, không tự bịa thêm tiêu đề ngắn
+// cho 2023/2026 (2 mốc đó chỉ có mô tả, không có tiêu đề riêng trong yêu cầu gốc).
+// =============================================
+const MILESTONES = [
+  { year: '2013', title: 'THÀNH LẬP', desc: 'Thành lập Công ty TNHH Cơ Khí Xây Dựng Song Ngọc tại TP. Hồ Chí Minh (04/05/2013).' },
+  { year: '2015', title: 'DỰ ÁN ĐẦU', desc: 'Hoàn thành dự án cảng biển đầu tiên, xác lập năng lực thi công hạ tầng thủy.' },
+  { year: '2018', title: 'MỞ RỘNG', desc: 'Mở rộng sang lĩnh vực san lấp mặt bằng KCN, đầu tư đội cơ giới 30+ phương tiện.' },
+  { year: '2023', title: null, desc: 'Đạt chứng nhận ISO 9001:2015 về hệ thống quản lý chất lượng và ISO 45001:2018 Hệ thống quản lý An toàn và Sức khoẻ Nghề nghiệp.' },
+  { year: '2026', title: null, desc: 'Đội ngũ 40 nhân sự chủ chốt + 250 công nhân hiện trường, đã hoàn thành 30 dự án lớn với các đối tác chiến lược, doanh thu mục tiêu 350 tỷ/năm.' }
+];
+const MILESTONE_COLORS = [COLOR1, COLOR2, COLOR1, COLOR2, COLOR1];
+const N = MILESTONES.length;
+
+// =============================================
+// Bố cục biểu đồ — trục ngang cố định (mốc thời gian) + đường cong tăng trưởng phía trên (độ cao =
+// mức tăng trưởng ấn tượng dần, không cần tuyến tính đúng số năm — ưu tiên bố cục đều/dễ đọc, đúng
+// quy ước hình học đã dùng ở SN-Growth-*.html gốc).
+// =============================================
+const CHART_X1 = 120, CHART_X2 = 1800;
+const CHART_Y_AXIS = 760;
+const CURVE_Y_LOW = 740, CURVE_Y_HIGH = 240;
+// Độ dốc từng đoạn PHẢI tăng dần hoặc ít nhất giữ nguyên (không bao giờ giảm) — nếu đoạn cuối
+// (2023->2026) dốc ÍT HƠN đoạn trước nó, biểu đồ sẽ trông như "hụt hơi" ngay khúc cuối thay vì
+// vút lên. Chênh lệch giữa các mốc liên tiếp: 0.14/0.20/0.28/0.38 — tăng dần đều, dốc nhất ở
+// đoạn cuối cùng để nhấn đúng cảm giác "tăng tốc" tới hiện tại (2026).
+const CURVE_FRACTIONS = [0, 0.14, 0.34, 0.62, 1];
+const tickX = i => CHART_X1 + (CHART_X2 - CHART_X1) * i / (N - 1);
+const curveY = i => CURVE_Y_LOW + (CURVE_Y_HIGH - CURVE_Y_LOW) * CURVE_FRACTIONS[i];
+const curvePoints = MILESTONES.map((m, i) => ({ x: tickX(i), y: curveY(i) }));
+
+// Catmull-Rom -> Bezier (tension 1/6) — đường cong mượt đi ĐÚNG QUA cả 5 điểm mốc, khác 1 cubic
+// bezier đơn kéo dài qua nhiều điểm (sẽ không đi qua đúng các điểm giữa).
+function catmullSeg(p0, p1, p2, p3) {
+  const c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
+  const c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+  return `M ${p1.x},${p1.y} C ${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2.x},${p2.y}`;
+}
+const segmentDs = [];
+for (let i = 0; i < curvePoints.length - 1; i++) {
+  const p0 = curvePoints[i - 1] || curvePoints[i];
+  const p1 = curvePoints[i];
+  const p2 = curvePoints[i + 1];
+  const p3 = curvePoints[i + 2] || p2;
+  segmentDs.push(catmullSeg(p0, p1, p2, p3));
+}
+
+// =============================================
+// Dựng SVG scene — CHỈ biểu đồ, KHÔNG nền, KHÔNG logo, KHÔNG confetti/pháo hoa
+// =============================================
+function el(tag, attrs) {
+  const e = document.createElementNS(svgNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+
+/* @@SVG_ROOT_START@@ */
+const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, xmlns: svgNS });
+document.getElementById('stage').appendChild(svg);
+/* @@SVG_ROOT_END@@ */
+
+/* @@BG_RECT_START@@ */
+// Nền đặc xanh đen — KHÔNG còn glow (bỏ theo yêu cầu: chữ/nét glow làm biểu đồ trông "nát" khi
+// nhiều mốc chồng thông tin cùng lúc) — chỉ còn màu phẳng, sắc nét. Bản xuất SVG (nút "Xuất SVG
+// động") bỏ hẳn khối này để giữ trong suốt thật — xem hàm exportStandaloneSvg() bên dưới.
+svg.appendChild(el('rect', { id: 'bg', x: 0, y: 0, width: W, height: H, fill: BG }));
+/* @@BG_RECT_END@@ */
+
+const sceneLayer = el('g', { id: 'sceneLayer' });
+svg.appendChild(sceneLayer);
+
+// Đo chiều rộng chữ THẬT (chính xác hơn hẳn ước lượng theo số ký tự cố định) để tự xuống dòng —
+// 1 phần tử <text> ẩn tái sử dụng cho mọi phép đo, phải gắn vào DOM trước khi đo.
+const measureText = el('text', { 'font-family': FONT, opacity: 0 });
+svg.appendChild(measureText);
+function textWidth(str, fontSize, fontWeight) {
+  measureText.setAttribute('font-size', fontSize);
+  measureText.setAttribute('font-weight', fontWeight);
+  measureText.textContent = str;
+  return measureText.getComputedTextLength();
+}
+function wrapWords(str, maxWidth, fontSize, fontWeight) {
+  const words = str.split(' ');
+  const lines = [];
+  let cur = '';
+  for (const w of words) {
+    const test = cur ? cur + ' ' + w : w;
+    if (cur && textWidth(test, fontSize, fontWeight) > maxWidth) {
+      lines.push(cur);
+      cur = w;
+    } else {
+      cur = test;
+    }
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+// Trục ngang — kéo dài dần từ trái sang phải, làm mốc thời gian trực quan
+const axisLine = el('line', { x1: CHART_X1, y1: CHART_Y_AXIS, x2: CHART_X1, y2: CHART_Y_AXIS, stroke: CYAN, 'stroke-width': 2.5, opacity: 0.5 });
+sceneLayer.appendChild(axisLine);
+
+// Đường cong tăng trưởng — 4 đoạn RIÊNG (mỗi đoạn vẽ dần đúng lúc "tới lượt", đồng bộ với mốc kế
+// tiếp bật lên), tô glow cyan
+const curveLayerG = el('g', {});
+sceneLayer.appendChild(curveLayerG);
+const segmentPaths = segmentDs.map(d => el('path', { d, fill: 'none', stroke: CYAN, 'stroke-width': 5, 'stroke-linecap': 'round' }));
+segmentPaths.forEach(p => curveLayerG.appendChild(p));
+const segmentLens = segmentPaths.map(p => p.getTotalLength());
+segmentPaths.forEach((p, i) => { p.setAttribute('stroke-dasharray', segmentLens[i]); p.setAttribute('stroke-dashoffset', segmentLens[i]); });
+
+const curveTip = el('circle', { r: 9, fill: '#ffffff', opacity: 0 });
+sceneLayer.appendChild(curveTip);
+
+// Mỗi mốc: chấm trên trục + đường nối chấm-lên-điểm trên đường cong + chấm trên đường cong +
+// năm/tiêu đề/mô tả (tự xuống dòng) xếp dọc bên dưới trục.
+const DESC_MAX_WIDTH = 230; // hẹp hơn hẳn 1/4 khoảng cách giữa 2 mốc — tránh chữ mô tả 2 mốc kề nhau chồng lấn
+const groups = MILESTONES.map((m, i) => {
+  const x = tickX(i), color = MILESTONE_COLORS[i];
+  const anchor = i === 0 ? 'start' : (i === N - 1 ? 'end' : 'middle');
+
+  const connector = el('line', { x1: x, y1: curveY(i), x2: x, y2: CHART_Y_AXIS, stroke: color, 'stroke-width': 1.5, 'stroke-dasharray': '3,4', opacity: 0 });
+  const axisDot = el('circle', { cx: x, cy: CHART_Y_AXIS, r: 0, fill: color, opacity: 0 });
+  const curveDot = el('circle', { cx: x, cy: curveY(i), r: 0, fill: '#ffffff', opacity: 0 });
+  sceneLayer.appendChild(connector);
+  sceneLayer.appendChild(axisDot);
+  sceneLayer.appendChild(curveDot);
+
+  const yearText = el('text', {
+    x, y: CHART_Y_AXIS + 52, 'text-anchor': anchor, 'font-family': FONT, 'font-weight': '800',
+    'font-size': 42, fill: color, opacity: 0
+  });
+  yearText.textContent = m.year;
+  sceneLayer.appendChild(yearText);
+
+  let titleText = null;
+  let descStartY = CHART_Y_AXIS + 88;
+  if (m.title) {
+    titleText = el('text', {
+      x, y: CHART_Y_AXIS + 86, 'text-anchor': anchor, 'font-family': FONT, 'font-weight': '700',
+      'font-size': 21, fill: color, opacity: 0
+    });
+    titleText.textContent = m.title;
+    sceneLayer.appendChild(titleText);
+    descStartY = CHART_Y_AXIS + 118;
+  }
+
+  const lines = wrapWords(m.desc, DESC_MAX_WIDTH, 15, 500);
+  const LINE_H = 21;
+  const descLines = lines.map((line, li) => {
+    const t = el('text', {
+      x, y: descStartY + li * LINE_H, 'text-anchor': anchor, 'font-family': FONT, 'font-weight': '500',
+      'font-size': 15, fill: '#e8ecf7', opacity: 0
+    });
+    t.textContent = line;
+    sceneLayer.appendChild(t);
+    return t;
+  });
+
+  return { axisDot, curveDot, connector, yearText, titleText, descLines };
+});
+
+// Bùng sáng ngắn CỤC BỘ tại điểm cuối (2026) khi đường cong "về đích" — KHÔNG chớp toàn màn hình
+// (nền trong suốt, chớp cả khung sẽ đè lên nội dung nền thật khi ghép video/slide).
+function spawnBurst(x, y, color) {
+  const ring = el('circle', { cx: x, cy: y, r: 8, fill: 'none', stroke: color, 'stroke-width': 3, opacity: 0.9 });
+  sceneLayer.appendChild(ring);
+  gsap.to(ring, { attr: { r: 90 }, opacity: 0, duration: 0.9, ease: 'power1.out', onComplete: () => ring.remove() });
+}
+
+// =============================================
+// Timeline chính — trục kéo dài -> mốc đầu bật lên -> đường cong vẽ tới mốc kế + mốc đó bật lên
+// (lặp cho 4 đoạn) -> bùng sáng ở mốc cuối -> giữ đủ 5 mốc cùng hiện -> mờ dần rồi lặp lại
+// (repeat:-1 để xem trực tiếp liên tục; render-tool/GIF chỉ xuất đúng 1 chu kỳ).
+// =============================================
+const tl = gsap.timeline({ paused: true, repeat: -1 });
+
+function popMilestone(idx, at) {
+  const g = groups[idx];
+  tl.to(g.axisDot, { opacity: 1, attr: { r: 6 }, duration: 0.3, ease: 'back.out(3)' }, at);
+  tl.to(g.curveDot, { opacity: 1, attr: { r: 7 }, duration: 0.3, ease: 'back.out(3)' }, at);
+  tl.to(g.connector, { opacity: 0.5, duration: 0.3 }, at);
+  tl.to(g.yearText, { opacity: 1, duration: 0.3 }, at + 0.1);
+  let textAt = at + 0.1;
+  if (g.titleText) { tl.to(g.titleText, { opacity: 1, duration: 0.3 }, at + 0.22); textAt = at + 0.22; }
+  tl.to(g.descLines, { opacity: 1, duration: 0.35, stagger: 0.05 }, textAt + (g.titleText ? 0.16 : 0.12));
+}
+
+let cursor = 0.15;
+tl.fromTo(axisLine, { attr: { x2: CHART_X1 } }, { attr: { x2: CHART_X2 }, duration: 0.8, ease: 'power1.inOut' }, cursor);
+
+popMilestone(0, cursor + 0.1);
+cursor += 0.7;
+
+for (let i = 0; i < segmentPaths.length; i++) {
+  const segEl = segmentPaths[i];
+  const len = segmentLens[i];
+  const segDur = 0.85;
+  const state = { drawn: 0 };
+  tl.to(state, {
+    drawn: len, duration: segDur, ease: 'power1.inOut',
+    onStart: () => curveTip.setAttribute('opacity', 1),
+    onUpdate: () => {
+      segEl.setAttribute('stroke-dashoffset', len - state.drawn);
+      const pt = segEl.getPointAtLength(state.drawn);
+      curveTip.setAttribute('cx', pt.x);
+      curveTip.setAttribute('cy', pt.y);
+    }
+  }, cursor);
+  cursor += segDur;
+  popMilestone(i + 1, cursor);
+  if (i === segmentPaths.length - 1) {
+    const endPt = curvePoints[i + 1], endColor = MILESTONE_COLORS[i + 1];
+    tl.call(() => spawnBurst(endPt.x, endPt.y, endColor), [], cursor);
+  }
+  cursor += 0.65;
+}
+
+tl.to(curveTip, { opacity: 0, duration: 0.3 }, cursor);
+tl.addLabel('holdStart', cursor + 0.2);
+tl.addLabel('holdEnd', 'holdStart+=2.4');
+
+// --- Mờ dần về trong suốt trước khi lặp lại vòng kế — tránh cắt cứng khi video/GIF lặp vòng ---
+tl.to(sceneLayer, { opacity: 0, duration: 0.6, ease: 'power1.in' }, 'holdEnd');
+tl.addLabel('cycleEnd', 'holdEnd+=0.6');
+
+// =============================================
+// Điều khiển phát / HUD
+// =============================================
+const totalDur = tl.duration();
+document.getElementById('hudTime').textContent = `0.0s / ${totalDur.toFixed(1)}s`;
+function updateHud() {
+  document.getElementById('hudTime').textContent = `${tl.time().toFixed(1)}s / ${totalDur.toFixed(1)}s`;
+  requestAnimationFrame(updateHud);
+}
+requestAnimationFrame(updateHud);
+
+function playFromStart() { tl.pause(0).play(0); }
+document.getElementById('btnReplay').addEventListener('click', playFromStart);
+
+// Debug: mở với ?t=6.5 để "seek" tĩnh tới đúng giây đó (dùng khi chụp/preview từng khung hình).
+const debugT = new URLSearchParams(location.search).get('t');
+// Render mode (?render=1): dùng bởi render-tool/ để xuất video WebM/MP4 nền đặc — dừng hẳn ở t=0,
+// báo sẵn sàng qua cờ toàn cục để script tự cầm nhịp thời gian bằng gsap.updateRoot(), đúng kỹ
+// thuật đã dùng cho toàn bộ dự án. Nội dung giờ có nền đặc (không trong suốt) nên KHÔNG cần
+// omitBackground/--alpha khi gọi render-tool cho file này.
+const isRenderMode = new URLSearchParams(location.search).get('render') === '1';
+if (debugT !== null) {
+  tl.seek(parseFloat(debugT), false);
+} else if (isRenderMode) {
+  document.getElementById('hud').style.display = 'none';
+  tl.pause(0);
+  window.__RENDER_READY__ = true;
+} else {
+  tl.play(0);
+}
+
+// --- Scale khung 1920x1080 vừa viewport ---
+function fitStage() {
+  const stage = document.getElementById('stage');
+  const k = Math.min(window.innerWidth / W, window.innerHeight / H);
+  stage.style.transform = `scale(${k})`;
+}
+window.addEventListener('resize', fitStage);
+fitStage();
+
+// =============================================
+// Xuất video Full HD — mỗi khung hình vẽ lại SVG sống lên 1 canvas ẩn cố định 1920x1080 rồi ghi
+// hình canvas đó bằng captureStream(60) + MediaRecorder (60fps thật theo đồng hồ thật, không phụ
+// thuộc tốc độ decode SVG mỗi khung — kỹ thuật đã nâng cấp cho Harbor/BigStar, xem memory
+// intro-video-effects mục "Xuất video 60fps"). Không cần xử lý alpha/trong suốt gì cả vì nền đã
+// đặc (rect #bg xanh đen) — đơn giản hơn hẳn pipeline GIF/WebM-alpha.
+// =============================================
+const btnExport = document.getElementById('btnExport');
+const exportStatus = document.getElementById('exportStatus');
+const exportOverlay = document.getElementById('exportOverlay');
+const exportCanvas = document.getElementById('exportCanvas');
+const exportLabel = document.getElementById('exportLabel');
+const exportCtx = exportCanvas.getContext('2d');
+let isExporting = false;
+
+function svgFrameDataURL() {
+  const xml = new XMLSerializer().serializeToString(svg);
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+}
+
+btnExport.addEventListener('click', async () => {
+  if (isExporting) return;
+  if (typeof MediaRecorder === 'undefined' || !exportCanvas.captureStream) {
+    alert('Trình duyệt này chưa hỗ trợ xuất video. Hãy dùng Chrome hoặc Edge bản mới nhất.');
+    return;
+  }
+
+  isExporting = true;
+  btnExport.disabled = true;
+  document.getElementById('btnReplay').disabled = true;
+  exportStatus.textContent = 'Đang ghi hình…';
+  exportOverlay.classList.add('active');
+  exportLabel.textContent = `Đang ghi hình… 0 / ${tl.duration().toFixed(0)}s`;
+
+  const canvasStream = exportCanvas.captureStream(60);
+
+  const mimeCandidates = [
+    'video/mp4;codecs=avc1.42E01E,mp4a.40.2',
+    'video/mp4',
+    'video/webm;codecs=vp9',
+    'video/webm'
+  ];
+  const mimeType = mimeCandidates.find(m => { try { return MediaRecorder.isTypeSupported(m); } catch (e) { return false; } }) || '';
+  const ext = mimeType.startsWith('video/mp4') ? 'mp4' : 'webm';
+  const recorder = new MediaRecorder(canvasStream, {
+    ...(mimeType ? { mimeType } : {}),
+    videoBitsPerSecond: 24_000_000 // ~24 Mbps — nét cho Full HD 60fps
+  });
+  const chunks = [];
+  recorder.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+
+  let stopRequested = false;
+  function finishExport() {
+    stopRequested = true;
+    if (recorder.state !== 'inactive') recorder.stop();
+  }
+
+  recorder.onstop = () => {
+    const blob = new Blob(chunks, { type: mimeType || 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `SongNgoc-Growth-Chart.${ext}`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 6000);
+    exportOverlay.classList.remove('active');
+    exportStatus.textContent = 'Đã xuất xong!';
+    btnExport.disabled = false;
+    document.getElementById('btnReplay').disabled = false;
+    isExporting = false;
+    setTimeout(() => { exportStatus.textContent = ''; }, 5000);
+  };
+
+  // --- Vòng lặp vẽ khung hình: rasterize SVG sống lên exportCanvas ---
+  const frameImg = new Image();
+  let drawing = false;
+  const t0 = performance.now();
+  function scheduleDraw() {
+    if (stopRequested || drawing) return;
+    drawing = true;
+    frameImg.onload = () => {
+      exportCtx.drawImage(frameImg, 0, 0, W, H);
+      exportLabel.textContent = `Đang ghi hình… ${((performance.now() - t0) / 1000).toFixed(0)} / ${tl.duration().toFixed(0)}s`;
+      drawing = false;
+      if (!stopRequested) requestAnimationFrame(scheduleDraw);
+    };
+    frameImg.onerror = () => { drawing = false; if (!stopRequested) requestAnimationFrame(scheduleDraw); };
+    frameImg.src = svgFrameDataURL();
+  }
+
+  recorder.start(200);
+  tl.restart();
+  scheduleDraw();
+
+  setTimeout(finishExport, tl.duration() * 1000 + 400);
+});
+
+// =============================================
+// Xuất SVG ĐỘNG, nền trong suốt thật — vector nên giữ độ nét TUYỆT ĐỐI ở MỌI độ phóng đại (khác
+// hẳn video/GIF vốn là ảnh raster, phóng to sẽ vỡ hạt). Cách làm: lấy NGUYÊN VĂN mã nguồn của
+// chính script đang chạy (thẻ <script id="mainScript"> — chính là script này), chỉnh 2 chỗ nhỏ
+// bằng marker comment cố định (đổi cách tạo gốc <svg> để dùng thẳng document.documentElement thay
+// vì tạo mới rồi gắn vào #stage; bỏ hẳn khối rect nền), CẮT BỎ toàn bộ phần "Điều khiển phát/HUD"
+// trở đi (chỉ áp dụng khi nhúng trong trang HTML, không có ý nghĩa khi file .svg được mở ĐỘC LẬP)
+// rồi thay bằng đúng 1 dòng tl.play(0) để tự động phát khi mở file. Gói toàn bộ thành 1 file .svg
+// gồm 1 <script> tải GSAP từ CDN + 1 <script> chứa mã đã chỉnh — TỰ CHỨA HOÀN TOÀN, chạy được khi
+// mở trực tiếp bằng trình duyệt (Chrome/Firefox/Edge) hoặc nhúng qua <iframe>/<object> trong 1
+// trang web khác.
+// ⚠️ GIỚI HẠN QUAN TRỌNG: SVG có gắn <script> hầu hết KHÔNG chạy được khi import vào phần mềm dựng
+// video (Premiere/DaVinci/CapCut...) — các phần mềm đó thường chỉ đọc SVG như ảnh tĩnh (hoặc không
+// đọc được luôn) vì không có engine JS đầy đủ như trình duyệt. File này CHỈ đảm bảo chạy đúng khi
+// mở bằng trình duyệt thật hoặc nhúng vào 1 trang web — không phải giải pháp thay thế cho video
+// nếu mục đích cuối là chèn vào phần mềm edit video.
+// =============================================
+document.getElementById('btnExportSvg').addEventListener('click', () => {
+  const rawSrc = document.getElementById('mainScript').textContent;
+
+  const rootStart = rawSrc.indexOf('/* @@SVG_ROOT_START@@ */');
+  const rootEnd = rawSrc.indexOf('/* @@SVG_ROOT_END@@ */') + '/* @@SVG_ROOT_END@@ */'.length;
+  const bgStart = rawSrc.indexOf('/* @@BG_RECT_START@@ */');
+  const bgEnd = rawSrc.indexOf('/* @@BG_RECT_END@@ */') + '/* @@BG_RECT_END@@ */'.length;
+  const hudMarker = rawSrc.indexOf('// Điều khiển phát / HUD');
+
+  if (rootStart === -1 || bgStart === -1 || hudMarker === -1) {
+    alert('Không tìm thấy điểm đánh dấu trong mã nguồn — không thể tạo SVG độc lập (có thể file đã bị sửa cấu trúc).');
+    return;
+  }
+
+  const standaloneRoot = `const svg = document.documentElement;\nsvg.setAttribute('viewBox', '0 0 ${W} ${H}');`;
+
+  let out =
+    rawSrc.slice(0, rootStart) + standaloneRoot + rawSrc.slice(rootEnd, bgStart) +
+    rawSrc.slice(bgEnd, hudMarker) +
+    'tl.play(0);\n';
+
+  const svgDoc = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${W} ${H}">\n` +
+    `<script xlink:href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"><\/script>\n` +
+    `<script><![CDATA[\n${out}\n]]><\/script>\n` +
+    `</svg>\n`;
+
+  const blob = new Blob([svgDoc], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'SongNgoc-Growth-Chart.svg';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 6000);
+  exportStatus.textContent = 'Đã xuất SVG!';
+  setTimeout(() => { exportStatus.textContent = ''; }, 4000);
+});
+</script>
+
+</body>
+</html>

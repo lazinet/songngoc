@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<!-- Bắt buộc phải có để mobile render đúng tỉ lệ thật (không zoom-out giả lập màn desktop 980px)
+     — thiếu tag này là nguyên nhân phổ biến nhất khiến trang "không responsive" trên điện thoại. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Song Ngọc — Giới thiệu (trọn bộ)</title>
+<style>
+  html, body {
+    margin: 0; height: 100%; background: #05041a; overflow: hidden;
+    font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  }
+  /* 100dvh (dynamic viewport height) né đúng lỗi kinh điển "100vh trên mobile" — thanh địa chỉ
+     Safari/Chrome ẩn/hiện khi cuộn làm 100vh tính sai, đo hụt hoặc dư. Khai TRƯỚC bằng vh làm nền
+     cho trình duyệt cũ không hiểu dvh (bị bỏ qua khai báo sau, giữ nguyên khai trước — suy biến
+     nhẹ nhàng), rồi ghi đè bằng dvh nếu trình duyệt hỗ trợ. */
+  .viewport {
+    width: 100vw; height: 100vh; height: 100dvh;
+    display: flex; align-items: center; justify-content: center; position: relative;
+    /* Viền ngoài khung 16:9 dùng gradient thương hiệu thay vì đen phẳng — đỡ trơ khi màn hình
+       không đúng 16:9 (dọc/vuông/ultra-wide) lộ viền 2 bên hoặc trên dưới. */
+    background: radial-gradient(ellipse at center, #0a0940 0%, #05041a 70%, #020112 100%);
+  }
+
+  /* Khung 1920x1080 cố định, co giãn ĐỀU theo cửa sổ (giống hệt fitStage() ở từng file con) —
+     mọi segment (iframe hoặc YouTube) đều lấp đầy ĐÚNG khung này nên khi chuyển đoạn không bị
+     nhảy/lệch kích thước. fitStage() dùng window.innerWidth/innerHeight (đo qua JS, luôn đúng
+     viewport THẬT đang hiển thị) chứ không dùng đơn vị vw/vh tĩnh, nên tự động né được luôn lỗi
+     "100vh mobile" mà không cần thêm gì — an toàn cho mọi nền tảng. */
+  #stageWrap { width: 1920px; height: 1080px; position: relative; transform-origin: center center; flex: none; background: #000; }
+  #segIframe { position: absolute; inset: 0; width: 1920px; height: 1080px; border: 0; display: none; background: #000; }
+  #ytWrap { position: absolute; inset: 0; width: 1920px; height: 1080px; display: none; background: #000; }
+  #ytPlayerTarget { width: 100%; height: 100%; }
+
+  /* Màn hình mở đầu/kết thúc — nền là video YouTube (galaxy) chạy lặp vô hạn, phủ kín màn hình
+     kiểu "hero background video" (kỹ thuật oversize + căn giữa kinh điển, không dùng object-fit
+     vì iframe không hỗ trợ) + 1 lớp phủ tối nhẹ cho chữ luôn đọc rõ dù nền đang chuyển động. */
+  .heroOverlay {
+    position: fixed; inset: 0; z-index: 200; overflow: hidden; background: #040354;
+    display: none; flex-direction: column; align-items: center;
+  }
+  .heroOverlay.active { display: flex; }
+  .heroBgWrap { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  /* Lớp chắn trong suốt PHỦ ĐÈ LÊN video nền — phòng hờ thêm 1 lớp để chắn tuyệt đối mọi rê/bấm
+     chuột chạm tới iframe YouTube bên dưới. `pointer-events:none` ở trên đã kiểm chứng hoạt động
+     đúng theo chuẩn (document.elementFromPoint() tại giữa video trả về đúng phần tử khác, bỏ qua
+     hẳn iframe) nên với chuột thật của người dùng, YouTube sẽ không nhận được sự kiện hover/click
+     nào cả. Tuy vậy khi test bằng Puppeteer (giả lập chuột qua CDP ở tầng thấp hơn bình thường),
+     rê "chuột" thẳng vào giữa video vẫn làm lộ khung tiêu đề/nút play-pause/watermark của YouTube
+     — có thể chỉ là đặc thù riêng của cách công cụ test giả lập input, nhưng để chắc chắn 100%
+     trong MỌI trường hợp (không phụ thuộc suy luận về hành vi trình duyệt), thêm hẳn 1 lớp chắn
+     THẬT (pointer-events mặc định = auto, không gắn listener) — mọi sự kiện chuột tại vùng này đều
+     dừng lại ở đây, không bao giờ lọt xuống được tới iframe nữa. */
+  .heroBgBlocker { position: absolute; inset: 0; z-index: 0; background: transparent; }
+  .heroBgWrap iframe {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 0;
+    width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.78vh;
+  }
+  @supports (height: 100dvh) {
+    .heroBgWrap iframe { min-height: 100dvh; min-width: 177.78dvh; }
+  }
+  .heroBgTint {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(180deg, rgba(4,3,84,.5), rgba(4,3,84,.2) 35%, rgba(4,3,84,.2) 65%, rgba(4,3,84,.6));
+  }
+  .heroContent {
+    position: relative; z-index: 1; width: 100%; height: 100%; box-sizing: border-box;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    padding: 3.5vh 4vw; gap: 2vh;
+    /* Lưới an toàn: nếu màn hình quá thấp/hẹp (điện thoại nằm ngang, màn gập...) để nội dung
+       không vừa dù đã co theo clamp(), cho phép cuộn dọc thay vì bị cắt/đè chồng lên nhau. */
+    overflow-y: auto;
+  }
+  .heroTitles { text-align: center; }
+  .heroTitleLine1 {
+    color: #1fd08a; font-size: clamp(16px, 2.4vw, 30px); font-weight: 800; margin: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,.7); letter-spacing: .3px;
+  }
+  .heroTitleLine2 {
+    color: #F47115; font-size: clamp(20px, 3.2vw, 44px); font-weight: 800; margin: 8px 0 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,.7);
+  }
+  .heroLogo { width: clamp(240px, 26vw, 420px); filter: drop-shadow(0 4px 18px rgba(0,0,0,.6)); }
+  .heroBottomRow { width: 100%; max-width: 1400px; display: flex; align-items: center; gap: 2vw; }
+  .heroQrCol { flex: 0 0 20%; display: flex; justify-content: center; }
+  .heroQrCol a { display: block; }
+  .heroQrCol img {
+    width: clamp(84px, 9vw, 150px); display: block; border-radius: 10px; background: #fff;
+    padding: 7px; box-shadow: 0 4px 18px rgba(0,0,0,.5);
+  }
+  .heroMidCol { flex: 0 0 60%; display: flex; align-items: center; justify-content: space-evenly; gap: 2vw; }
+  .heroContactList { display: flex; flex-direction: column; gap: 9px; }
+  .heroContactRow {
+    display: flex; align-items: flex-start; gap: 9px; color: #fff; text-decoration: none;
+    text-shadow: 0 1px 6px rgba(0,0,0,.7); font-size: clamp(11px, 1.05vw, 16px); font-weight: 600;
+    line-height: 1.35;
+  }
+  .heroContactRow:hover { text-decoration: underline; }
+  .heroContactRow svg { flex: none; width: 18px; height: 18px; margin-top: 1px; }
+  .heroViewBtn {
+    flex: none; width: clamp(76px, 6.8vw, 108px); height: clamp(76px, 6.8vw, 108px); border-radius: 50%;
+    background: #F47115; color: #fff; font-weight: 800; font-size: clamp(12px, 1.1vw, 16px);
+    border: none; cursor: pointer; letter-spacing: .3px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    animation: heroPulse 2s infinite;
+  }
+  .heroViewBtn:hover { background: #ff8a3d; }
+  @keyframes heroPulse {
+    0% { box-shadow: 0 0 0 0 rgba(244,113,21,.55); }
+    70% { box-shadow: 0 0 0 22px rgba(244,113,21,0); }
+    100% { box-shadow: 0 0 0 0 rgba(244,113,21,0); }
+  }
+  /* Nút "XEM LẠI" (màn kết thúc) — xanh lục Song Ngọc thay vì cam, để phân biệt rõ với "XEM" ở
+     màn mở đầu. */
+  .heroViewBtn.heroViewBtnGreen { background: #108449; animation: heroPulseGreen 2s infinite; }
+  .heroViewBtn.heroViewBtnGreen:hover { background: #16a25e; }
+  @keyframes heroPulseGreen {
+    0% { box-shadow: 0 0 0 0 rgba(16,132,73,.55); }
+    70% { box-shadow: 0 0 0 22px rgba(16,132,73,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,132,73,0); }
+  }
+
+  /* ===== Responsive: màn hẹp (điện thoại đứng) — xếp dọc thay vì 3 cột ngang để tránh QR/nút bị
+     bóp méo hoặc tràn khi cột giữa/2 bên không còn đủ chỗ. ===== */
+  @media (max-width: 700px) {
+    .heroContent { padding: 2.2vh 4vw; gap: 1.4vh; }
+    .heroTitleLine1 { font-size: clamp(13px, 3.6vw, 18px); }
+    .heroTitleLine2 { font-size: clamp(16px, 5vw, 24px); margin-top: 5px; }
+    /* Logo = 1/3 bề rộng thiết bị (user yêu cầu cụ thể) thay vì clamp co hẹp như trước — quá nhỏ,
+       không đủ nổi bật giữa nền video. */
+    .heroLogo { width: 66vw; max-width: 380px; }
+    .heroBottomRow { flex-direction: column; gap: 12px; max-width: 420px; }
+    .heroQrCol { flex: none; width: 100%; }
+    .heroQrCol img { width: 76px; margin: 0 auto; padding: 5px; }
+    .heroMidCol {
+      flex: none; width: 100%; flex-direction: column; gap: 12px; order: -1;
+    }
+    /* Khối liên hệ (địa chỉ/sđt/email/web) CÙNG canh trái với nhau (chung 1 mép trái) — trước đây
+       align-items:center khiến mỗi dòng dài ngắn khác nhau tự canh giữa riêng, tạo mép trái
+       lởm chởm, đọc rối. Bọc khối lại bằng width:fit-content + margin:auto để cả khối vẫn nằm
+       giữa cột, nhưng NỘI DUNG bên trong canh trái đồng nhất. */
+    .heroContactList { align-items: flex-start; gap: 7px; width: fit-content; margin: 0 auto; }
+    .heroContactRow { font-size: 12.5px; }
+    .heroViewBtn { width: 68px; height: 68px; font-size: 12px; }
+  }
+  /* Màn thấp (điện thoại nằm ngang, hoặc cửa sổ desktop kéo lùn) — thu gọn khoảng cách dọc, giữ
+     bố cục 3 cột ngang (đủ rộng) nhưng giảm kích thước để không tràn chiều cao. */
+  @media (max-height: 480px) and (orientation: landscape) {
+    .heroContent { padding: 1.6vh 3vw; gap: 1vh; }
+    .heroTitleLine1 { font-size: clamp(11px, 2.2vw, 16px); }
+    .heroTitleLine2 { font-size: clamp(14px, 3vw, 22px); margin-top: 3px; }
+    .heroLogo { width: clamp(120px, 18vw, 220px); }
+    .heroQrCol img { width: clamp(56px, 6vw, 90px); }
+    .heroViewBtn { width: clamp(56px, 6vw, 84px); height: clamp(56px, 6vw, 84px); font-size: 11px; }
+    .heroContactRow { font-size: 11px; gap: 6px; }
+    .heroContactList { gap: 5px; }
+  }
+
+  #progressDots {
+    position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 50;
+    display: flex; gap: 14px; background: rgba(0,0,0,.4); padding: 10px 16px; border-radius: 20px;
+  }
+  /* Chấm bấm được luôn (nhảy thẳng tới đoạn bất kỳ) — thay hẳn cho 2 nút ‹ › để đỡ tốn chỗ. Cỡ
+     16px (thay vì 10px) để đủ lớn bấm trúng, không cần thêm vùng đệm/clip phức tạp. */
+  #progressDots .dot { width: 16px; height: 16px; border-radius: 50%; background: #ffffff; transition: background .25s; cursor: pointer; }
+  #progressDots .dot:hover { background: #0000ff; }
+  #progressDots .dot.active { background: #F47115; }
+  #progressDots .dot.active:hover { background: #F47115; }
+  #progressDots .dot.done { background: #108449; }
+  #progressDots .dot.done:hover { background: #16a25e; }
+</style>
+</head>
+<body>
+
+<div class="viewport">
+  <div id="stageWrap">
+    <iframe id="segIframe" allow="autoplay" title="Đoạn giới thiệu"></iframe>
+    <div id="ytWrap"><div id="ytPlayerTarget"></div></div>
+  </div>
+</div>
+
+<div id="progressDots">
+  <span class="dot" data-i="0" title="Đoạn 1 — Harbor Introduction"></span>
+  <span class="dot" data-i="1" title="Đoạn 2 — Biểu đồ tăng trưởng"></span>
+  <span class="dot" data-i="2" title="Đoạn 3 — Video YouTube"></span>
+  <span class="dot" data-i="3" title="Đoạn 4 — Hiệu ứng logo"></span>
+</div>
+
+<!-- Icon liên hệ dùng chung (pin/phone/mail/globe) — cùng hình dạng đã dùng ở introduction-2.html,
+     chép lại dạng SVG tĩnh vì trang này là HTML thường, không phải scene SVG dựng bằng JS. -->
+<div id="startOverlay" class="heroOverlay active">
+  <div class="heroBgWrap"><div id="galaxy1Target"></div></div>
+  <div class="heroBgBlocker"></div>
+  <div class="heroBgTint"></div>
+  <div class="heroContent">
+    <div class="heroTitles">
+      <p class="heroTitleLine1">Interactive Video Profile</p>
+      <p class="heroTitleLine2">CÔNG TY TNHH CƠ KHÍ XÂY DỰNG SONG NGỌC (SNCons)</p>
+    </div>
+    <img class="heroLogo" src="logo-sn-transparent.png" alt="Song Ngọc">
+    <div class="heroBottomRow">
+      <div class="heroQrCol">
+        <a href="https://songngoc.com.vn" target="_blank" rel="noopener" title="Website Song Ngọc">
+          <img src="QR_SongNgocWeb.png" alt="QR website Song Ngọc">
+        </a>
+      </div>
+      <div class="heroMidCol">
+        <div class="heroContactList">
+          <a class="heroContactRow" href="https://maps.app.goo.gl/GVrx3fHAmo8mfDz69" target="_blank" rel="noopener">
+            <svg viewBox="-14 -14 28 32"><path d="M0,-11 C6.1,-11 11,-6.4 11,-0.9 C11,6.3 0,16 0,16 C0,16 -11,6.3 -11,-0.9 C-11,-6.4 -6.1,-11 0,-11 Z" fill="#F47115"/><circle cx="0" cy="-1" r="4" fill="#040354"/></svg>
+            <span>VP-2-09, Lầu 2, Tòa nhà St. Moritz<br>Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP. Hồ Chí Minh</span>
+          </a>
+          <a class="heroContactRow" href="https://zalo.me/0378943883" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path fill="#F47115" d="M6.62,10.79c1.44,2.83,3.76,5.14,6.59,6.59l2.2-2.2c0.27-0.27,0.67-0.36,1.02-0.24c1.12,0.37,2.33,0.57,3.57,0.57c0.55,0,1,0.45,1,1V20c0,0.55-0.45,1-1,1c-9.39,0-17-7.61-17-17c0-0.55,0.45-1,1-1h3.5c0.55,0,1,0.45,1,1c0,1.25,0.2,2.45,0.57,3.57c0.11,0.35,0.03,0.74-0.25,1.02L6.62,10.79z"/></svg>
+            <span>(+84) 086 893 7699</span>
+          </a>
+          <a class="heroContactRow" href="mailto:songngoc@sncc.vn">
+            <svg viewBox="-14 -10 28 22"><rect x="-12" y="-8" width="24" height="17" rx="2" fill="none" stroke="#F47115" stroke-width="2.4"/><path d="M-12,-8 L0,3 L12,-8" fill="none" stroke="#F47115" stroke-width="2.4" stroke-linejoin="round"/></svg>
+            <span>songngoc@sncc.vn</span>
+          </a>
+          <a class="heroContactRow" href="https://songngoc.com.vn" target="_blank" rel="noopener">
+            <svg viewBox="-13 -13 26 26"><circle cx="0" cy="0" r="11" fill="none" stroke="#F47115" stroke-width="2.4"/><ellipse cx="0" cy="0" rx="4.6" ry="11" fill="none" stroke="#F47115" stroke-width="2"/><line x1="-11" y1="0" x2="11" y2="0" stroke="#F47115" stroke-width="2"/></svg>
+            <span>songngoc.com.vn</span>
+          </a>
+        </div>
+        <button id="btnStart" class="heroViewBtn">XEM</button>
+      </div>
+      <div class="heroQrCol">
+        <a href="https://maps.app.goo.gl/GVrx3fHAmo8mfDz69" target="_blank" rel="noopener" title="Google Maps Song Ngọc">
+          <img src="QR_GMap_SN.png" alt="QR Google Maps Song Ngọc">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="endOverlay" class="heroOverlay">
+  <div class="heroBgWrap"><div id="galaxy2Target"></div></div>
+  <div class="heroBgBlocker"></div>
+  <div class="heroBgTint"></div>
+  <div class="heroContent">
+    <div class="heroTitles">
+      <p class="heroTitleLine1">Interactive Video Profile</p>
+      <p class="heroTitleLine2">CÔNG TY TNHH CƠ KHÍ XÂY DỰNG SONG NGỌC (SNCons)</p>
+    </div>
+    <img class="heroLogo" src="logo-sn-transparent.png" alt="Song Ngọc">
+    <div class="heroBottomRow">
+      <div class="heroQrCol">
+        <a href="https://songngoc.com.vn" target="_blank" rel="noopener" title="Website Song Ngọc">
+          <img src="QR_SongNgocWeb.png" alt="QR website Song Ngọc">
+        </a>
+      </div>
+      <div class="heroMidCol">
+        <div class="heroContactList">
+          <a class="heroContactRow" href="https://maps.app.goo.gl/GVrx3fHAmo8mfDz69" target="_blank" rel="noopener">
+            <svg viewBox="-14 -14 28 32"><path d="M0,-11 C6.1,-11 11,-6.4 11,-0.9 C11,6.3 0,16 0,16 C0,16 -11,6.3 -11,-0.9 C-11,-6.4 -6.1,-11 0,-11 Z" fill="#F47115"/><circle cx="0" cy="-1" r="4" fill="#040354"/></svg>
+            <span>VP-2-09, Lầu 2, Tòa nhà St. Moritz<br>Số 1014 Phạm Văn Đồng, P. Hiệp Bình, TP. Hồ Chí Minh</span>
+          </a>
+          <a class="heroContactRow" href="https://zalo.me/0378943883" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path fill="#F47115" d="M6.62,10.79c1.44,2.83,3.76,5.14,6.59,6.59l2.2-2.2c0.27-0.27,0.67-0.36,1.02-0.24c1.12,0.37,2.33,0.57,3.57,0.57c0.55,0,1,0.45,1,1V20c0,0.55-0.45,1-1,1c-9.39,0-17-7.61-17-17c0-0.55,0.45-1,1-1h3.5c0.55,0,1,0.45,1,1c0,1.25,0.2,2.45,0.57,3.57c0.11,0.35,0.03,0.74-0.25,1.02L6.62,10.79z"/></svg>
+            <span>(+84) 086 893 7699</span>
+          </a>
+          <a class="heroContactRow" href="mailto:songngoc@sncc.vn">
+            <svg viewBox="-14 -10 28 22"><rect x="-12" y="-8" width="24" height="17" rx="2" fill="none" stroke="#F47115" stroke-width="2.4"/><path d="M-12,-8 L0,3 L12,-8" fill="none" stroke="#F47115" stroke-width="2.4" stroke-linejoin="round"/></svg>
+            <span>songngoc@sncc.vn</span>
+          </a>
+          <a class="heroContactRow" href="https://songngoc.com.vn" target="_blank" rel="noopener">
+            <svg viewBox="-13 -13 26 26"><circle cx="0" cy="0" r="11" fill="none" stroke="#F47115" stroke-width="2.4"/><ellipse cx="0" cy="0" rx="4.6" ry="11" fill="none" stroke="#F47115" stroke-width="2"/><line x1="-11" y1="0" x2="11" y2="0" stroke="#F47115" stroke-width="2"/></svg>
+            <span>songngoc.com.vn</span>
+          </a>
+        </div>
+        <button id="btnReplayAll" class="heroViewBtn heroViewBtnGreen">XEM LẠI</button>
+      </div>
+      <div class="heroQrCol">
+        <a href="https://maps.app.goo.gl/GVrx3fHAmo8mfDz69" target="_blank" rel="noopener" title="Google Maps Song Ngọc">
+          <img src="QR_GMap_SN.png" alt="QR Google Maps Song Ngọc">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// =============================================
+// CẤU HÌNH — sửa YOUTUBE_VIDEO_ID khi đã upload video thật lên YouTube. Giá trị hiện tại chỉ là
+// ID VÍ DỤ lấy từ link user cung cấp (https://youtu.be/4VCw1ZenI88), CẦN THAY LẠI trước khi dùng
+// thật. Thời lượng (duration) của 3 file HTML đo bằng tl.duration() thật (Puppeteer), dùng để
+// tự chuyển đoạn kế tiếp bằng hẹn giờ (không cần iframe tự báo lại cho trang cha).
+// =============================================
+const YOUTUBE_VIDEO_ID = 'Dfdfs_SPGGw'; // Full = 024TOCGlDV4
+// Video nền dạng thiên hà (galaxy) cho màn hình mở đầu/kết thúc — chạy lặp vô hạn, tắt tiếng,
+// thuần trang trí (không phải nội dung phải xem hết như YOUTUBE_VIDEO_ID ở giữa).
+const GALAXY1_VIDEO_ID = 'E59kBVw8VjU'; // màn mở đầu
+const GALAXY2_VIDEO_ID = 'hcutQJqNq8c'; // màn kết thúc
+const SEGMENTS = [
+  { type: 'iframe', src: 'introduction-1.html', duration: 38.7 }, // đã trim ~2s "dư" cuối, xem introduction-1.html
+  // introduction-2.html dùng repeat:-1 (tự lặp vô hạn khi xem riêng) — tl.duration() thật đo được
+  // là 31.09s, NHƯNG đó là mốc tween CUỐI CÙNG kết thúc (1 chu kỳ vẽ/tô/reset lẻ của logo SN mini
+  // kéo dài quá nhãn 'cycleEnd' một chút dù đã bị fade che khuất), không phải mốc nội dung THẬT SỰ
+  // hết hiển thị — màn hình đã trống hẳn (chỉ còn tiêu đề) từ giây 30.55, và tại đúng 31.09-31.1
+  // toàn bộ biểu đồ/logo/liên hệ BẬT LẠI opacity=1 để bắt đầu vẽ lại vòng lặp mới. Dùng nguyên
+  // 31.1 (+ ADVANCE_BUFFER) khiến hẹn giờ bắn ở ~31.7s — RƠI ĐÚNG vào lúc biểu đồ vừa bật lại, gây
+  // cảm giác "lặp lại" trước khi chuyển đoạn. Hạ xuống 29.95 (+0.6 đệm = 30.55, đúng lúc màn hình
+  // vừa trống hẳn) để cắt cảnh êm, không dính vào vòng lặp kế tiếp.
+  { type: 'iframe', src: 'introduction-2.html', duration: 29.95 },
+  { type: 'youtube' },
+  { type: 'iframe', src: 'introduction-3.html', duration: 15.3 }
+];
+const ADVANCE_BUFFER = 0.6; // đệm thêm sau thời lượng đo được, tránh cắt cụt khung cuối
+
+// =============================================
+// Co giãn khung 1920x1080 vừa cửa sổ — giống hệt fitStage() ở từng file con.
+// =============================================
+function fitStage() {
+  const k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  document.getElementById('stageWrap').style.transform = `scale(${k})`;
+}
+window.addEventListener('resize', fitStage);
+window.addEventListener('orientationchange', fitStage); // xoay ngang/dọc điện thoại
+fitStage();
+
+// =============================================
+// YouTube IFrame API — nạp động, khởi tạo player 1 lần rồi tái dùng. Cố gợi ý chất lượng 1080p
+// qua setPlaybackQuality() nhưng KHÔNG có gì đảm bảo YouTube tuân theo (thuật toán của YouTube tự
+// quyết theo băng thông/kích thước khung — kích thước player 1920x1080 là đòn bẩy đáng tin cậy
+// nhất trong tầm kiểm soát của mình).
+// =============================================
+let ytPlayer = null;
+let ytApiPromise = null;
+function loadYouTubeApi() {
+  if (ytApiPromise) return ytApiPromise;
+  ytApiPromise = new Promise(resolve => {
+    if (window.YT && window.YT.Player) { resolve(); return; }
+    window.onYouTubeIframeAPIReady = resolve;
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  });
+  return ytApiPromise;
+}
+function ensureYtPlayer() {
+  return loadYouTubeApi().then(() => new Promise(resolve => {
+    if (ytPlayer) { resolve(ytPlayer); return; }
+    ytPlayer = new YT.Player('ytPlayerTarget', {
+      videoId: YOUTUBE_VIDEO_ID,
+      width: 1920, height: 1080,
+      playerVars: { autoplay: 1, controls: 1, rel: 0, playsinline: 1, modestbranding: 1, vq: 'hd1080' },
+      events: {
+        onReady: (e) => {
+          try { e.target.setPlaybackQuality('hd1080'); } catch (err) {}
+          resolve(ytPlayer);
+        },
+        onStateChange: (e) => {
+          if (e.data === YT.PlayerState.PLAYING) {
+            try { e.target.setPlaybackQuality('hd1080'); } catch (err) {}
+          }
+          if (e.data === YT.PlayerState.ENDED) goNext();
+        }
+      }
+    });
+  }));
+}
+
+// =============================================
+// Video nền "galaxy" cho màn hình mở đầu/kết thúc — TẮT TIẾNG (bắt buộc để autoplay được phép
+// ngay cả TRƯỚC khi có tương tác — đây chính là màn hình đầu tiên đập vào mắt, chưa có gesture
+// nào cả) + `loop:1` cùng `playlist:videoId` (yêu cầu bắt buộc của YouTube để 1 video tự lặp lại
+// vô hạn) + `controls:0` (thuần nền trang trí, không cho bấm vào điều khiển video). CSS cover-fit
+// (xem .heroBgWrap iframe) phóng to + canh giữa iframe để phủ kín màn hình bất kể tỉ lệ cửa sổ.
+let galaxy1Player = null, galaxy2Player = null;
+function createGalaxyPlayer(targetId, videoId) {
+  return loadYouTubeApi().then(() => new Promise(resolve => {
+    const p = new YT.Player(targetId, {
+      videoId, width: 1920, height: 1080,
+      playerVars: {
+        autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: videoId,
+        playsinline: 1, modestbranding: 1, rel: 0, disablekb: 1, fs: 0, iv_load_policy: 3
+      },
+      events: { onReady: (e) => { e.target.playVideo(); resolve(p); } }
+    });
+  }));
+}
+// Màn mở đầu hiện NGAY từ lúc tải trang nên tạo player nền của nó ngay lập tức.
+createGalaxyPlayer('galaxy1Target', GALAXY1_VIDEO_ID).then(p => { galaxy1Player = p; });
+
+// =============================================
+// Bộ điều khiển trình tự — hiện ĐÚNG 1 segment tại 1 thời điểm, tự chuyển đoạn kế tiếp bằng hẹn
+// giờ (file HTML) hoặc sự kiện ENDED (YouTube); vẫn cho bấm Prev/Next thủ công bất kỳ lúc nào.
+// =============================================
+const segIframe = document.getElementById('segIframe');
+const ytWrap = document.getElementById('ytWrap');
+let currentIndex = -1;
+let advanceTimer = null;
+
+function clearAdvanceTimer() {
+  if (advanceTimer) { clearTimeout(advanceTimer); advanceTimer = null; }
+}
+function updateDots() {
+  document.querySelectorAll('#progressDots .dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentIndex);
+    dot.classList.toggle('done', i < currentIndex);
+  });
+}
+function showSegment(index) {
+  clearAdvanceTimer();
+  if (ytPlayer) { try { ytPlayer.stopVideo(); } catch (e) {} }
+  segIframe.style.display = 'none';
+  segIframe.src = 'about:blank';
+  ytWrap.style.display = 'none';
+  document.getElementById('endOverlay').classList.remove('active');
+
+  if (index < 0) index = 0;
+  if (index >= SEGMENTS.length) { currentIndex = SEGMENTS.length; onSequenceEnd(); return; }
+
+  currentIndex = index;
+  updateDots();
+  const seg = SEGMENTS[index];
+  if (seg.type === 'iframe') {
+    segIframe.style.display = 'block';
+    segIframe.src = seg.src;
+    advanceTimer = setTimeout(goNext, (seg.duration + ADVANCE_BUFFER) * 1000);
+  } else if (seg.type === 'youtube') {
+    ytWrap.style.display = 'block';
+    ensureYtPlayer().then(player => {
+      if (currentIndex !== index) return; // đã chuyển đoạn khác trong lúc đang nạp API
+      player.seekTo(0, true);
+      player.playVideo();
+    });
+  }
+}
+function goNext() { showSegment(currentIndex + 1); }
+function onSequenceEnd() {
+  updateDots();
+  document.getElementById('endOverlay').classList.add('active');
+  if (galaxy2Player) { try { galaxy2Player.playVideo(); } catch (e) {} }
+  else createGalaxyPlayer('galaxy2Target', GALAXY2_VIDEO_ID).then(p => { galaxy2Player = p; });
+}
+
+// Chấm bấm được — nhảy thẳng tới đoạn bất kỳ, thay cho 2 nút ‹ › trước đây.
+document.querySelectorAll('#progressDots .dot').forEach(dot => {
+  dot.addEventListener('click', () => showSegment(parseInt(dot.dataset.i, 10)));
+});
+document.getElementById('btnStart').addEventListener('click', () => {
+  if (galaxy1Player) { try { galaxy1Player.pauseVideo(); } catch (e) {} }
+  document.getElementById('startOverlay').classList.remove('active');
+  showSegment(0);
+});
+document.getElementById('btnReplayAll').addEventListener('click', () => {
+  if (galaxy2Player) { try { galaxy2Player.pauseVideo(); } catch (e) {} }
+  showSegment(0); // showSegment() đã tự bỏ .active khỏi #endOverlay
+});
+</script>
+</body>
+</html>

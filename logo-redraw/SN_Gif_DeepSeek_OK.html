@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>SN Blueprint – GIF động (sửa CORS worker)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js">
+    </script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #2a2a2a;
+            background-image: linear-gradient(45deg, #383838 25%, transparent 25%),
+                linear-gradient(-45deg, #383838 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #383838 75%),
+                linear-gradient(-45deg, transparent 75%, #383838 75%);
+            background-size: 32px 32px;
+            background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
+            font-family: ui-monospace, monospace;
+        }
+        .viewport {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #stage {
+            width: 1920px;
+            height: 1080px;
+            transform-origin: center center;
+            flex: none;
+            position: relative;
+        }
+        #stage svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #hud {
+            position: fixed;
+            left: 12px;
+            bottom: 12px;
+            z-index: 10;
+            font-size: 12px;
+            color: #9aa0ff;
+            background: rgba(0, 0, 0, .55);
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(4px);
+            border: 1px solid #2a2f5a;
+        }
+        #hud button {
+            font-family: inherit;
+            font-size: 12px;
+            background: #1b1e3a;
+            color: #cfd2ff;
+            border: 1px solid #3a3f7a;
+            border-radius: 5px;
+            padding: 4px 14px;
+            cursor: pointer;
+        }
+        #hud button:hover {
+            background: #2a2f5a;
+        }
+        #hud button:disabled {
+            opacity: .45;
+            cursor: default;
+            pointer-events: none;
+        }
+        #hud select {
+            font-family: inherit;
+            font-size: 12px;
+            background: #1b1e3a;
+            color: #cfd2ff;
+            border: 1px solid #3a3f7a;
+            border-radius: 5px;
+            padding: 3px 6px;
+        }
+        #exportStatus {
+            color: #ffd23f;
+            min-width: 180px;
+            font-size: 12px;
+        }
+        #hint {
+            position: fixed;
+            left: 12px;
+            top: 12px;
+            z-index: 10;
+            font-size: 12px;
+            color: #8a90c0;
+            background: rgba(0, 0, 0, .45);
+            padding: 6px 12px;
+            border-radius: 6px;
+            max-width: 480px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #1e2240;
+        }
+        #progressBar {
+            width: 100px;
+            height: 4px;
+            background: #1b1e3a;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #3a3f7a;
+            display: none;
+        }
+        #progressBar .fill {
+            height: 100%;
+            width: 0%;
+            background: #ffd23f;
+            border-radius: 4px;
+            transition: width 0.1s;
+        }
+        .hud-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        @media (max-width:720px) {
+            #hud {
+                font-size: 10px;
+                padding: 6px 10px;
+                gap: 6px;
+                left: 6px;
+                bottom: 6px;
+                right: 6px;
+                flex-wrap: wrap;
+            }
+            #hud button {
+                font-size: 10px;
+                padding: 3px 10px;
+            }
+            #hud select {
+                font-size: 10px;
+            }
+            #exportStatus {
+                min-width: 100px;
+                font-size: 10px;
+            }
+            #hint {
+                font-size: 10px;
+                max-width: 280px;
+                left: 6px;
+                top: 6px;
+                padding: 4px 8px;
+            }
+        }
+        #protocolWarning {
+            display: none;
+            color: #ffb347;
+            background: #2a1e0a;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #b87c2e;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hint">🧊 Nền bàn cờ <strong>chỉ để xem</strong> — GIF xuất ra nền trong suốt thật.</div>
+
+    <div class="viewport">
+        <div id="stage"></div>
+    </div>
+
+    <div id="hud">
+        <button id="btnReplay">▶ Phát lại</button>
+        <div class="hud-group">
+            <label style="display:flex;align-items:center;gap:4px;">Cỡ
+                <select id="selSize">
+                    <option value="1920x1080">1920×1080</option>
+                    <option value="1280x720" selected>1280×720</option>
+                    <option value="960x540">960×540</option>
+                    <option value="640x360">640×360</option>
+                </select>
+            </label>
+            <button id="btnExportGif">🎞 Xuất GIF</button>
+        </div>
+        <div id="progressBar"><div class="fill" id="progressFill"></div></div>
+        <span id="exportStatus">Sẵn sàng</span>
+        <span id="protocolWarning">⚠️ Chạy bằng Live Server để worker hoạt động</span>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. HÌNH HỌC LOGO (giữ nguyên)
+        // ============================================================
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const W = 1920,
+            H = 1080;
+        const COLOR1 = '#F47115';
+        const COLOR2 = '#108449';
+
+        function lineCross(P1, P2, P3, P4) {
+            const denom = (P1.x - P2.x) * (P3.y - P4.y) - (P1.y - P2.y) * (P3.x - P4.x);
+            if (Math.abs(denom) < 1e-8) return { x: NaN, y: NaN };
+            const numX = (P1.x * P2.y - P2.x * P1.y) * (P3.x - P4.x) - (P3.x * P4.y - P4.x * P3.y) * (P1.x - P2.x);
+            const numY = (P1.x * P2.y - P2.x * P1.y) * (P3.y - P4.y) - (P3.x * P4.y - P4.x * P3.y) * (P1.y - P2.y);
+            return { x: numX / denom, y: numY / denom };
+        }
+
+        function computePoints(alphaDeg, h) {
+            const alpha = alphaDeg * Math.PI / 180;
+            const cosA = Math.cos(alpha),
+                tanA = Math.tan(alpha);
+            const a = h / cosA;
+            const d = h / (6 + 3 * cosA);
+            const s = d / cosA;
+            const P = {};
+            P.O = { x: 0, y: 0 };
+            P.D = { x: 0, y: h };
+            P.A = { x: h * tanA, y: 0 };
+            P.S = { x: P.A.x + s, y: P.A.y };
+            P.T = { x: P.S.x + s, y: P.A.y };
+            P.B = { x: P.A.x + a, y: 0 };
+            P.C = { x: a, y: h };
+            P.p1 = { x: d * tanA * 1, y: h - d * 1 };
+            P.p2 = { x: d * tanA * 2, y: h - d * 2 };
+            P.p3 = { x: d * tanA * 3, y: h - d * 3 };
+            P.p4 = { x: P.A.x - d * tanA * (4 - 3), y: d * (4 - 3) };
+            P.p5 = { x: P.A.x - d * tanA * (5 - 3), y: d * (5 - 3) };
+            P.p6 = { x: P.A.x - d * tanA * (6 - 3), y: d * (6 - 3) };
+            P.p7 = { x: P.p4.x + s, y: P.p4.y };
+            P.p9 = { x: P.p5.x + 2 * s, y: P.p5.y };
+            P.p12 = { x: P.p4.x + a, y: P.p4.y };
+            P.p13 = { x: P.p5.x + a, y: P.p5.y };
+            P.p14 = { x: P.p6.x + a, y: P.p6.y };
+            P.p15 = { x: P.p3.x + a, y: P.p3.y };
+            P.p16 = { x: P.p2.x + a, y: P.p2.y };
+            P.p17 = { x: P.p1.x + a, y: P.p1.y };
+            P.p18 = { x: P.C.x - s, y: P.C.y };
+            P.p19 = { x: P.p17.x - s, y: P.p17.y };
+            P.p21 = { x: P.B.x - s, y: P.B.y };
+            P.p22 = { x: P.p21.x - s, y: P.p21.y };
+            P.p25 = { x: P.p18.x - s, y: P.p18.y };
+            P.p8 = lineCross(P.p5, P.p17, P.S, P.p7);
+            P.p10 = lineCross(P.p4, P.p16, P.p9, P.T);
+            P.p11 = lineCross(P.A, P.p15, P.p6, P.p14);
+            P.p20 = lineCross(P.p4, P.p16, P.p18, P.p21);
+            P.p23 = lineCross(P.p5, P.p17, P.p22, P.p25);
+            P.p24 = lineCross(P.p2, P.p16, P.p22, P.p25);
+            P.p26 = lineCross(P.p6, P.C, P.p3, P.p15);
+            return { P, a, d, s };
+        }
+
+        function trimPoint(from, to, dist) {
+            const dx = to.x - from.x,
+                dy = to.y - from.y;
+            const len = Math.hypot(dx, dy);
+            const t = (len < 1e-9) ? 0 : Math.min(dist, len / 2) / len;
+            return { x: from.x + dx * t, y: from.y + dy * t };
+        }
+
+        function buildRoundedPathCommands(vertices, roundSet, radius) {
+            const n = vertices.length;
+            const cmds = [];
+            for (let i = 0; i < n; i++) {
+                const prev = vertices[(i - 1 + n) % n];
+                const cur = vertices[i];
+                const next = vertices[(i + 1) % n];
+                if (radius > 0 && roundSet.has(cur.label)) {
+                    const p1 = trimPoint(cur, prev, radius);
+                    const p2 = trimPoint(cur, next, radius);
+                    cmds.push({ type: i === 0 ? 'M' : 'L', x: p1.x, y: p1.y });
+                    cmds.push({ type: 'Q', cx: cur.x, cy: cur.y, x: p2.x, y: p2.y });
+                } else {
+                    cmds.push({ type: i === 0 ? 'M' : 'L', x: cur.x, y: cur.y });
+                }
+            }
+            cmds.push({ type: 'Z' });
+            return cmds;
+        }
+
+        function transformCommands(cmds, fn) {
+            return cmds.map(c => {
+                if (c.type === 'Z') return c;
+                if (c.type === 'Q') {
+                    const ctrl = fn({ x: c.cx, y: c.cy });
+                    const end = fn({ x: c.x, y: c.y });
+                    return { type: 'Q', cx: ctrl.x, cy: ctrl.y, x: end.x, y: end.y };
+                }
+                const p = fn({ x: c.x, y: c.y });
+                return { type: c.type, x: p.x, y: p.y };
+            });
+        }
+
+        function serializePath(cmds) {
+            let d = '';
+            for (const c of cmds) {
+                if (c.type === 'M') d += `M ${c.x.toFixed(2)},${c.y.toFixed(2)} `;
+                else if (c.type === 'L') d += `L ${c.x.toFixed(2)},${c.y.toFixed(2)} `;
+                else if (c.type === 'Q') d += `Q ${c.cx.toFixed(2)},${c.cy.toFixed(2)} ${c.x.toFixed(2)},${c.y.toFixed(2)} `;
+                else if (c.type === 'Z') d += 'Z';
+            }
+            return d;
+        }
+
+        function makeSToNTransform(tx, pivot, angleDeg, doFlip) {
+            const rad = angleDeg * Math.PI / 180;
+            const cos = Math.cos(rad),
+                sin = Math.sin(rad);
+            return function(p) {
+                let x = p.x + tx,
+                    y = p.y;
+                if (doFlip) x = 2 * pivot.x - x;
+                const dx = x - pivot.x,
+                    dy = y - pivot.y;
+                return { x: pivot.x + dx * cos + dy * sin, y: pivot.y - dx * sin + dy * cos };
+            };
+        }
+
+        const { P, a, d, s } = computePoints(15, 1000);
+        const label = (name, pt) => Object.assign({ label: name }, pt);
+        const shape1 = [label('A', P.A), label('B', P.B), label('12', P.p12), label('7', P.p7), label('8', P.p8), label('23',
+                P.p23), label('24', P.p24), label('2', P.p2), label('3', P.p3), label('26', P.p26), label('6', P.p6)];
+        const shape2 = [label('9', P.p9), label('10', P.p10), label('20', P.p20), label('19', P.p19), label('1', P.p1),
+            label('D', P.D), label('C', P.C), label('15', P.p15), label('11', P.p11), label('14', P.p14), label('13', P
+                .p13)
+        ];
+        const round1 = new Set(['A', '6']);
+        const round2 = new Set(['C', '15']);
+        const RADIUS = 50;
+
+        const cmds1 = buildRoundedPathCommands(shape1, round1, RADIUS);
+        const cmds2 = buildRoundedPathCommands(shape2, round2, RADIUS);
+
+        const sAll = [...shape1, ...shape2];
+        const sxs = sAll.map(p => p.x),
+            sys = sAll.map(p => p.y);
+        const cx0 = (Math.min(...sxs) + Math.max(...sxs)) / 2;
+        const cy0 = (Math.min(...sys) + Math.max(...sys)) / 2;
+        const txSN = a + d;
+        const pivotSN = { x: cx0 + txSN, y: cy0 };
+        const toN = makeSToNTransform(txSN, pivotSN, 75, true);
+
+        const cmdsN1 = transformCommands(cmds1, toN);
+        const cmdsN2 = transformCommands(cmds2, toN);
+
+        const nAll = sAll.map(toN);
+        const allPts = [...sAll, ...nAll];
+        const axs = allPts.map(p => p.x),
+            ays = allPts.map(p => p.y);
+        const bboxMinX = Math.min(...axs),
+            bboxMaxX = Math.max(...axs);
+        const bboxMinY = Math.min(...ays),
+            bboxMaxY = Math.max(...ays);
+        const bboxW = bboxMaxX - bboxMinX,
+            bboxH = bboxMaxY - bboxMinY;
+        const LOGO_HEIGHT_FRACTION = 0.42;
+        const K = (H * LOGO_HEIGHT_FRACTION) / bboxH;
+        const OX = (W - bboxW * K) / 2 - bboxMinX * K;
+        const OY = (H - bboxH * K) / 2 - bboxMinY * K;
+        const fitFn = p => ({ x: OX + p.x * K, y: OY + p.y * K });
+
+        const finalPathS1 = serializePath(transformCommands(cmds1, fitFn));
+        const finalPathS2 = serializePath(transformCommands(cmds2, fitFn));
+        const finalPathN1 = serializePath(transformCommands(cmdsN1, fitFn));
+        const finalPathN2 = serializePath(transformCommands(cmdsN2, fitFn));
+
+        // ============================================================
+        // 2. DỰNG SVG
+        // ============================================================
+        function el(tag, attrs) {
+            const e = document.createElementNS(svgNS, tag);
+            for (const k in attrs) e.setAttribute(k, attrs[k]);
+            return e;
+        }
+
+        const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, xmlns: svgNS });
+        document.getElementById('stage').appendChild(svg);
+
+        const defs = el('defs', {});
+        defs.innerHTML = `
+        <filter id="glow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="9" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      `;
+        svg.appendChild(defs);
+
+        const wireframeLayer = el('g', { id: 'wireframeLayer' });
+        const finalLayer = el('g', { id: 'finalLayer', opacity: 0 });
+        svg.appendChild(wireframeLayer);
+        svg.appendChild(finalLayer);
+
+        const wireS1 = el('path', { d: finalPathS1, fill: 'none', stroke: COLOR1, 'stroke-width': 5, 'stroke-linecap': 'round',
+            'stroke-linejoin': 'round', filter: 'url(#glow)' });
+        const wireS2 = el('path', { d: finalPathS2, fill: 'none', stroke: COLOR2, 'stroke-width': 5, 'stroke-linecap': 'round',
+            'stroke-linejoin': 'round', filter: 'url(#glow)' });
+        const wireN1 = el('path', { d: finalPathN1, fill: 'none', stroke: COLOR1, 'stroke-width': 5, 'stroke-linecap': 'round',
+            'stroke-linejoin': 'round', filter: 'url(#glow)' });
+        const wireN2 = el('path', { d: finalPathN2, fill: 'none', stroke: COLOR2, 'stroke-width': 5, 'stroke-linecap': 'round',
+            'stroke-linejoin': 'round', filter: 'url(#glow)' });
+        [wireS1, wireS2, wireN1, wireN2].forEach(p => wireframeLayer.appendChild(p));
+        const wirePaths = [wireS1, wireS2, wireN1, wireN2];
+        const wireLens = wirePaths.map(p => p.getTotalLength());
+        wirePaths.forEach((p, i) => {
+            p.setAttribute('stroke-dasharray', wireLens[i]);
+            p.setAttribute('stroke-dashoffset', wireLens[i]);
+        });
+
+        const penTip = el('circle', { r: 9, fill: '#ffffff', filter: 'url(#glow)', opacity: 0 });
+        svg.appendChild(penTip);
+
+        const finalS1 = el('path', { d: finalPathS1, fill: COLOR1, stroke: 'none' });
+        const finalS2 = el('path', { d: finalPathS2, fill: COLOR2, stroke: 'none' });
+        const finalN1 = el('path', { d: finalPathN1, fill: COLOR1, stroke: 'none' });
+        const finalN2 = el('path', { d: finalPathN2, fill: COLOR2, stroke: 'none' });
+        finalLayer.appendChild(finalS1);
+        finalLayer.appendChild(finalS2);
+        finalLayer.appendChild(finalN1);
+        finalLayer.appendChild(finalN2);
+
+        // ============================================================
+        // 3. TIMELINE GSAP
+        // ============================================================
+        const tl = gsap.timeline({ paused: true, repeat: -1 });
+        tl.addLabel('drawStart', 0.15);
+
+        const DRAW_DUR = 1.1,
+            DRAW_OVERLAP = 0.85;
+
+        function drawWirePath(path, len, position) {
+            const state = { drawn: 0 };
+            tl.to(state, {
+                drawn: len,
+                duration: DRAW_DUR,
+                ease: 'power1.inOut',
+                onStart: () => penTip.setAttribute('opacity', 1),
+                onUpdate: () => {
+                    path.setAttribute('stroke-dashoffset', len - state.drawn);
+                    try {
+                        const pt = path.getPointAtLength(state.drawn);
+                        penTip.setAttribute('cx', pt.x);
+                        penTip.setAttribute('cy', pt.y);
+                    } catch (_) {}
+                }
+            }, position);
+        }
+        wirePaths.forEach((p, i) => {
+            drawWirePath(p, wireLens[i], `drawStart+=${i * DRAW_DUR * DRAW_OVERLAP}`);
+        });
+        const totalDrawTime = DRAW_DUR + (wirePaths.length - 1) * DRAW_DUR * DRAW_OVERLAP;
+        tl.addLabel('wireDone', `drawStart+=${totalDrawTime}`);
+
+        tl.to(penTip, { opacity: 0, duration: 0.3 }, 'wireDone');
+        tl.addLabel('settle', 'wireDone+=0.3');
+
+        tl.set(wireframeLayer, { opacity: 0 }, 'settle+=0.5');
+        tl.set([finalS1, finalS2, finalN1, finalN2], { attr: { fill: '#ffffff' } }, 'settle+=0.5');
+        tl.set(finalLayer, { opacity: 1 }, 'settle+=0.5');
+        tl.set([finalS1, finalN1], { filter: 'url(#glow)' }, 'settle+=0.5');
+        tl.set([finalS2, finalN2], { filter: 'url(#glow)' }, 'settle+=0.5');
+        tl.to(finalS1, { attr: { fill: COLOR1 }, duration: 0.4, ease: 'power1.out' }, 'settle+=0.5');
+        tl.to(finalN1, { attr: { fill: COLOR1 }, duration: 0.4, ease: 'power1.out' }, 'settle+=0.5');
+        tl.to(finalS2, { attr: { fill: COLOR2 }, duration: 0.4, ease: 'power1.out' }, 'settle+=0.5');
+        tl.to(finalN2, { attr: { fill: COLOR2 }, duration: 0.4, ease: 'power1.out' }, 'settle+=0.5');
+        tl.set([finalS1, finalS2, finalN1, finalN2], { filter: 'none' }, 'settle+=0.95');
+
+        tl.addLabel('holdStart', 'settle+=1.1');
+        tl.addLabel('holdEnd', 'holdStart+=1.5');
+
+        tl.to(finalLayer, { opacity: 0, duration: 0.5, ease: 'power1.in' }, 'holdEnd');
+        tl.addLabel('cycleEnd', 'holdEnd+=0.6');
+
+        const ONE_CYCLE_DURATION = tl.duration();
+
+        // ============================================================
+        // 4. ĐIỀU KHIỂN PHÁT
+        // ============================================================
+        function playFromStart() { tl.pause(0).play(0); }
+        document.getElementById('btnReplay').addEventListener('click', playFromStart);
+        tl.play(0);
+
+        function fitStage() {
+            const stage = document.getElementById('stage');
+            const k = Math.min(window.innerWidth / W, window.innerHeight / H);
+            stage.style.transform = `scale(${k})`;
+        }
+        window.addEventListener('resize', fitStage);
+        fitStage();
+
+        // ============================================================
+        // 5. XUẤT GIF – DÙNG BLOB WORKER ĐỂ TRÁNH CORS
+        // ============================================================
+        const btnExportGif = document.getElementById('btnExportGif');
+        const selSize = document.getElementById('selSize');
+        const exportStatus = document.getElementById('exportStatus');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const protocolWarning = document.getElementById('protocolWarning');
+
+        // Ẩn cảnh báo nếu không phải file://
+        if (window.location.protocol !== 'file:') {
+            protocolWarning.style.display = 'none';
+        }
+
+        const GIF_FPS = 24;
+        const TRANSPARENT_KEY = 0x00ff00;
+
+        function svgFrameDataURL() {
+            const xml = new XMLSerializer().serializeToString(svg);
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+        }
+
+        btnExportGif.addEventListener('click', async () => {
+            // Nếu đang file://, yêu cầu dùng server
+            if (window.location.protocol === 'file:') {
+                alert('⚠️ Bạn đang chạy từ file://. Hãy dùng Live Server (VS Code) hoặc Python HTTP server để worker hoạt động.');
+                return;
+            }
+
+            btnExportGif.disabled = true;
+            document.getElementById('btnReplay').disabled = true;
+            selSize.disabled = true;
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            const [outW, outH] = selSize.value.split('x').map(Number);
+            const frameCount = Math.max(4, Math.ceil(ONE_CYCLE_DURATION * GIF_FPS));
+            exportStatus.textContent = `⏳ Chuẩn bị… 0/${frameCount}`;
+
+            const workCanvas = document.createElement('canvas');
+            workCanvas.width = outW;
+            workCanvas.height = outH;
+            const ctx = workCanvas.getContext('2d', { alpha: true, willReadFrequently: true });
+
+            // ---- Tạo worker script từ Blob để tránh CORS ----
+            const workerUrl = 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js';
+            let workerBlobUrl;
+            try {
+                const resp = await fetch(workerUrl);
+                const scriptText = await resp.text();
+                const blob = new Blob([scriptText], { type: 'application/javascript' });
+                workerBlobUrl = URL.createObjectURL(blob);
+            } catch (e) {
+                console.error('Lỗi fetch worker script:', e);
+                exportStatus.textContent = `❌ Không thể tải worker: ${e.message}`;
+                btnExportGif.disabled = false;
+                document.getElementById('btnReplay').disabled = false;
+                selSize.disabled = false;
+                progressBar.style.display = 'none';
+                return;
+            }
+
+            const gif = new GIF({
+                workers: 2,
+                quality: 10,
+                width: outW,
+                height: outH,
+                transparent: TRANSPARENT_KEY,
+                background: null,
+                dither: false,
+                repeat: 0,
+                workerScript: workerBlobUrl
+            });
+
+            // Tạm dừng ticker
+            const ticker = gsap.ticker;
+            const baseTime = ticker.time;
+            ticker.remove(gsap.updateRoot);
+            tl.pause(0);
+
+            function drawSvgFrame() {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        ctx.clearRect(0, 0, outW, outH);
+                        ctx.drawImage(img, 0, 0, outW, outH);
+                        resolve();
+                    };
+                    img.onerror = reject;
+                    img.src = svgFrameDataURL();
+                });
+            }
+
+            function flattenAlphaToKey() {
+                const imgData = ctx.getImageData(0, 0, outW, outH);
+                const d = imgData.data;
+                const kr = (TRANSPARENT_KEY >> 16) & 255,
+                    kg = (TRANSPARENT_KEY >> 8) & 255,
+                    kb = TRANSPARENT_KEY & 255;
+                for (let i = 0; i < d.length; i += 4) {
+                    if (d[i + 3] < 128) {
+                        d[i] = kr;
+                        d[i + 1] = kg;
+                        d[i + 2] = kb;
+                        d[i + 3] = 255;
+                    } else {
+                        d[i + 3] = 255;
+                    }
+                }
+                ctx.putImageData(imgData, 0, 0);
+            }
+
+            // Vòng lặp frame
+            for (let i = 0; i < frameCount; i++) {
+                const t = i / GIF_FPS;
+                tl.time(t);
+                gsap.updateRoot(baseTime + t);
+
+                await new Promise(r => requestAnimationFrame(r));
+
+                await drawSvgFrame();
+                flattenAlphaToKey();
+
+                gif.addFrame(ctx, { copy: true, delay: Math.round(1000 / GIF_FPS) });
+
+                const pct = ((i + 1) / frameCount * 100);
+                progressFill.style.width = pct + '%';
+                if (i % 3 === 0 || i === frameCount - 1) {
+                    exportStatus.textContent = `⏳ Đang dựng khung… ${i+1}/${frameCount}`;
+                    await new Promise(r => setTimeout(r, 0));
+                }
+            }
+
+            console.log(`✅ Đã thêm ${frameCount} frame. Bắt đầu mã hoá...`);
+            exportStatus.textContent = `⏳ Mã hoá GIF… 0%`;
+            progressFill.style.width = '100%';
+
+            gif.on('error', (e) => {
+                console.error('❌ Lỗi mã hoá GIF:', e);
+                exportStatus.textContent = `❌ Lỗi: ${e.message || e}`;
+                btnExportGif.disabled = false;
+                document.getElementById('btnReplay').disabled = false;
+                selSize.disabled = false;
+                progressBar.style.display = 'none';
+                ticker.add(gsap.updateRoot);
+                tl.pause(0).play(0);
+                URL.revokeObjectURL(workerBlobUrl);
+            });
+
+            gif.on('progress', (p) => {
+                const pct = Math.round(p * 100);
+                exportStatus.textContent = `⏳ Mã hoá GIF… ${pct}%`;
+                progressFill.style.width = pct + '%';
+            });
+
+            gif.on('finished', (blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `SN-Logo-${outW}x${outH}.gif`;
+                a.click();
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                    URL.revokeObjectURL(workerBlobUrl);
+                }, 8000);
+
+                exportStatus.textContent = `✅ Xuất xong!`;
+                progressFill.style.width = '100%';
+                setTimeout(() => {
+                    exportStatus.textContent = 'Sẵn sàng';
+                    progressBar.style.display = 'none';
+                    progressFill.style.width = '0%';
+                }, 4000);
+
+                ticker.add(gsap.updateRoot);
+                tl.pause(0).play(0);
+
+                btnExportGif.disabled = false;
+                document.getElementById('btnReplay').disabled = false;
+                selSize.disabled = false;
+            });
+
+            try {
+                gif.render();
+            } catch (err) {
+                console.error('❌ Lỗi khi gọi render():', err);
+                exportStatus.textContent = `❌ Lỗi: ${err.message}`;
+                btnExportGif.disabled = false;
+                document.getElementById('btnReplay').disabled = false;
+                selSize.disabled = false;
+                progressBar.style.display = 'none';
+                ticker.add(gsap.updateRoot);
+                tl.pause(0).play(0);
+                URL.revokeObjectURL(workerBlobUrl);
+            }
+        });
+
+        console.log('✅ SN Blueprint – GIF export với Blob worker (tránh CORS)');
+        console.log(`   Chu kỳ: ${ONE_CYCLE_DURATION.toFixed(2)}s, FPS xuất: ${GIF_FPS}`);
+        console.log(`   Giao thức: ${window.location.protocol}`);
+        if (window.location.protocol === 'file:') {
+            console.warn('⚠️ Đang chạy file:// – worker sẽ không tải được. Dùng Live Server!');
+        }
+    </script>
+</body>
+</html>

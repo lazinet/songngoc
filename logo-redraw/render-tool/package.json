@@ -1,0 +1,11 @@
+{
+  "name": "sn-video-render-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render SN-*.html (GSAP/SVG scenes) thành video độ phân giải/fps bất kỳ bằng headless Chrome (khung hình rời rạc, không phụ thuộc máy xuất) + ffmpeg.",
+  "type": "commonjs",
+  "dependencies": {
+    "puppeteer-core": "^23.0.0",
+    "ffmpeg-static": "^5.2.0"
+  }
+}
